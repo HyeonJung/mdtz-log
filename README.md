@@ -1,3 +1,3 @@
 # mdtz-log
 
-![https://github.com/HyeonJung/mdtz-log/blob/master/src/main/resources/images/mtdz_banner.gif?raw=true](ㅁㅔ인배너)
+![메인](https://github.com/HyeonJung/mdtz-log/blob/master/src/main/resources/images/mtdz_banner.gif?raw=true)
