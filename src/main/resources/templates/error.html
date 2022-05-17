@@ -1,0 +1,17 @@
+<!DOCTYPE html> 
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+		<title>MTDZ-LOG :: ERROR</title> 
+		<link rel="stylesheet" th:href="@{/css/common.css}"></link>
+		<link rel="shortcut icon" th:href="@{/images/favicon.ico}"> 
+	</head>
+	<body>
+		<div class="errorWrap">
+			<div class="contents"><img class="icon_img" th:src="@{${'/images/dragon/' + randNum  + '.gif'}}"/></div>
+			<div class="title" th:text="${msg}"></div>
+			<div class="desc">잠시 후 다시 시도해주세요</div>
+		</div>
+	</body> 
+</html>
+

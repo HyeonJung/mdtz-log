@@ -1,0 +1,28 @@
+@charset "utf-8";
+:root {--color-mc:#5c584f;--color-nm:#573d29;--color-sc:#231815;--color-pc:#d02d28;--color-pco:#f45000;--color-yw:#FFF700;--color-ic:#286BD0;--color-df:#212121;--color-st:#777;--color-ph:#bbb;--color-pg:#ccc;--color-ml:#ddd;--color-ct:#e2e2e2;--color-cl:#eee;--color-cs:#eceae6;--color-hg:#f6f6f6;--color-lg:#f3f3f3;--color-wt:#fff;--color-bt:#a2a2a2;--color-sct:#5d5d5d;--color-en:#8d8d8d}
+html,body,button,dl,dt,dd,div,form,fieldset,legend,h1,h2,h3,h4,h5,h6,input,select,textarea,ul,ol,li,p,pre,table,td,th,caption,a {margin:0; padding:0; line-height:120%;}
+html{font-size: 14px; font-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust:none;}
+body{padding:0; color:#212121; font-weight: 400; font-family: Pretendard,apple-system,'Apple SD Gothic Neo','맑은 고딕',sans-serif; letter-spacing: -0.72px; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+h1,h2,h3,h4,h5{font-weight: 700; font-size: 14px;}
+
+/* 에러페이지 **/
+.errorWrap {text-align:center}
+.errorWrap .contents .icon_img {height:102px;margin:100px 0 30px 0;background-position:0 -264px}
+.errorWrap .title {display:block;font-size:23px;line-height:30px;color:var(--color-sct)}
+.errorWrap .desc {margin-top:30px;color:var(--color-st)}
+
+/* 헤더 **/
+/*******************************
+*	헤더
+********************************/
+.headerArea .headerInner {position:relative;width:100%;height:55px;padding:0 12px;background:var(--color-wt);line-height:55px;text-align:center;box-sizing:border-box}
+.headerArea .headerInner .headerTitle {font-size:17px;text-align:center}
+.headerArea .headerInner .headerBtn {position:absolute;top:0;height:100%;z-index:2}
+.headerArea .headerInner .headerBtn a {display:flex;align-items:center;position:relative;height:100%;padding:0 10px}
+.headerArea .headerInner .headerBtn.back {left:7px}/* 이전 페이지 */
+.headerArea .headerInner .headerBtn.back .icon_img {width:10px;height:18px;background-position:-80px 0}
+.headerArea.white {position:absolute;top:0;left:0;width:100%;z-index:3}
+.headerArea.white .headerInner {background:0}
+.headerArea.white .headerInner .headerBtn.back .icon_img {background-position:-92px 0}
+.headerArea.white .headerInner .headerBtn.sCart .icon_img {background-position:-212px -75px}
+body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;box-shadow:0px 2px 3px rgba(0,0,0,.1);z-index:3}
