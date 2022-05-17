@@ -18,8 +18,8 @@ import com.xpos.mtdzlog.meta.MetaAttribute;
 import com.xpos.mtdzlog.meta.MetaData;
 import com.xpos.mtdzlog.token.TokenAttribute;
 import com.xpos.mtdzlog.token.TokenInfo;
-import com.xpos.mtdzlog.token.repository.TokenAttributeRepository;
-import com.xpos.mtdzlog.token.repository.TokenInfoRepository;
+import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
+import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

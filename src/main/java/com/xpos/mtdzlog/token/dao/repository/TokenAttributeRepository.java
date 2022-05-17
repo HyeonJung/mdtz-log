@@ -1,4 +1,4 @@
-package com.xpos.mtdzlog.token.repository;
+package com.xpos.mtdzlog.token.dao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

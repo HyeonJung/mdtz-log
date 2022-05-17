@@ -20,6 +20,10 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
+	// Querydsl 추가 시작
+    implementation 'com.querydsl:querydsl-jpa'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    
 	developmentOnly ("org.springframework.boot:spring-boot-devtools")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
