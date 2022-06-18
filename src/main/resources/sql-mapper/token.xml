@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xpos.mtdzlog.token.dao.mapper.TokenDAO">
+    <select id="getTokenList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenDTO">
+	    SELECT * FROM (
+		    SELECT t.id, t.token_id, t.image_url, t.type, t.grade, t.description
+			FROM token_info t
+			         left join token_attribute ta
+			                   on t.id = ta.token_info_id
+			where 1=1
+			<if test="type != null">
+				t.type = #{type}
+			</if>
+			<if test="grade != null">
+				and t.grade = #{grade}
+			</if>
+			<if test="value != null">
+				and ta.value = #{value}
+			</if>
+			<if test="key != null">
+				and ta.key = #{key}
+			</if>
+			<if test="values != null and values.size > 0">
+				and ta.value in 
+				<foreach collection="values" item="v" open="(" close=")" separator=",">
+					#{v}
+				</foreach>
+			</if>
+			group by t.id
+		) res
+		<if test="page != 0 and rows != 0">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+    </select>
+    
+    <select id="getTokenListCount" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="long">
+    select count(*)
+	from (
+	         SELECT t.id, t.token_id, t.image_url, t.type, t.grade, t.description
+	         FROM token_info t
+	                  left join token_attribute ta
+	                            on t.id = ta.token_info_id
+	         where 1=1
+			<if test="type != null">
+				t.type = #{type}
+			</if>
+			<if test="grade != null">
+				and t.grade = #{grade}
+			</if>
+			<if test="value != null">
+				and ta.value = #{value}
+			</if>
+			<if test="key != null">
+				and ta.key = #{key}
+			</if>
+			<if test="values != null and values.size > 0">
+				and ta.value in 
+				<foreach collection="values" item="v" open="(" close=")" separator=",">
+					#{v}
+				</foreach>
+			</if>
+	         group by t.id
+	) res
+    </select>
+</mapper>

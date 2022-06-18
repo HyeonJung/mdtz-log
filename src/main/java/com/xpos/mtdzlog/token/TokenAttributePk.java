@@ -15,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class TokenAttributePk  implements Serializable {
+public class TokenAttributePk implements Serializable {
 
 	/**
 	 * 

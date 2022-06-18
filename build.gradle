@@ -24,6 +24,8 @@ dependencies {
     implementation 'com.querydsl:querydsl-jpa'
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
     
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    
 	developmentOnly ("org.springframework.boot:spring-boot-devtools")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

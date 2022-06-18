@@ -1,5 +1,7 @@
 package com.xpos.mtdzlog.token.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +12,10 @@ public class TokenInfoSearchRequest {
 
     private int rows = DEFAULT_ROWS;
     private int page = DEFAULT_PAGE;
+    private String type;
     private String grade;
     private String keyword;
+    private String value;
+    private List<String> values;
+    private String key;
 }

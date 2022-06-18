@@ -19,8 +19,9 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-    
-    
+
+mybatis:
+  mapper-locations: classpath:sql-mapper/*.xml
         
 mtdz:
   json:
