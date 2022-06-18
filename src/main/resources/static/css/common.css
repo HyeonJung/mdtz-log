@@ -26,3 +26,18 @@ h1,h2,h3,h4,h5{font-weight: 700; font-size: 14px;}
 .headerArea.white .headerInner .headerBtn.back .icon_img {background-position:-92px 0}
 .headerArea.white .headerInner .headerBtn.sCart .icon_img {background-position:-212px -75px}
 body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;box-shadow:0px 2px 3px rgba(0,0,0,.1);z-index:3}
+
+/*******************************
+*	loading
+********************************/
+.loadingWrap {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.3);z-index:99;display:none}
+.loadingWrap .loadingArea {position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);width:100%;height:100px;margin:0 auto}
+.loadingWrap .loadingArea .icon {display:block;position:absolute;top:0;left:50%;transform:translateX(62px);height:100%;background:url('../images/common/mtdz_loading.png') no-repeat 0/250px auto;animation:loading 1.8s linear both infinite}
+.loadingWrap .loadingArea .icon.xposDragon1 {width:62px;animation-name:loading-xposDragon1}
+.loadingWrap .loadingArea .icon.xposDragon2 {width:62px;background-position-x:-62px;animation-name:loading-xposDragon2}
+.loadingWrap .loadingArea .icon.xposDragon3 {width:62px;background-position-x:-124px;animation-name:loading-xposDragon3}
+.loadingWrap .loadingArea .icon.xposDragon4 {width:62px;background-position-x:-186px;animation-name:loading-xposDragon4}
+@keyframes loading-xposDragon1{0% {transform:translate(62px);opacity:0} 5%, 20% {opacity:1} 25% {transform:translate(-31px);opacity:0} 100% {transform:translate(62px);opacity:0}}
+@keyframes loading-xposDragon2{0%, 25% {transform:translate(62px);opacity:0} 30%, 45% {opacity:1} 50% {transform:translate(-31px);opacity:0} 100% {transform:translate(62px);opacity:0}}
+@keyframes loading-xposDragon3{0%, 50% {transform:translate(62px);opacity:0} 55%, 70% {opacity:1} 75% {transform:translate(-31px);opacity:0} 100% {transform:translate(62px);opacity:0}}
+@keyframes loading-xposDragon4{0%, 75% {transform:translate(62px);opacity:0} 80%, 95% {opacity:1} 99% {transform:translate(-31px);opacity:0} 100% {transform:translate(62px);opacity:0}}
