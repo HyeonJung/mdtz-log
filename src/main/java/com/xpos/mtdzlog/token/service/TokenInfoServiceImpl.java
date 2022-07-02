@@ -14,8 +14,11 @@ import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
-public class TokenServiceImpl implements TokenService {
+@Slf4j
+public class TokenInfoServiceImpl implements TokenInfoService {
 
 	@Autowired
 	private TokenInfoRepository tokenInfoRepository;
@@ -27,8 +30,7 @@ public class TokenServiceImpl implements TokenService {
 	private TokenDAO tokenDAO;
 
 	@Override
-	public Page<TokenDTO> getTokenList(TokenInfoSearchRequest req) {
-		
+	public Page<TokenDTO> getTokenInfoList(TokenInfoSearchRequest req) {
 		// 토큰 리스트 조회
 		List<TokenDTO> tokenList = tokenDAO.getTokenList(req);
 		// 토큰 수량 조회

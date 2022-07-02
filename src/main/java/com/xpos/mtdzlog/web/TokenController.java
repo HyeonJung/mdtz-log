@@ -10,35 +10,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
-import com.xpos.mtdzlog.token.service.TokenService;
+import com.xpos.mtdzlog.token.service.TokenInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping(value = "/mtdz")
+@RequestMapping(value = "/token")
 @Slf4j
-public class MtdzController {
+public class TokenController {
 	
 	private static final String TYPE = "MTDZ";
 	
 	@Autowired
-	private TokenService tokenService;
+	private TokenInfoService tokenInfoServiceImpl;
 	
 	// 리스트 조회
 	@GetMapping("")
 	public String list(Model model, @ModelAttribute TokenInfoSearchRequest req) {
 		subList(model, req);
-		return "mtdz/list";
+		return "token/list";
 	}
 	
 	// 서브 리스트 조회
 	@GetMapping("/subList")
 	public String subList(Model model, @ModelAttribute TokenInfoSearchRequest req) {
 		req.setType(TYPE);
-		Page<TokenDTO> tokenRes = tokenService.getTokenList(req);
+		Page<TokenDTO> tokenRes = tokenInfoServiceImpl.getTokenInfoList(req);
 		model.addAttribute("contents", tokenRes.getContent());
 		model.addAttribute("totalDocs", tokenRes.getTotalElements());
-		return "mdtz/include/list";
+		model.addAttribute("req", req);
+		return "token/include/list";
 	}
 
 }

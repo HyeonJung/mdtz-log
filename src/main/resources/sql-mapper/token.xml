@@ -11,7 +11,7 @@
 			                   on t.id = ta.token_info_id
 			where 1=1
 			<if test="type != null">
-				t.type = #{type}
+				and t.type = #{type}
 			</if>
 			<if test="grade != null">
 				and t.grade = #{grade}
@@ -44,7 +44,7 @@
 	                            on t.id = ta.token_info_id
 	         where 1=1
 			<if test="type != null">
-				t.type = #{type}
+				and t.type = #{type}
 			</if>
 			<if test="grade != null">
 				and t.grade = #{grade}

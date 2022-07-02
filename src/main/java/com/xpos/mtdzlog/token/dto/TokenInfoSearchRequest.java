@@ -18,4 +18,12 @@ public class TokenInfoSearchRequest {
     private String value;
     private List<String> values;
     private String key;
+    
+    public Integer getLimit() {
+    	return rows;
+    }
+    
+    public Integer getOffset() {
+    	return (rows - 1) * page;
+    }
 }
