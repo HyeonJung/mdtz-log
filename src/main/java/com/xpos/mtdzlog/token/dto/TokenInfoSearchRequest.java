@@ -8,15 +8,16 @@ import lombok.Data;
 public class TokenInfoSearchRequest {
 
 	private static final int DEFAULT_PAGE = 1;
-    private static final int DEFAULT_ROWS = 20;
+    private static final int DEFAULT_ROWS = 60;
 
     private int rows = DEFAULT_ROWS;
     private int page = DEFAULT_PAGE;
-    private String type;
+    private String type = "MTDZ";
     private String grade;
     private String keyword;
     private String value;
     private List<String> values;
+    private List<String> gradeList;
     private String key;
     
     public Integer getLimit() {
@@ -24,6 +25,6 @@ public class TokenInfoSearchRequest {
     }
     
     public Integer getOffset() {
-    	return (rows - 1) * page;
+    	return rows * (page - 1);
     }
 }

@@ -1,5 +1,6 @@
 package com.xpos.mtdzlog.token.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
+import com.xpos.mtdzlog.token.dto.MtdzGrade;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 
@@ -40,5 +42,10 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		pageable = PageRequest.of(req.getPage() -1, req.getRows());
 
 		return new PageImpl<>(tokenList, pageable, totalCount);
+	}
+	
+	@Override
+	public List<MtdzGrade> getMtdzGrade() {
+		return Arrays.asList(MtdzGrade.values());
 	}
 }

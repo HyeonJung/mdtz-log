@@ -1,3 +1,10 @@
 <li class="item" th:each="token : ${contents}">
-	<img th:src="${token.imageUrl}" src=""/>
+	<div>
+		<img th:src="${token.imageUrl}" src=""/>
+	</div>
+	<div class="tokenInfo">
+		<span th:text="${token.type}"></span> #<span th:text="${token.tokenId}">MTDZ</span>
+	</div>
 </li>
+
+<input type="hidden" name="refreshTotalPages" th:value="${ totalPages }"/>

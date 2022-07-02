@@ -4,30 +4,82 @@
       layout:decorator="~{layout/layout}">
       
 	<th:block layout:fragment="content">
+	
 		<script type="text/javascript">
 			var page = 1;
-			var totalPage = '${ totalPage }';
+			var totalPages = 0;
 			var isLoading = false;
 	    	$(function() {
+	    		totalPages = $("#totalPages").val();
 	    		$(window).scroll(function() {
-	    	        if (page < totalPage && !isLoading && ($(window).scrollTop() >= $(document).height() - $(window).height() - 110)) {
-	    	        	console.log('?')
+	    	        if (page < totalPages && !isLoading && ($(window).scrollTop() >= $(document).height() - $(window).height() - 50)) {
+	    	        	getTokenInfoList(++page);
 	    	        }
-	    	        	
 	    	    });
+	    		
+	    		$("input[name=grade]").on("change", function() {
+	    			page = 1;
+	    			getTokenInfoList(page);
+	    		});
 	    	})
+	    	
+	    	function getTokenInfoList(page) {
+	    		isLoading = true;
+				var $tokenSearchForm = $("#tokenSearchForm");
+				var rows = $tokenSearchForm.find("input[name=rows]").val();
+				var type = $tokenSearchForm.find("input[name=type]").val();
+				var gradeList = new Array();
+				$("input[name=grade]:checked").each(function() {
+					var grade = $(this).data('grade');	
+					gradeList.push(grade);
+				});
+				
+				$.ajax({
+					url : contextPath + "/token/subList",
+					type: "GET",
+					dataType: "html",
+					data: { rows : rows, page : page, type : type, gradeList: gradeList},
+					success: function(html) {
+						if (page == 1) {
+							$(".tokenItemWrap").html(html);
+							totalPages = $("input[name=refreshTotalPages]").val();
+						} else {
+							$(".tokenItemWrap").append(html);	
+						}
+						isLoading = false;
+					}, 
+					error: function() {
+						isLoading = false;
+					}
+				});
+			}
     	</script>
-	    <div>
-			<ul class="tokenInfoWrap">
-				<th:block th:include="token/include/list"></th:block>
-			</ul>
-		</div>
-		
-		
+    	<div class="tokenInfoWrap">
+    		<div class="tokenFilterWrap">
+    			<div class="item tit">등급</div>
+    			<div class="item filter">
+    				<ul>
+    					<li th:each="grade : ${ gradeList }">
+    						<div class="check">
+    							<input type="checkbox" th:id="${ grade }" th:data-grade="${ grade }" name="grade">
+    							<label th:for="${ grade }" th:text="${ grade.description }"></label>
+    						</div>
+    					</li>
+    				</ul>
+    			</div>
+	    	</div>
+		    <div>
+				<ul class="tokenItemWrap">
+					<th:block th:include="token/include/list"></th:block>
+				</ul>
+			</div>
+    	</div>
+    	
 		<form id="tokenSearchForm">
-			<input type="hidden" id="type" th:value="${ req.type }"/>
-			<input type="hidden" id="rows" th:value="${ req.rows }"/>
-			<input type="hidden" id="page" th:value="${ req.page }"/>
+			<input type="hidden" name="type" th:value="${ req.type }"/>
+			<input type="hidden" name="rows" th:value="${ req.rows }"/>
+			<input type="hidden" name="page" th:value="${ req.page }"/>
 		</form>
+		<input type="hidden" name="totalPages" id="totalPages" th:value="${ totalPages }"/> 
 	</th:block>
 </html>

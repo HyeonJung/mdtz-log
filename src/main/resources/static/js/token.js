@@ -1,4 +1,5 @@
-//3자리 수 콤마.
+var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+// 3자리 수 콤마.
 function comma(str) {
 	if(!$.isNumeric(str))
 		return 0;
@@ -14,23 +15,32 @@ function uncomma(str) {
 	return str.replace(/[^\d]+/g, '');
 }
 
+// 로딩
+(function($) {
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("AJAX", "true");
+		},
+		error: function(xhr, status, err) {
+			if (xhr.status == 403) {
+				location.href = contextPath + "/login?redirect=true";
+			}
+			else {
+				console.log("error: " + xhr.status);
+			}
+		}
+	});
+	
+	$(document).ajaxStart(function() {
+		$(".loadingWrap").show();
+		
+	}).ajaxStop(function() {
+		$(".loadingWrap").hide();
+	});
+
+	
+})(jQuery);
+
 /******************************************************************************
  * 토큰 관련.
  ******************************************************************************/
-function getTokenInfoList(page) {
-	var $tokenSearchForm = $("#tokenSearchForm");
-	var rows = $tokenSearchForm.find("input[name=rows]").val();
-	var type = $tokenSearchForm.find("input[name=type]").val();
-	
-	$.ajax({
-		url : contextPath + "/token/subList",
-		type: "GET",
-		dataType: "html",
-		data: { rows : rows, page : page, type : type},
-		success: function(html) {
-
-		}, 
-		error: function() {
-		}
-	});
-}

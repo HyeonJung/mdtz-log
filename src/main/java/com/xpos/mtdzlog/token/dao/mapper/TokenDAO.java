@@ -17,4 +17,7 @@ public interface TokenDAO {
 	
 	// 토큰 정보 수량
 	long getTokenListCount(TokenInfoSearchRequest req);
+	
+	// 토큰 등급
+	List<String> getTokenGrade(String type);
 }

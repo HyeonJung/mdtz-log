@@ -28,7 +28,14 @@
 					#{v}
 				</foreach>
 			</if>
-			group by t.id
+			<if test="gradeList != null and gradeList.size > 0">
+				and t.grade in 
+				<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+					#{grade}
+				</foreach>
+			</if>
+			group by t.id, t.token_id
+			order by t.token_id
 		) res
 		<if test="page != 0 and rows != 0">
 			LIMIT #{limit} OFFSET #{offset}
@@ -61,7 +68,19 @@
 					#{v}
 				</foreach>
 			</if>
+			<if test="gradeList != null and gradeList.size > 0">
+				and t.grade in 
+				<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+					#{grade}
+				</foreach>
+			</if>
 	         group by t.id
 	) res
+    </select>
+    
+    <select id="getTokenGrade" parameterType="string" resultType="string">
+    	select grade from token_info
+		where type = '#{token}'
+		group by grade
     </select>
 </mapper>
