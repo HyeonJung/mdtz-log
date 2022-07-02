@@ -21,6 +21,10 @@
 	    			page = 1;
 	    			getTokenInfoList(page);
 	    		});
+	    		
+	    		$(document).on("input[name=keyword]", function() {
+	    	        $(this).val( $(this).val().replace(/[^0-9]/gi,"") );
+	    	    });
 	    	})
 	    	
 	    	function getTokenInfoList(page) {
@@ -66,6 +70,14 @@
     						</div>
     					</li>
     				</ul>
+    			</div>
+    			
+    			<div class="item tit">검색</div>
+    			<div class="item filter search">
+    				<input type="number" name="number" placeholder="MTDZ 번호로 검색해주세요 :)">
+    				<a href="#;" onclick="javascript:searchKeyword()" class="btnSearch">
+	                	<span class="icon_img"><span class="blind">검색하기</span></span>
+	                </a>
     			</div>
 	    	</div>
 		    <div>
