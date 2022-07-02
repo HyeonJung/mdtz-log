@@ -48,4 +48,9 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	public List<MtdzGrade> getMtdzGrade() {
 		return Arrays.asList(MtdzGrade.values());
 	}
+	
+	@Override
+	public List<String> getTokenColorList(TokenInfoSearchRequest req) {
+		return tokenDAO.getTokenColorList(req);
+	}
 }

@@ -26,7 +26,7 @@
 				and ta.key = #{key}
 			</if>
 			<if test="values != null and values.size > 0">
-				and ta.value in 
+				and ta.attribute_value in 
 				<foreach collection="values" item="v" open="(" close=")" separator=",">
 					#{v}
 				</foreach>
@@ -53,6 +53,54 @@
 	                  left join token_attribute ta
 	                            on t.id = ta.token_info_id
 	         where 1=1
+	         <if test="keyword != null and keyword != ''">
+				and t.token_id = #{keyword}
+			</if>
+			<if test="type != null">
+				and t.type = #{type}
+			</if>
+			<if test="grade != null">
+				and t.grade = #{grade}
+			</if>
+			<if test="value != null">
+				and ta.value = #{value}
+			</if>
+			<if test="key != null">
+				and ta.key = #{key}
+			</if>
+			<if test="values != null and values.size > 0">
+				and ta.attribute_value in 
+				<foreach collection="values" item="v" open="(" close=")" separator=",">
+					#{v}
+				</foreach>
+			</if>
+			<if test="gradeList != null and gradeList.size > 0">
+				and t.grade in 
+				<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+					#{grade}
+				</foreach>
+			</if>
+	         group by t.id
+	) res
+    </select>
+    
+    <select id="getTokenGrade" parameterType="string" resultType="string">
+    	select grade from token_info
+		where type = '#{token}'
+		group by grade
+    </select>
+    
+    <select id="getTokenColorList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="string">
+    	select attribute_value
+    	from (
+	    	select count(*) as cnt, ta.attribute_value
+			from token_info t,
+			     token_attribute ta
+			where ta.attribute_key = 'color'
+			  and t.id = ta.token_info_id
+			<if test="keyword != null and keyword != ''">
+				and t.token_id = #{keyword}
+			</if>
 			<if test="type != null">
 				and t.type = #{type}
 			</if>
@@ -77,13 +125,11 @@
 					#{grade}
 				</foreach>
 			</if>
-	         group by t.id
-	) res
-    </select>
-    
-    <select id="getTokenGrade" parameterType="string" resultType="string">
-    	select grade from token_info
-		where type = '#{token}'
-		group by grade
+			group by ta.attribute_value
+			<if test="(gradeList == null or gradeList.size == 0) and (keyword == null or keyword == '')">
+			having count(*) > 10
+			</if>
+		) res
+		order by cnt desc, attribute_value asc
     </select>
 </mapper>

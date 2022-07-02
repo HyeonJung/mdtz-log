@@ -44,3 +44,40 @@ function uncomma(str) {
 /******************************************************************************
  * 토큰 관련.
  ******************************************************************************/
+function getColorList() {
+	var $tokenSearchForm = $("#tokenSearchForm");
+	var rows = $tokenSearchForm.find("input[name=rows]").val();
+	var type = $tokenSearchForm.find("input[name=type]").val();
+	var keyword = $("input[name=keyword]").val();
+	$tokenSearchForm.find("input[name=keyword]").val(keyword);
+	var gradeList = new Array();
+	$("input[name=grade]:checked").each(function() {
+		var grade = $(this).data('grade');	
+		gradeList.push(grade);
+	});
+	
+	var values = new Array();
+	$("input[name=color]:checked").each(function() {
+		var color = $(this).data('color');	
+		values.push(color);
+	});
+	
+	$(".item.filter.color").html("");
+	$.ajax({
+		url : contextPath + "/token/colorList",
+		type: "GET",
+		dataType: "html",
+		data: {  type : type, gradeList: gradeList, keyword: keyword},
+		success: function(html) {
+			$(".item.filter.color").html(html);
+			$(".item.filter.color").find("input[type=checkbox]").each(function() {
+				var color = $(this).data("color");
+				if (values.indexOf(color) >= 0) {
+					$(this).prop("checked", true);
+				}
+			});
+		}, 
+		error: function() {
+		}
+	});
+}

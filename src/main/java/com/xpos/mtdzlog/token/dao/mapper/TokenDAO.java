@@ -20,4 +20,7 @@ public interface TokenDAO {
 	
 	// 토큰 등급
 	List<String> getTokenGrade(String type);
+	
+	// 토큰 색깔 조회
+	List<String> getTokenColorList(TokenInfoSearchRequest req);
 }

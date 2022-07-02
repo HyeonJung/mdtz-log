@@ -1,5 +1,6 @@
 package com.xpos.mtdzlog.token;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +16,12 @@ import lombok.Data;
 
 @Data
 @Entity(name = "TOKEN_INFO")
-public class TokenInfo {
+public class TokenInfo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "ID")

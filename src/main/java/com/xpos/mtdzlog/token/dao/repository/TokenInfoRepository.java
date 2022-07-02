@@ -9,5 +9,4 @@ import com.xpos.mtdzlog.token.TokenInfo;
 public interface TokenInfoRepository extends JpaRepository<TokenInfo, Integer> {
 
 	List<TokenInfo> findByIdIn(List<Integer> ids);
-	
 }

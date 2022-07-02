@@ -15,4 +15,7 @@ public interface TokenInfoService {
 	
 	// 메토드 등급 조회
 	List<MtdzGrade> getMtdzGrade();
+	
+	// 토큰 색깔 조회
+	List<String> getTokenColorList(TokenInfoSearchRequest req);
 }

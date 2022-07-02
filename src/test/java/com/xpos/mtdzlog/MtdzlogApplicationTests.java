@@ -1,21 +1,17 @@
 package com.xpos.mtdzlog;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xpos.mtdzlog.meta.MetaAttribute;
-import com.xpos.mtdzlog.meta.MetaData;
 import com.xpos.mtdzlog.token.TokenAttribute;
 import com.xpos.mtdzlog.token.TokenInfo;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
@@ -105,6 +101,31 @@ class MtdzlogApplicationTests {
 //		} catch (Exception e) {
 //			log.error("error : ", e);
 //		}
+	}
+	
+	@Test
+	void getRgb() throws IOException {
+		
+		List<TokenInfo> tokenList = tokenInfoRepository.findAll();
+		for (TokenInfo tokenInfo: tokenList) {
+			URL url = new URL(tokenInfo.getImageUrl());
+		    BufferedImage img = ImageIO.read(url);
+		    int pixel = img.getRGB(108, 151);
+	        //Creating a Color object from pixel value
+	        Color color = new Color(pixel, true);
+	        //Retrieving the R G B values
+	        int red = color.getRed();
+	        int green = color.getGreen();
+	        int blue = color.getBlue();
+	        String hex = String. format("#%02X%02X%02X", red, green, blue);
+	        TokenAttribute tokenAttribute = new TokenAttribute();
+	        tokenAttribute.setAttributeKey("color");
+	        tokenAttribute.setAttributeValue(hex);
+	        tokenAttribute.setTokenInfoId(tokenInfo.getId());
+	        System.out.println(tokenAttribute);
+	        tokenAttributeRepository.save(tokenAttribute);
+		}
+		
 	}
 
 }

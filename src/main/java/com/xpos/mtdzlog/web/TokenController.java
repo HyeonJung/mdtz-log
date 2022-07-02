@@ -46,7 +46,6 @@ public class TokenController {
 	@GetMapping("/subList")
 	public String subList(Model model, @ModelAttribute TokenInfoSearchRequest req) {
 		log.info("list req : {}", req);
-		req.setType(TYPE);
 		Page<TokenDTO> tokenRes = tokenInfoServiceImpl.getTokenInfoList(req);
 		model.addAttribute("contents", tokenRes.getContent());
 		model.addAttribute("totalDocs", tokenRes.getTotalElements());
@@ -67,4 +66,11 @@ public class TokenController {
 		return "token/include/list";
 	}
 
+	// 색깔 필터 리스트 조회
+	@GetMapping("/colorList")
+	public String colorList(Model model, @ModelAttribute TokenInfoSearchRequest req) {
+		log.info("colorList req : {}", req);
+		model.addAttribute("colorList", tokenInfoServiceImpl.getTokenColorList(req));
+		return "token/include/colorList";
+	}
 }
