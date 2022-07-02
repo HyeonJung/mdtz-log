@@ -10,7 +10,10 @@
 			         left join token_attribute ta
 			                   on t.id = ta.token_info_id
 			where 1=1
-			<if test="type != null">
+			<if test="keyword != null and keyword != ''">
+				and t.token_id = #{keyword}
+			</if>
+			<if test="type != null and type != ''">
 				and t.type = #{type}
 			</if>
 			<if test="grade != null">

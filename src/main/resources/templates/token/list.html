@@ -18,8 +18,13 @@
 	    	    });
 	    		
 	    		$("input[name=grade]").on("change", function() {
-	    			page = 1;
-	    			getTokenInfoList(page);
+	    			search();
+	    		});
+	    		
+	    		$("input[name=keyword]").on("keyup", function(e) {
+	    			if (e.keyCode == 13) {
+	    				search();
+	    			}
 	    		});
 	    		
 	    		$(document).on("input[name=keyword]", function() {
@@ -27,11 +32,13 @@
 	    	    });
 	    	})
 	    	
-	    	function getTokenInfoList(page) {
+	    	function getTokenInfoList(searchPage) {
 	    		isLoading = true;
 				var $tokenSearchForm = $("#tokenSearchForm");
 				var rows = $tokenSearchForm.find("input[name=rows]").val();
 				var type = $tokenSearchForm.find("input[name=type]").val();
+				var keyword = $("input[name=keyword]").val();
+				$tokenSearchForm.find("input[name=keyword]").val(keyword);
 				var gradeList = new Array();
 				$("input[name=grade]:checked").each(function() {
 					var grade = $(this).data('grade');	
@@ -42,14 +49,10 @@
 					url : contextPath + "/token/subList",
 					type: "GET",
 					dataType: "html",
-					data: { rows : rows, page : page, type : type, gradeList: gradeList},
+					data: { rows : rows, page : searchPage, type : type, gradeList: gradeList, keyword: keyword},
 					success: function(html) {
-						if (page == 1) {
-							$(".tokenItemWrap").html(html);
-							totalPages = $("input[name=refreshTotalPages]").val();
-						} else {
-							$(".tokenItemWrap").append(html);	
-						}
+						$(".tokenItemWrap").append(html);	
+						totalPages = $("input[name=refreshTotalPages]").val();
 						isLoading = false;
 					}, 
 					error: function() {
@@ -57,6 +60,12 @@
 					}
 				});
 			}
+	    	
+	    	// 검색
+	    	function search() {
+	    		$(".tokenItemWrap").html("");
+	    		getTokenInfoList(page);
+	    	}
     	</script>
     	<div class="tokenInfoWrap">
     		<div class="tokenFilterWrap">
@@ -74,8 +83,8 @@
     			
     			<div class="item tit">검색</div>
     			<div class="item filter search">
-    				<input type="number" name="number" placeholder="MTDZ 번호로 검색해주세요 :)">
-    				<a href="#;" onclick="javascript:searchKeyword()" class="btnSearch">
+    				<input type="number" name="keyword" placeholder="MTDZ 번호로 검색해주세요 :)" th:value="${ req.keyword }">
+    				<a href="javascript:search()" class="btnSearch">
 	                	<span class="icon_img"><span class="blind">검색하기</span></span>
 	                </a>
     			</div>
@@ -91,6 +100,7 @@
 			<input type="hidden" name="type" th:value="${ req.type }"/>
 			<input type="hidden" name="rows" th:value="${ req.rows }"/>
 			<input type="hidden" name="page" th:value="${ req.page }"/>
+			<input type="hidden" name="keyword" th:value="${ req.keyword }"/>
 		</form>
 		<input type="hidden" name="totalPages" id="totalPages" th:value="${ totalPages }"/> 
 	</th:block>

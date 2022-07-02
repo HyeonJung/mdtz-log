@@ -4,7 +4,11 @@ html,body,button,dl,dt,dd,div,form,fieldset,legend,h1,h2,h3,h4,h5,h6,input,selec
 html{font-size: 14px; font-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust:none;}
 body{padding:0; color:#212121; font-weight: 400; font-family: Pretendard,apple-system,'Apple SD Gothic Neo','맑은 고딕',sans-serif; letter-spacing: -0.72px; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 h1,h2,h3,h4,h5{font-weight: 700; font-size: 14px;}
-
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 .icon_img {display:inline-block;background:url('../images/common/icon_sprites.png') no-repeat 0 0/250px auto;vertical-align:top}/* 사용안함 */
 
 /*숨김 텍스트*/

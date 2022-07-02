@@ -6,8 +6,8 @@
 		<span th:text="${token.type}"></span> #<span th:text="${token.tokenId}">MTDZ</span>
 	</div>
 	<div class="tokenExchange">
-		<a class="opensea" th:href="@{|https://opensea.io/assets/klaytn/0x46dbdc7965cf3cd2257c054feab941a05ff46488/${token.tokenId}|}"><span class="blind">OpenSea</span></a>
-		<a class="pala" th:href="@{|https://pala.world/square/project/46DBdC7965CF3cd2257C054fEAb941a05Ff46488/${token.tokenId}|}"><span class="blind">Pala</span></a>
+		<a class="opensea" th:href="@{|https://opensea.io/assets/klaytn/0x46dbdc7965cf3cd2257c054feab941a05ff46488/${token.tokenId}|}" target="blank"><span class="blind">OpenSea</span></a>
+		<a class="pala" th:href="@{|https://pala.world/square/project/46DBdC7965CF3cd2257C054fEAb941a05Ff46488/${token.tokenId}|}" target="blank"><span class="blind">Pala</span></a>
 	</div>
 </li>
 
