@@ -106,25 +106,25 @@ class MtdzlogApplicationTests {
 	@Test
 	void getRgb() throws IOException {
 		
-		List<TokenInfo> tokenList = tokenInfoRepository.findAll();
-		for (TokenInfo tokenInfo: tokenList) {
-			URL url = new URL(tokenInfo.getImageUrl());
-		    BufferedImage img = ImageIO.read(url);
-		    int pixel = img.getRGB(108, 151);
-	        //Creating a Color object from pixel value
-	        Color color = new Color(pixel, true);
-	        //Retrieving the R G B values
-	        int red = color.getRed();
-	        int green = color.getGreen();
-	        int blue = color.getBlue();
-	        String hex = String. format("#%02X%02X%02X", red, green, blue);
-	        TokenAttribute tokenAttribute = new TokenAttribute();
-	        tokenAttribute.setAttributeKey("color");
-	        tokenAttribute.setAttributeValue(hex);
-	        tokenAttribute.setTokenInfoId(tokenInfo.getId());
-	        System.out.println(tokenAttribute);
-	        tokenAttributeRepository.save(tokenAttribute);
-		}
+//		List<TokenInfo> tokenList = tokenInfoRepository.findAll();
+//		for (TokenInfo tokenInfo: tokenList) {
+//			URL url = new URL(tokenInfo.getImageUrl());
+//		    BufferedImage img = ImageIO.read(url);
+//		    int pixel = img.getRGB(108, 151);
+//	        //Creating a Color object from pixel value
+//	        Color color = new Color(pixel, true);
+//	        //Retrieving the R G B values
+//	        int red = color.getRed();
+//	        int green = color.getGreen();
+//	        int blue = color.getBlue();
+//	        String hex = String. format("#%02X%02X%02X", red, green, blue);
+//	        TokenAttribute tokenAttribute = new TokenAttribute();
+//	        tokenAttribute.setAttributeKey("color");
+//	        tokenAttribute.setAttributeValue(hex);
+//	        tokenAttribute.setTokenInfoId(tokenInfo.getId());
+//	        System.out.println(tokenAttribute);
+//	        tokenAttributeRepository.save(tokenAttribute);
+//		}
 		
 	}
 

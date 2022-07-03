@@ -61,6 +61,7 @@ function getColorList() {
 		values.push(color);
 	});
 	
+	
 	$(".item.filter.color").html("");
 	$.ajax({
 		url : contextPath + "/token/colorList",
