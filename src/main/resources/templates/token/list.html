@@ -14,7 +14,7 @@
 	    		updateTotalCount();
 	    		totalPages = $("#totalPages").val();
 	    		$(window).scroll(function() {
-	    	        if (page < totalPages && !isLoading && ($(window).scrollTop() >= $(document).height() - $(window).height() - 50)) {
+	    	        if (page < totalPages && !isLoading && ($(window).scrollTop() >= $(document).height() - $(window).height() - 110)) {
 	    	        	getTokenInfoList(++page);
 	    	        }
 	    	    });

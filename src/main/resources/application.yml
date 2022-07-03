@@ -9,7 +9,10 @@ feign:
         readTimeout: 5000
         loggerLevel: full
         
+        
 spring:
+  application:
+    name: mtdz-log
   datasource: # DB설정
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://140.238.23.189:3306/MTDZ_LOG?characterEncoding=UTF-8&serverTimezone=Asia/Seoul # 터널링 필요
@@ -28,3 +31,17 @@ mybatis:
 mtdz:
   json:
     url: https://data.metatoydragonz.io/meta
+    
+tomcat:
+  ajp:
+   protocol: AJP/1.3
+   enabled: true
+   port: 18080
+   
+---
+
+spring:
+  profiles: production 
+ 
+logging:
+  config: classpath:logback-production.xml
