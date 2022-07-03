@@ -13,6 +13,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /*숨김 텍스트*/
 .blind {display:block;position:absolute;overflow:hidden;clip:rect(0 0 0 0);width:1px;height:1px}
+.btnTop {display: none; position: fixed; bottom: 98px; right: 16px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.9); box-shadow: 0 3px 6px rgba(0,0,0,.16); z-index: 10;}
+.btnTop::before {content: '';display: block;width: 15px;height: 15px;margin: 0 auto;background: url('../images/common/icon_sprites.png') -69px -156px no-repeat;background-size: 253px auto;}
 
 /* 에러페이지 **/
 .errorWrap {text-align:center}
@@ -75,20 +77,20 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .toggleCheck label::after {content:'';display:block;position:absolute;top:1px;right:36px;width:33px;height:33px;border-radius:50%;background:var(--color-wt);box-shadow:0 3px 6px rgba(0,0,0,.16);transition:all .2s ease-in-out;z-index:1}
 .toggleCheck input:checked + label::before {background:var(--color-pc)}
 .toggleCheck input:checked + label::after {right:1px}
-
 /*******************************
 *	token
 ********************************/
+.tokenTotalCnt {margin-bottom:10px; display:block;}
 .tokenInfoWrap {padding:20px;position: relative;margin: auto; max-width: 900px;}
-.tokenInfoWrap .tokenFilterWrap {margin-bottom:20px; display:grid;grid-template-columns: 2fr 8fr; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 2fr 8fr; gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenFilterWrap .item{padding:10px; position:relative}
 .tokenInfoWrap .tokenFilterWrap .item.tit {text-align:center; border-radius: 50px; letter-spacing:-1px; font-size:20px; display:flex; justify-content: center; align-items: center; font-weight:bold}
 .tokenInfoWrap .tokenFilterWrap .item.tit 
 .tokenInfoWrap .tokenFilterWrap .item.filter {}
 .tokenInfoWrap .tokenFilterWrap .item.filter ul {display:grid;grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenFilterWrap .item.filter ul li {display:inline-grid;}
-.tokenInfoWrap .tokenFilterWrap .item.filter input {width: 100%; display: inline-block;height: 20px; padding: 5px 10px;border: 1px solid #dfdfdf; border-radius: 50px;}
-.tokenInfoWrap .tokenFilterWrap .item.search .btnSearch {position:absolute;top:0;right:-3px;display:flex;align-items:center;height:100%;padding:0 10px}
+.tokenInfoWrap .tokenFilterWrap .item.filter input {width: calc(100% - 20px);display: inline-block;height: 20px;padding: 5px 10px;border: 1px solid #dfdfdf;border-radius: 50px;}
+.tokenInfoWrap .tokenFilterWrap .item.search .btnSearch {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
 .tokenInfoWrap .tokenFilterWrap .item.search .btnSearch .icon_img {width:19px;height:19px;background-position:-20px 0}
 .tokenInfoWrap .tokenFilterWrap .item.color .check label span {width:20px; height:20px; display:inline-block; border-radius:50px}
 .tokenInfoWrap .tokenFilterWrap .item.color ul {display:grid;grid-template-columns: repeat(8, 1fr); gap:5px; grid-gap:5px;}
