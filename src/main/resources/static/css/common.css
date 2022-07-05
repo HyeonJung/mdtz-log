@@ -15,6 +15,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .blind {display:block;position:absolute;overflow:hidden;clip:rect(0 0 0 0);width:1px;height:1px}
 .btnTop {display: none; position: fixed; bottom: 98px; right: 16px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.9); box-shadow: 0 3px 6px rgba(0,0,0,.16); z-index: 10;}
 .btnTop::before {content: '';display: block;width: 15px;height: 15px;margin: 0 auto;background: url('../images/common/icon_sprites.png') -69px -156px no-repeat;background-size: 253px auto;}
+.iconS::before {content:'';display:inline-block;background:url('../images/common/icon_sprites.png') no-repeat 0 0/250px auto;vertical-align:top}
 
 /* 에러페이지 **/
 .errorWrap {text-align:center}
@@ -82,27 +83,18 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 ********************************/
 .tokenTotalCnt {margin-bottom:10px; display:block;}
 .tokenInfoWrap {padding:20px;position: relative;margin: auto; max-width: 900px;}
-.tokenInfoWrap .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 2fr 8fr; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 9fr 1fr; gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenFilterWrap .item{padding:10px; position:relative}
+.tokenInfoWrap .tokenFilterWrap .item .btnFilter {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
+.icon_filter {width:19px; height:19px; display:inline-block;background:url('../images/common/filter_icon.png') no-repeat 0 0;vertical-align:top; background-size:19px;}
 .tokenInfoWrap .tokenFilterWrap .item.tit {text-align:center; border-radius: 50px; letter-spacing:-1px; font-size:20px; display:flex; justify-content: center; align-items: center; font-weight:bold}
-.tokenInfoWrap .tokenFilterWrap .item.tit 
 .tokenInfoWrap .tokenFilterWrap .item.filter {}
 .tokenInfoWrap .tokenFilterWrap .item.filter ul {display:grid;grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenFilterWrap .item.filter ul li {display:inline-grid;}
 .tokenInfoWrap .tokenFilterWrap .item.filter input {width: calc(100% - 20px);display: inline-block;height: 20px;padding: 5px 10px;border: 1px solid #dfdfdf;border-radius: 50px;}
 .tokenInfoWrap .tokenFilterWrap .item.search .btnSearch {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
 .tokenInfoWrap .tokenFilterWrap .item.search .btnSearch .icon_img {width:19px;height:19px;background-position:-20px 0}
-.tokenInfoWrap .tokenFilterWrap .item.color .check label span {width:20px; height:20px; display:inline-block; border-radius:50px}
-.tokenInfoWrap .tokenFilterWrap .item.color ul {display:grid;grid-template-columns: repeat(8, 1fr); gap:5px; grid-gap:5px;}
 
-.tokenInfoWrap .tokenFilterWrap .item.filter.grade ul li label {display:block;width:100%;height:100%;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
-.tokenInfoWrap .tokenFilterWrap .item.filter.grade ul li input:checked + label {color:var(--color-wt)}
-.tokenInfoWrap .tokenFilterWrap .item.filter.grade ul li input:checked + label::before {content:'';display:block;position:absolute;top:-1px;left:-1px;width:calc(100% + 2px);height:calc(100% + 2px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}
-
-.tokenInfoWrap .tokenFilterWrap .item.filter.color ul li label {display:block;width:20px;height:20px;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
-.tokenInfoWrap .tokenFilterWrap .item.filter.color ul li input:checked + label {color:var(--color-wt)}
-.tokenInfoWrap .tokenFilterWrap .item.filter.color ul li input:checked + label::before {content:'';display:block;position:absolute;top:-2.5px;left:-2.5px;width:calc(100% + 5px);height:calc(100% + 5px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}
-  
 .tokenInfoWrap .tokenItemWrap {display:grid;grid-template-columns: repeat(4, 1fr); gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenItemWrap li {display:inline-grid; border-radius:10px;}
 .tokenInfoWrap .tokenItemWrap li img {border-radius:10px; width:100%}
@@ -112,3 +104,34 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .opensea::before {content:'';display:inline-block;background:url('../images/common/opensea.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px;}
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .pala {width:17px; height:17px;display: inline-block; border:1px solid #dfdfdf; border-radius:50px}  
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .pala::before {content:'';display:inline-block;background:url('../images/common/pala.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px;}
+
+/* .filterArea {width: 300px;height: 100vh;background: #ffffff;position: fixed;top: 0;left: 0;z-index: 2;} */
+.filterArea {opacity:0;visibility:hidden;position:fixed;top:0;left:0;width:80vw;height:100vh;padding-top:0;background:#fff;transform:translate3d(-60%, 0, 0);transition:.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);transition-property:transform, height, visibility, opacity;z-index:10; max-width:500px; padding:15px;}
+.filterArea::after {content:'';opacity:0;visibility:hidden;position:absolute;top: 0;left: 100%;width: 100vw;height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
+.filterArea .btnClose {overflow:hidden;display:block;position:relative;width:100%;height:53px;background:#fff}
+.filterArea .btnClose .slideRefresh {display:block;position:absolute;top:3px;left:0;width:48px;height:100%;padding:17px 0;text-align:center;box-sizing:border-box}
+.filterArea .btnClose .slideRefresh.iconS::before {width:17px;height:19px;background-position:-197px 0px}
+.filterArea .btnClose .slideClose {display:block;position:absolute;top:0;right:0;width:52px;height:100%;padding:19px 0;text-align:center;box-sizing:border-box}
+.filterArea .btnClose .slideClose.iconS::before {width:15px;height:15px;background-position:-176px -21px}
+
+.filterArea.on {opacity:1;visibility:visible;transform:translate3d(0, 0, 0)}
+.filterArea.on::after {opacity:1;visibility:visible;}
+
+
+.filterArea .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 1fr;}
+.filterArea .tokenFilterWrap .item{padding:10px; position:relative}
+.filterArea .tokenFilterWrap .item.tit {text-align:center; letter-spacing:-1px;font-size: 15px; display:flex;justify-content: flex-start;align-items: center;background: #31a1d3;border-radius: 0;color: #ffffff;}
+.filterArea .tokenFilterWrap .item.filter {border-bottom:1px solid #dfdfdf;}
+.filterArea .tokenFilterWrap .item.filter ul {display:grid;grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px;}
+.filterArea .tokenFilterWrap .item.filter ul li {display:inline-grid;}
+.filterArea .tokenFilterWrap .item.filter input {width: calc(100% - 20px);display: inline-block;height: 20px;padding: 5px 10px;border: 1px solid #dfdfdf;border-radius: 50px;}
+.filterArea .tokenFilterWrap .item.color .check label span {width:20px; height:20px; display:inline-block; border-radius:50px}
+.filterArea .tokenFilterWrap .item.color ul {display:grid;grid-template-columns: repeat(8, 1fr); gap:5px; grid-gap:5px;}
+
+.filterArea .tokenFilterWrap .item.filter.grade ul li label {display:block;width:100%;height:100%;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
+.filterArea .tokenFilterWrap .item.filter.grade ul li input:checked + label {color:var(--color-wt)}
+.filterArea .tokenFilterWrap .item.filter.grade ul li input:checked + label::before {content:'';display:block;position:absolute;top:-1px;left:-1px;width:calc(100% + 2px);height:calc(100% + 2px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}
+
+.filterArea .tokenFilterWrap .item.filter.color ul li label {display:block;width:20px;height:20px;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
+.filterArea .tokenFilterWrap .item.filter.color ul li input:checked + label {color:var(--color-wt)}
+.filterArea .tokenFilterWrap .item.filter.color ul li input:checked + label::before {content:'';display:block;position:absolute;top:-2.5px;left:-2.5px;width:calc(100% + 5px);height:calc(100% + 5px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}

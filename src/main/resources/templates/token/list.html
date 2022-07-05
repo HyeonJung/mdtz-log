@@ -41,6 +41,16 @@
 	    			e.preventDefault();
 	    			$('html, body').animate({scrollTop: '0'}, 1000);
 	    		});
+	    		
+	    		$(".slideClose").on("click", function(e) {
+	    			e.preventDefault();
+	    			$(".filterArea").removeClass("on");
+	    		})
+	    		
+	    		$(".btnFilter").on("click", function(e) {
+	    			e.preventDefault();
+	    			$(".filterArea").toggleClass("on");
+	    		})
 	    	})
 	    	
 	    	// 리스트 불러오기
@@ -97,27 +107,15 @@
     	</script>
     	<div class="tokenInfoWrap">
     		<div class="tokenFilterWrap">
-    			<div class="item tit">등급</div>
-    			<div class="item filter grade">
-    				<ul>
-    					<li th:each="grade : ${ gradeList }">
-    						<div class="check">
-    							<input type="checkbox" th:id="${ grade }" th:data-grade="${ grade }" name="grade">
-    							<label th:for="${ grade }" th:text="${ grade.description }"></label>
-    						</div>
-    					</li>
-    				</ul>
-    			</div>
-    			
-    			<div class="item tit">색깔</div>
-    			<div class="item filter color">
-    			</div>
-    			
-    			<div class="item tit">검색</div>
     			<div class="item filter search">
     				<input type="number" name="keyword" placeholder="MTDZ 번호로 검색해주세요 :)" th:value="${ req.keyword }">
     				<a href="javascript:search()" class="btnSearch">
 	                	<span class="icon_img"><span class="blind">검색하기</span></span>
+	                </a>
+    			</div>
+    			<div class="item">
+    				<a href="#" class="btnFilter">
+	                	<span class="icon_filter"><span class="blind">필터</span></span>
 	                </a>
     			</div>
 	    	</div>
@@ -137,5 +135,28 @@
 		</form>
 		<input type="hidden" name="totalPages" id="totalPages" th:value="${ totalPages }"/>
 		<input type="hidden" name="totalDocs" th:value="${ totalDocs }"/> 
+		
+		<div class="filterArea">
+			<div class="btnClose">
+	            <a href="" class="slideClose iconS"><span class="blind">팝업 닫기</span></a>
+	        </div>
+			<div class="tokenFilterWrap">
+    			<div class="item tit">등급</div>
+    			<div class="item filter grade">
+    				<ul>
+    					<li th:each="grade : ${ gradeList }">
+    						<div class="check">
+    							<input type="checkbox" th:id="${ grade }" th:data-grade="${ grade }" name="grade">
+    							<label th:for="${ grade }" th:text="${ grade.description }"></label>
+    						</div>
+    					</li>
+    				</ul>
+    			</div>
+    			
+    			<div class="item tit">색깔</div>
+    			<div class="item filter color">
+    			</div>
+	    	</div>
+		</div>
 	</th:block>
 </html>
