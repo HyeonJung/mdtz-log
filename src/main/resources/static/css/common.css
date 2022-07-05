@@ -3,6 +3,7 @@
 html,body,button,dl,dt,dd,div,form,fieldset,legend,h1,h2,h3,h4,h5,h6,input,select,textarea,ul,ol,li,p,pre,table,td,th,caption,a {margin:0; padding:0; line-height:120%;}
 html{font-size: 14px; font-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust:none;}
 body{padding:0; color:#212121; font-weight: 400; font-family: Pretendard,apple-system,'Apple SD Gothic Neo','맑은 고딕',sans-serif; letter-spacing: -0.72px; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+body.screenOut { height:100vh; overflow:hidden; overscroll-behavior: none; position: fixed; width:100%}
 h1,h2,h3,h4,h5{font-weight: 700; font-size: 14px;}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -15,6 +16,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .blind {display:block;position:absolute;overflow:hidden;clip:rect(0 0 0 0);width:1px;height:1px}
 .btnTop {display: none; position: fixed; bottom: 98px; right: 16px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.9); box-shadow: 0 3px 6px rgba(0,0,0,.16); z-index: 10;}
 .btnTop::before {content: '';display: block;width: 15px;height: 15px;margin: 0 auto;background: url('../images/common/icon_sprites.png') -69px -156px no-repeat;background-size: 253px auto;}
+body.screenOut .btnTop {display:none !important}
 .iconS::before {content:'';display:inline-block;background:url('../images/common/icon_sprites.png') no-repeat 0 0/250px auto;vertical-align:top}
 
 /* 에러페이지 **/
@@ -114,15 +116,17 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .filterArea .btnClose .slideClose {display:block;position:absolute;top:0;right:0;width:52px;height:100%;padding:19px 0;text-align:center;box-sizing:border-box}
 .filterArea .btnClose .slideClose.iconS::before {width:15px;height:15px;background-position:-176px -21px}
 
-.filterArea.on {opacity:1;visibility:visible;transform:translate3d(0, 0, 0)}
+.filterArea.on {opacity:1;visibility:visible;transform:translate3d(0, 0, 0);}
 .filterArea.on::after {opacity:1;visibility:visible;}
 
 
-.filterArea .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 1fr;}
+.filterArea .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 1fr; overflow-y:auto; overflow-x:hidden; max-height:70%}
 .filterArea .tokenFilterWrap .item{padding:10px; position:relative}
-.filterArea .tokenFilterWrap .item.tit {text-align:center; letter-spacing:-1px;font-size: 15px; display:flex;justify-content: flex-start;align-items: center;background: #31a1d3;border-radius: 0;color: #ffffff;}
-.filterArea .tokenFilterWrap .item.filter {border-bottom:1px solid #dfdfdf;}
+.filterArea .tokenFilterWrap .item.tit {text-align:center; letter-spacing:-1px;font-size: 15px; display:flex;justify-content: flex-start;align-items: center;background: #9974af;border-radius: 0;color: #ffffff;}
+.filterArea .tokenFilterWrap .item.filter {border-bottom:1px solid #dfdfdf; display:none;}
+.filterArea .tokenFilterWrap .itemWrap.open .item.filter {display:block;}
 .filterArea .tokenFilterWrap .item.filter ul {display:grid;grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px;}
+.filterArea .tokenFilterWrap .item.filter ul.attributes {grid-template-columns: 1fr;}
 .filterArea .tokenFilterWrap .item.filter ul li {display:inline-grid;}
 .filterArea .tokenFilterWrap .item.filter input {width: calc(100% - 20px);display: inline-block;height: 20px;padding: 5px 10px;border: 1px solid #dfdfdf;border-radius: 50px;}
 .filterArea .tokenFilterWrap .item.color .check label span {width:20px; height:20px; display:inline-block; border-radius:50px}

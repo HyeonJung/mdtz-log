@@ -1,7 +1,10 @@
 package com.xpos.mtdzlog.token.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,7 @@ import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
 import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 
@@ -52,5 +56,15 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	@Override
 	public List<String> getTokenColorList(TokenInfoSearchRequest req) {
 		return tokenDAO.getTokenColorList(req);
+	}
+	
+	public Map<String, List<TokenAttributesDTO>> getTokenAttributeMap(TokenInfoSearchRequest req) {
+		List<TokenAttributesDTO> tokenAttributeList = tokenDAO.getTokenAttributeList(req);
+		Map<String, List<TokenAttributesDTO>> tokenAttributeMap = new HashMap<>();
+		if (tokenAttributeList != null && tokenAttributeList.size() > 0) {
+			tokenAttributeMap = tokenAttributeList.stream().collect(Collectors.groupingBy(r -> r.getAttributeKey()));
+		}
+		
+		return tokenAttributeMap;
 	}
 }

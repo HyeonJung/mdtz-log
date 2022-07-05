@@ -1,6 +1,7 @@
 package com.xpos.mtdzlog.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 import com.xpos.mtdzlog.token.service.TokenInfoService;
@@ -73,4 +75,12 @@ public class TokenController {
 		model.addAttribute("colorList", tokenInfoServiceImpl.getTokenColorList(req));
 		return "token/include/colorList";
 	}
+	
+	@GetMapping("/attributes")
+	public String attributes(Model model, @ModelAttribute TokenInfoSearchRequest req) {
+		Map<String, List<TokenAttributesDTO>> attributesMap = tokenInfoServiceImpl.getTokenAttributeMap(req);
+		model.addAttribute("attributesMap", attributesMap);
+		return "token/include/attributeList";
+	}
+	
 }

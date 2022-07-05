@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 
@@ -23,4 +24,7 @@ public interface TokenDAO {
 	
 	// 토큰 색깔 조회
 	List<String> getTokenColorList(TokenInfoSearchRequest req);
+	
+	// 토큰 속성 값 조회
+	List<TokenAttributesDTO> getTokenAttributeList(TokenInfoSearchRequest req);
 }

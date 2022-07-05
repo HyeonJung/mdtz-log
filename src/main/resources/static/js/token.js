@@ -56,11 +56,17 @@ function getColorList() {
 	});
 	
 	var values = new Array();
+	// 색
 	$("input[name=color]:checked").each(function() {
 		var color = $(this).data('color');	
 		values.push(color);
 	});
 	
+	// 특성
+	$("input[name=attribute]:checked").each(function() {
+		var attribute = $(this).data('attribute');	
+		values.push(attribute);
+	});
 	
 	$(".item.filter.color").html("");
 	$.ajax({
@@ -76,6 +82,22 @@ function getColorList() {
 					$(this).prop("checked", true);
 				}
 			});
+		}, 
+		error: function() {
+		}
+	});
+	
+}
+
+function getAttributes() {
+	var type = "MTDZ"
+	$.ajax({
+		url : contextPath + "/token/attributes",
+		type: "GET",
+		dataType: "html",
+		data: {  type : type},
+		success: function(html) {
+			$(".attributeWrap").html(html);
 		}, 
 		error: function() {
 		}
