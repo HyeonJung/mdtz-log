@@ -5,7 +5,7 @@
 <mapper namespace="com.xpos.mtdzlog.token.dao.mapper.TokenDAO">
     <select id="getTokenList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenDTO">
 	    SELECT * FROM (
-		    SELECT t.id, t.token_id, t.image_url, t.type, t.grade, t.description
+		    SELECT t.id, t.token_id, t.image_url, t.type, t.grade, t.description, t.owner
 			FROM token_info t
 			         left join token_attribute ta
 			                   on t.id = ta.token_info_id
@@ -223,7 +223,13 @@
 	</select>
 
 	<select id="getOwnerTokenList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenDTO">
-		select *
+		select * from (
+		select t.*
+	     , case when t.grade = 'legendary' then 5
+	    when t.grade = 'light' then 4
+	    when t.grade = 'glass' then 3
+	    when t.grade = 'gradation' then 2
+	    when t.grade = 'canister' then 1 end as grade_seq
 		from token_info t
 		where t.owner = #{address}
 		<if test="gradeList != null and gradeList.size > 0">
@@ -235,6 +241,8 @@
 		<if test="type != null">
 			and t.type = #{type}
 		</if>
-		order by t.token_id asc
+		) res
+		order by grade_seq desc
+		limit 10
 	</select>
 </mapper>

@@ -2,7 +2,7 @@
 
     $(function() {
         var swiper = new Swiper('.swiper', {
-            slidesPerView: 8,
+            slidesPerView: 'auto',
             spaceBetween: 10,
             loop : false,
             pagination : false
@@ -13,3 +13,9 @@
 <div class="tokenItem swiper-slide" th:each="token : ${contents}">
     <img th:src="${token.imageUrl}" src=""/>
 </div>
+
+<div class="tokenItem swiper-slide moreBtn">
+	<a th:href="@{|/token?keyword=${address}|}"><img th:src="@{/images/common/icons-right-arrow.png}" src=""/></a>
+   
+</div>
+

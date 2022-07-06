@@ -19,7 +19,7 @@ public interface KlaytnClient {
      * @param cursor
      */
     @GetMapping(value = "v2/contract/nft/{contractAddress}/token")
-    NftItemResponse tokenInfo(@RequestHeader("x-chain-Id") String xChainId, @PathVariable String contractAddress
+    NftItemResponse tokenInfo(@RequestHeader("x-chain-Id") String xChainId, @PathVariable("contractAddress") String contractAddress
                    , @RequestParam(value = "size", required = false, defaultValue = "1000") Integer size
                    , @RequestParam(value = "cursor", required = false) String cursor);
 

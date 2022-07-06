@@ -125,6 +125,7 @@ public class TokenController {
 		log.info("ownerTokenList : {}", req);
 		List<TokenDTO> tokenList = tokenInfoServiceImpl.getTokenByOwnerAddress(req);
 		model.addAttribute("contents", tokenList);
+		model.addAttribute("address", address);
 
 		return "token/include/rankingTokenList";
 	}

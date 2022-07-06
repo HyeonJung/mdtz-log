@@ -18,6 +18,7 @@ public class TokenDTO implements Serializable {
 	private String type;
 	private String grade;
 	private String description;
+	private String owner;
 	private List<TokenAttributesDTO> tokenAttributes;
 
 }
