@@ -11,7 +11,7 @@
 			                   on t.id = ta.token_info_id
 			where 1=1
 			<if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null and type != ''">
 				and t.type = #{type}
@@ -54,7 +54,7 @@
 	                            on t.id = ta.token_info_id
 	         where 1=1
 	         <if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				 and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -99,7 +99,7 @@
 			where ta.attribute_key = 'color'
 			  and t.id = ta.token_info_id
 			<if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -142,7 +142,7 @@
 			where t.id = ta.token_info_id
 	    	 and ta.attribute_key <![CDATA[ <> ]]> 'color'
 	    	 <if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				 and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -175,4 +175,66 @@
 		) res
 		order by cnt desc, attribute_value asc
     </select>
+
+	<select id="getTokenRankingList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenRankingDTO">
+		select owner, token_count, token_ids
+		from (
+				 select t.owner, count(*) as token_count, group_concat(t.token_id) as token_ids
+				 from token_info t
+				 where t.owner is not null
+				<if test="type != null">
+					and t.type = #{type}
+				</if>
+				<if test="grade != null">
+					and t.grade = #{grade}
+				</if>
+				<if test="gradeList != null and gradeList.size > 0">
+					and t.grade in
+					<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+						#{grade}
+					</foreach>
+				</if>
+				 group by owner) res
+		order by token_count desc
+		<if test="page != 0 and rows != 0">
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+	<select id="getTokenRankingListCount" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="long">
+		select count(*)
+		from (
+		select t.owner, count(*) as token_count, group_concat(t.token_id) as token_ids
+		from token_info t
+		where t.owner is not null
+		<if test="type != null">
+			and t.type = #{type}
+		</if>
+		<if test="grade != null">
+			and t.grade = #{grade}
+		</if>
+		<if test="gradeList != null and gradeList.size > 0">
+			and t.grade in
+			<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+				#{grade}
+			</foreach>
+		</if>
+		group by owner) res
+	</select>
+
+	<select id="getOwnerTokenList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenDTO">
+		select *
+		from token_info t
+		where t.owner = #{address}
+		<if test="gradeList != null and gradeList.size > 0">
+			and t.grade in
+			<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+				#{grade}
+			</foreach>
+		</if>
+		<if test="type != null">
+			and t.type = #{type}
+		</if>
+		order by t.token_id asc
+	</select>
 </mapper>

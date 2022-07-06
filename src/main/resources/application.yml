@@ -29,8 +29,16 @@ mybatis:
     map-underscore-to-camel-case: true
         
 mtdz:
+  contractAddress: '0x46dbdc7965cf3cd2257c054feab941a05ff46488'
   json:
     url: https://data.metatoydragonz.io/meta
+
+klaytn:
+  api:
+    host: https://th-api.klaytnapi.com
+    x-chain-id: 8217
+    accessKeyId: KASKW914TUX48DUA5ZR4PT1A
+    secretAccessKey: BE_sQ07qwNOT6ju06zL9KYnpUwwwzKc1rs9r3BGv
     
 tomcat:
   ajp:

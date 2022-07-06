@@ -42,6 +42,9 @@ public class TokenInfo implements Serializable {
 	
 	@Column(name = "description")
 	private String description;
+
+	@Column(name = "owner")
+	private String owner;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOKEN_INFO_ID", referencedColumnName = "TOKEN_ID")

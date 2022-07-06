@@ -3,12 +3,9 @@ package com.xpos.mtdzlog.token.service;
 import java.util.List;
 import java.util.Map;
 
+import com.xpos.mtdzlog.token.TokenInfo;
+import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.data.domain.Page;
-
-import com.xpos.mtdzlog.token.dto.MtdzGrade;
-import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
-import com.xpos.mtdzlog.token.dto.TokenDTO;
-import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 
 public interface TokenInfoService {
 	
@@ -23,4 +20,10 @@ public interface TokenInfoService {
 	
 	// 토큰 속성 값 조회.
 	Map<String, List<TokenAttributesDTO>> getTokenAttributeMap(TokenInfoSearchRequest req);
+
+	// 토큰 랭킹 리스트
+	Page<TokenRankingDTO> getTokenRankingList(TokenInfoSearchRequest req);
+
+	// 지갑주소로 토큰 검색
+	List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req);
 }
