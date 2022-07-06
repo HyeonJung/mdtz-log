@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout}">
+
+<th:block layout:fragment="content">
+
+    <script type="text/javascript">
+        var page = 1;
+        var totalPages = 0;
+        var isLoading = false;
+        $(function() {
+            updateTotalCount();
+            totalPages = $("#totalPages").val();
+            $(window).scroll(function() {
+                if (page < totalPages && !isLoading && ($(window).scrollTop() >= $(document).height() - $(window).height() - 110)) {
+                    getRankingList(++page);
+                }
+            });
+
+            $("input[name=grade]").on("change", function() {
+                search();
+            });
+
+            $(".btnTop").on("click", function(e) {
+                e.preventDefault();
+                $('html, body').animate({scrollTop: '0'}, 1000);
+            });
+
+            $(".tokenOwnerWrap").on("click", ".ownerAddress", function(e)  {
+                e.preventDefault();
+                var address = $(this).data("address");
+                console.log(address);
+                getRankingTokenList(address, this);
+            });
+        })
+
+        // 리스트 불러오기
+        function getRankingList(searchPage, updateColor) {
+            isLoading = true;
+            var $tokenSearchForm = $("#tokenSearchForm");
+            var rows = $tokenSearchForm.find("input[name=rows]").val();
+            var type = $tokenSearchForm.find("input[name=type]").val();
+            var gradeList = new Array();
+            // 등급
+            $("input[name=grade]:checked").each(function() {
+                var grade = $(this).data('grade');
+                gradeList.push(grade);
+            });
+
+            $("input[name=totalDocs]").remove();
+            $.ajax({
+                url : contextPath + "/token/subRanking",
+                type: "GET",
+                dataType: "html",
+                data: { rows : rows, page : searchPage, type : type, gradeList: gradeList},
+                success: function(html) {
+                    $(".tokenOwnerWrap").append(html);
+                    totalPages = $("input[name=refreshTotalPages]").val();
+                    updateTotalCount();
+                    isLoading = false;
+                },
+                error: function() {
+                    isLoading = false;
+                }
+            });
+        }
+
+        // 해당 지갑주소 토큰 리스트 조회
+        function getRankingTokenList(ownerAddress, el) {
+            var $tokenSearchForm = $("#tokenSearchForm");
+            var gradeList = new Array();
+            // 등급
+            $("input[name=grade]:checked").each(function() {
+                var grade = $(this).data('grade');
+                gradeList.push(grade);
+            });
+
+            var type = $tokenSearchForm.find("input[name=type]").val();
+            if ($(el).parents(".item").find(".tokenItem").length > 0) {
+                $(".ownerTokenList").removeClass("on");
+                $(el).parents(".item").find(".ownerTokenList").addClass("on");
+            } else {
+                $.ajax({
+                    url : contextPath + "/token/ranking/" + ownerAddress + "/token",
+                    type: "GET",
+                    dataType: "html",
+                    data: { type: type, gradeList: gradeList},
+                    success: function(html) {
+                        $(".ownerTokenList").removeClass("on");
+                        console.log(html);
+                        $(el).parents(".item").find(".ownerTokenList").html(html).addClass("on");
+                    },
+                    error: function() {
+                    }
+                });
+            }
+
+
+        }
+
+        // 검색
+        function search() {
+            $(".tokenItemWrap").html("");
+            page = 1;
+            getTokenInfoList(page);
+            getColorList();
+        }
+
+        function updateTotalCount() {
+            var totalDocs = $("input[name=totalDocs]").val();
+            $("#totalCount").text(comma(totalDocs));
+        }
+
+    </script>
+    <div class="tokenInfoWrap">
+        <div>
+            <span class="tokenTotalCnt">Total : <em id="totalCount"></em></span>
+            <ul class="tokenOwnerHeaderWrap">
+                <li>
+                    <div class="ownerHeader">
+                        <div>RANKING</div>
+                        <div>ADDRESS</div>
+                        <div>TOKEN COUNT</div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="tokenOwnerWrap">
+                <th:block th:include="token/include/subRanking"></th:block>
+            </ul>
+        </div>
+    </div>
+
+    <input type="hidden" name="totalPages" id="totalPages" th:value="${ totalPages }"/>
+    <input type="hidden" name="totalDocs" th:value="${ totalDocs }"/>
+
+<!--    <div class="filterArea">-->
+<!--        <div class="btnClose">-->
+<!--            <a href="" class="slideClose iconS"><span class="blind">팝업 닫기</span></a>-->
+<!--        </div>-->
+<!--        <div class="tokenFilterWrap">-->
+<!--            <div class="itemWrap open">-->
+<!--                <div class="item tit">GRADE</div>-->
+<!--                <div class="item filter grade">-->
+<!--                    <ul>-->
+<!--                        <li th:each="grade : ${ gradeList }">-->
+<!--                            <div class="check">-->
+<!--                                <input type="checkbox" th:id="${ grade }" th:data-grade="${ grade }" name="grade">-->
+<!--                                <label th:for="${ grade }" th:text="${ grade.description }"></label>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="itemWrap open">-->
+<!--                <div class="item tit">COLOR</div>-->
+<!--                <div class="item filter color">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="attributeWrap">-->
+
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+    <form id="tokenSearchForm">
+        <input type="hidden" name="type" th:value="${ req.type }"/>
+        <input type="hidden" name="rows" th:value="${ req.rows }"/>
+        <input type="hidden" name="page" th:value="${ req.page }"/>
+    </form>
+</th:block>
+</html>

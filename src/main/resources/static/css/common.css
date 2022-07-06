@@ -95,7 +95,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenFilterWrap .item.filter ul li {display:inline-grid;}
 .tokenInfoWrap .tokenFilterWrap .item.filter input {width: calc(100% - 20px);display: inline-block;height: 20px;padding: 5px 10px;border: 1px solid #dfdfdf;border-radius: 50px;}
 .tokenInfoWrap .tokenFilterWrap .item.search .btnSearch {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
-.tokenInfoWrap .tokenFilterWrap .item.search .btnSearch .icon_img {width:19px;height:19px;background-position:-20px 0}
+.tokenInfoWrap .tokenFilterWrap .item.search .btnSearch .icon_img {width:19px;height:19px;background-position:-20px 0;background-color: #ffffff;}
 
 .tokenInfoWrap .tokenItemWrap {display:grid;grid-template-columns: repeat(4, 1fr); gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenItemWrap li {display:inline-grid; border-radius:10px;}
@@ -122,7 +122,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 
 .filterArea .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 1fr; overflow-y:auto; overflow-x:hidden; max-height:70%}
 .filterArea .tokenFilterWrap .item{padding:10px; position:relative}
-.filterArea .tokenFilterWrap .item.tit {text-align:center; letter-spacing:-1px;font-size: 15px; display:flex;justify-content: flex-start;align-items: center;background: #9974af;border-radius: 0;color: #ffffff;}
+.filterArea .tokenFilterWrap .item.tit {text-align:center; letter-spacing:-1px;font-size: 15px; display:flex;justify-content: flex-start;align-items: center;background: #ffffff;border-radius: 0; border-bottom:1px solid #dfdfdf}
 .filterArea .tokenFilterWrap .item.filter {border-bottom:1px solid #dfdfdf; display:none;}
 .filterArea .tokenFilterWrap .itemWrap.open .item.filter {display:block;}
 .filterArea .tokenFilterWrap .item.filter ul {display:grid;grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px;}
@@ -139,3 +139,16 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .filterArea .tokenFilterWrap .item.filter.color ul li label {display:block;width:20px;height:20px;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
 .filterArea .tokenFilterWrap .item.filter.color ul li input:checked + label {color:var(--color-wt)}
 .filterArea .tokenFilterWrap .item.filter.color ul li input:checked + label::before {content:'';display:block;position:absolute;top:-2.5px;left:-2.5px;width:calc(100% + 5px);height:calc(100% + 5px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}
+
+/* 랭킹 조회 페이지 */
+.tokenInfoWrap .tokenOwnerHeaderWrap {display:grid; grid-template-columns:1fr; gap:10px; grid-gap:10px;margin: 20px 0 10px;text-align: center; letter-spacing: -1px;}
+.tokenInfoWrap .tokenOwnerHeaderWrap li {display:inline-grid; padding:10px 0}
+.tokenInfoWrap .tokenOwnerHeaderWrap li .ownerHeader {display:grid; grid-template-columns: 2fr 4fr 4fr; font-weight: bold; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .tokenOwnerWrap {display:grid; grid-template-columns:1fr; gap:10px; grid-gap:10px; text-align:center; letter-spacing: -1px;}
+.tokenInfoWrap .tokenOwnerWrap li {display:inline-grid; border-radius:10px;padding: 10px 0;border: 1px solid #dfdfdf;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerInfo {display:grid; grid-template-columns: 2fr 4fr 4fr; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerInfo .ownerAddress {overflow-x:hidden;text-overflow: ellipsis;white-space: nowrap;cursor: pointer;color: #1385c0;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList {display:none;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList.on {display:block; padding:10px;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .tokenItem {width:100px; float:left;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .tokenItem img {width:100%;}

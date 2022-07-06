@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.xpos.mtdzlog.token.TokenInfo;
+import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,10 +17,6 @@ import org.springframework.stereotype.Service;
 import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
-import com.xpos.mtdzlog.token.dto.MtdzGrade;
-import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
-import com.xpos.mtdzlog.token.dto.TokenDTO;
-import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -66,5 +64,28 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		}
 		
 		return tokenAttributeMap;
+	}
+
+	@Override
+	public Page<TokenRankingDTO> getTokenRankingList(TokenInfoSearchRequest req) {
+		// 토큰 랭킹 리스트 조회.
+		List<TokenRankingDTO> tokenRankingList = tokenDAO.getTokenRankingList(req);
+		Integer seq = req.getOffset();
+		for (TokenRankingDTO tokenRanking: tokenRankingList) {
+			tokenRanking.setSeq(++seq);
+		}
+
+		// 토큰 랭킹 수량 조회
+		long totalCount = tokenDAO.getTokenRankingListCount(req);
+
+		PageRequest pageable = null;
+		pageable = PageRequest.of(req.getPage() -1, req.getRows());
+
+		return new PageImpl<>(tokenRankingList, pageable, totalCount);
+	}
+
+	@Override
+	public List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req) {
+		return tokenDAO.getOwnerTokenList(req);
 	}
 }
