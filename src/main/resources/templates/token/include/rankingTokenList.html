@@ -1,7 +1,12 @@
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+
+	/*<![CDATA[*/
+	var seq = /*[[ ${seq} ]]*/;
+	/*]]*/
+
 
     $(function() {
-        var swiper = new Swiper('.swiper', {
+        var swiper = new Swiper('#ranking_' + seq, {
             slidesPerView: 'auto',
             spaceBetween: 10,
             loop : false,
@@ -15,7 +20,6 @@
 </div>
 
 <div class="tokenItem swiper-slide moreBtn">
-	<a th:href="@{|/token?keyword=${address}|}"><img th:src="@{/images/common/icons-right-arrow.png}" src=""/></a>
-   
+	<a th:href="@{|/token?keyword=${address}|}"><img th:src="@{/images/common/icons-right-arrow.png}" src=""/></a>   
 </div>
 

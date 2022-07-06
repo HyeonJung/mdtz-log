@@ -30,8 +30,9 @@
             $(".tokenOwnerWrap").on("click", ".ownerAddress", function(e)  {
                 e.preventDefault();
                 var address = $(this).data("address");
+                var seq = $(this).data("seq");
                 console.log(address);
-                getRankingTokenList(address, this);
+                getRankingTokenList(address, seq, this);
             });
         })
 
@@ -67,7 +68,7 @@
         }
 
         // 해당 지갑주소 토큰 리스트 조회
-        function getRankingTokenList(ownerAddress, el) {
+        function getRankingTokenList(ownerAddress, seq, el) {
             var $tokenSearchForm = $("#tokenSearchForm");
             var gradeList = new Array();
             // 등급
@@ -82,7 +83,7 @@
                 $(el).parents(".item").find(".ownerTokenList").addClass("on");
             } else {
                 $.ajax({
-                    url : contextPath + "/token/ranking/" + ownerAddress + "/token",
+                    url : contextPath + "/token/ranking/" + ownerAddress + "/token?seq=" + seq ,
                     type: "GET",
                     dataType: "html",
                     data: { type: type, gradeList: gradeList},

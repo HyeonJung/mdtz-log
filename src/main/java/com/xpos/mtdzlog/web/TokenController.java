@@ -3,7 +3,6 @@ package com.xpos.mtdzlog.web;
 import java.util.List;
 import java.util.Map;
 
-import com.xpos.mtdzlog.token.dto.*;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
+import com.xpos.mtdzlog.token.dto.TokenDTO;
+import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
+import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
 import com.xpos.mtdzlog.token.service.TokenInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -120,12 +125,14 @@ public class TokenController {
 	}
 
 	@GetMapping("/ranking/{address}/token")
-	public String rankingOwnerTokenList(Model model, @PathVariable String address, @ModelAttribute TokenInfoSearchRequest req) {
+	public String rankingOwnerTokenList(Model model, @PathVariable String address, @ModelAttribute TokenInfoSearchRequest req
+			, @RequestParam Integer seq) {
 		req.setAddress(address);
 		log.info("ownerTokenList : {}", req);
 		List<TokenDTO> tokenList = tokenInfoServiceImpl.getTokenByOwnerAddress(req);
 		model.addAttribute("contents", tokenList);
 		model.addAttribute("address", address);
+		model.addAttribute("seq", seq);
 
 		return "token/include/rankingTokenList";
 	}
