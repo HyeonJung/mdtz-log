@@ -11,7 +11,7 @@
 			                   on t.id = ta.token_info_id
 			where 1=1
 			<if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null and type != ''">
 				and t.type = #{type}
@@ -54,7 +54,7 @@
 	                            on t.id = ta.token_info_id
 	         where 1=1
 	         <if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				 and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -99,7 +99,7 @@
 			where ta.attribute_key = 'color'
 			  and t.id = ta.token_info_id
 			<if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -142,7 +142,7 @@
 			where t.id = ta.token_info_id
 	    	 and ta.attribute_key <![CDATA[ <> ]]> 'color'
 	    	 <if test="keyword != null and keyword != ''">
-				and t.token_id = #{keyword}
+				 and (t.token_id = #{keyword} or t.owner = #{keyword})
 			</if>
 			<if test="type != null">
 				and t.type = #{type}

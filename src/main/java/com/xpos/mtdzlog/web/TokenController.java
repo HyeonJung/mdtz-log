@@ -75,7 +75,8 @@ public class TokenController {
 		model.addAttribute("colorList", tokenInfoServiceImpl.getTokenColorList(req));
 		return "token/include/colorList";
 	}
-	
+
+	// 특성 리스트 조회
 	@GetMapping("/attributes")
 	public String attributes(Model model, @ModelAttribute TokenInfoSearchRequest req) {
 		Map<String, List<TokenAttributesDTO>> attributesMap = tokenInfoServiceImpl.getTokenAttributeMap(req);

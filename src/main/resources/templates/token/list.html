@@ -27,21 +27,12 @@
 	    		$(".item.filter.color, .attributeWrap").on("change", "input[type=checkbox]", function()  {
 	    			search();
 	    		});
-	    		
-	    		/* $(".filterArea .tokenFilterWrap").on("click", ".item.tit", function(e) {
-	    			e.preventDefault();
-	    			$(this).parents(".itemWrap").toggleClass("open");
-	    		}) */
-	    		
+
 	    		$("input[name=keyword]").on("keyup", function(e) {
 	    			if (e.keyCode == 13) {
 	    				search();
 	    			}
 	    		});
-	    		
-	    		$(document).on("input[name=keyword]", function() {
-	    	        $(this).val( $(this).val().replace(/[^0-9]/gi,"") );
-	    	    });
 	    		
 	    		$(".btnTop").on("click", function(e) {
 	    			e.preventDefault();
@@ -124,7 +115,7 @@
     	<div class="tokenInfoWrap">
     		<div class="tokenFilterWrap">
     			<div class="item filter search">
-    				<input type="number" name="keyword" placeholder="MTDZ 번호로 검색해주세요 :)" th:value="${ req.keyword }">
+    				<input type="text" name="keyword" placeholder="MTDZ 번호, 지갑주소로 검색해주세요 :)" th:value="${ req.keyword }">
     				<a href="javascript:search()" class="btnSearch">
 	                	<span class="icon_img"><span class="blind">검색하기</span></span>
 	                </a>
@@ -147,7 +138,6 @@
 			<input type="hidden" name="type" th:value="${ req.type }"/>
 			<input type="hidden" name="rows" th:value="${ req.rows }"/>
 			<input type="hidden" name="page" th:value="${ req.page }"/>
-			<input type="hidden" name="keyword" th:value="${ req.keyword }"/>
 		</form>
 		<input type="hidden" name="totalPages" id="totalPages" th:value="${ totalPages }"/>
 		<input type="hidden" name="totalDocs" th:value="${ totalDocs }"/> 
