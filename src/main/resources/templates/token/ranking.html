@@ -88,8 +88,8 @@
                     data: { type: type, gradeList: gradeList},
                     success: function(html) {
                         $(".ownerTokenList").removeClass("on");
-                        console.log(html);
-                        $(el).parents(".item").find(".ownerTokenList").html(html).addClass("on");
+                        $(el).parents(".item").find(".ownerTokenList .ownerTokenItemWrap").html(html);
+                        $(el).parents(".item").find(".ownerTokenList").addClass("on");
                     },
                     error: function() {
                     }
