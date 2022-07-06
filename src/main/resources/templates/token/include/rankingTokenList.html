@@ -1,4 +1,15 @@
-<div class="tokenItem" th:each="token : ${contents}">
+<script type="text/javascript">
+
+    $(function() {
+        var swiper = new Swiper('.swiper', {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            loop : false,
+            pagination : false
+        });
+    });
+</script>
+
+<div class="tokenItem swiper-slide" th:each="token : ${contents}">
     <img th:src="${token.imageUrl}" src=""/>
 </div>
-<div style="clear:both"></div>

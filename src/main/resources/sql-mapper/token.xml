@@ -235,5 +235,6 @@
 		<if test="type != null">
 			and t.type = #{type}
 		</if>
+		order by t.token_id asc
 	</select>
 </mapper>

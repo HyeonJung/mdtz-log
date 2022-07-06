@@ -148,8 +148,8 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenOwnerWrap li {display:inline-grid; border-radius:10px;padding: 10px 0;border: 1px solid #dfdfdf;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerInfo {display:grid; grid-template-columns: 2fr 4fr 4fr; gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerInfo .ownerAddress {overflow-x:hidden;text-overflow: ellipsis;white-space: nowrap;cursor: pointer;color: #1385c0;}
-.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList {display:none; width:100%; overflow-x: auto;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList {display:none;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList.on {display:block; padding:10px;}
-.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap {}
-.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem {width:100px; float:left; display:inline-block;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap {margin-top:10px;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem {width:calc(100% / 4) !important}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem img {width:100%;}
