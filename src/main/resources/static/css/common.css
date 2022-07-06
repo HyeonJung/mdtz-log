@@ -29,9 +29,16 @@ body.screenOut .btnTop {display:none !important}
 /*******************************
 *	헤더
 ********************************/
-.headerWrap {text-align: center;padding: 15px;border-bottom: 1px solid #dfdfdf;}
+.headerWrap {text-align: center;padding: 15px;border-bottom: 1px solid #dfdfdf; position:relative}
 .headerWrap h1{font-size: 18px; letter-spacing: -1px; font-weight:bold;}
-
+.headerWrap .subTopMenu { width:18px; left:13px; }
+.headerWrap .subTopMenu::before { content:""; display:block; width:18px; height:23px; background:url('../images/common/topBtn_menu.png') no-repeat 0 55%; background-size:100% auto; }
+.headerWrap .subTopPrev,
+.headerWrap .subTopMenu,
+.headerWrap .subTopSearch,
+.headerWrap .subTopNotice,
+.headerWrap .subTopSetting,
+.headerWrap .subTopHome { position:absolute; top:50%; transform:translateY(-50%); display:inline-block; width:24px; height:23px; font-size:0}/*20201125 .subTitTop .subTopHome 추가*/
 .headerArea .headerInner {position:relative;width:100%;height:55px;padding:0 12px;background:var(--color-wt);line-height:55px;text-align:center;box-sizing:border-box}
 .headerArea .headerInner .headerTitle {font-size:17px;text-align:center}
 .headerArea .headerInner .headerBtn {position:absolute;top:0;height:100%;z-index:2}
@@ -42,6 +49,22 @@ body.screenOut .btnTop {display:none !important}
 .headerArea.white .headerInner {background:0}
 .headerArea.white .headerInner .headerBtn.back .icon_img {background-position:-92px 0}
 .headerArea.white .headerInner .headerBtn.sCart .icon_img {background-position:-212px -75px}
+
+.menuArea {opacity:0;visibility:hidden;position:fixed;top:0;left:0;width:calc(100vw - 30px);height:100vh;padding-top:0;background:#fff;transform:translate3d(-60%, 0, 0);transition:.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);transition-property:transform, height, visibility, opacity;z-index:10; max-width:500px; padding:15px;}
+.menuArea::after {content:'';opacity:0;visibility:hidden;position:absolute;top: 0;left: 100%;width: calc(100vw - 30px);height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
+.menuArea .btnClose {overflow:hidden;display:block;position:relative;width:100%;height:53px;background:#fff}
+.menuArea .btnClose .slideRefresh {display:block;position:absolute;top:3px;right:0;width:48px;height:100%;padding:17px 0;text-align:center;box-sizing:border-box}
+.menuArea .btnClose .slideRefresh.iconS::before {width:17px;height:19px;background-position:-197px 0px}
+.menuArea .btnClose .slideClose {display:block;position:absolute;top:0;right:0;width:52px;height:100%;padding:19px 0;text-align:center;box-sizing:border-box}
+.menuArea .btnClose .slideClose.iconS::before {width:15px;height:15px;background-position:-176px -21px}
+
+.menuArea.on {opacity:1;visibility:visible;transform:translate3d(0, 0, 0);}
+.menuArea.on::after {opacity:1;visibility:visible;}
+
+.menuArea .menuList ul li {list-style: none;padding: 15px;}
+.menuArea .menuList ul li a {display:block; font-size: 20px; font-weight: bold;color: #999999;letter-spacing: -1px; text-decoration:none;}
+.menuArea .menuList ul li a.on {color:#000}
+
 body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;box-shadow:0px 2px 3px rgba(0,0,0,.1);z-index:3}
 
 /*******************************

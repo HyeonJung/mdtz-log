@@ -15,8 +15,21 @@ function uncomma(str) {
 	return str.replace(/[^\d]+/g, '');
 }
 
+$(function() {
+	$(".subTopMenu").on("click", function(e) {
+		e.preventDefault();
+		$(".menuArea").addClass("on");
+	})
+	
+	$(".menuArea .btnClose .slideClose").on("click", function(e) {
+		e.preventDefault();
+		$(".menuArea").removeClass("on");
+	})
+});
+
 // 로딩
 (function($) {
+	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader("AJAX", "true");

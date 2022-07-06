@@ -2,9 +2,24 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="headerFragment">
+	<script type="text/javascript">
+	</script>
 	<header id="header">
 		<div class="headerWrap">
+			<a href="#" class="subTopMenu"><span class="blind">메뉴열기</span></a>
 			<h1>MTDZ LOG</h1>
 		</div>
 	</header>
+	
+	<div class="menuArea">
+		<div class="btnClose">
+            <a href="" class="slideClose iconS"><span class="blind">메뉴 닫기</span></a>
+        </div>
+        <div class="menuList">
+        	<ul>
+        		<li><a href="/token" th:class="${#httpServletRequest.requestURI == '/token' ? 'on':''}">도감</a></li>
+        		<li><a href="/token/ranking" th:class="${#httpServletRequest.requestURI == '/token/ranking' ? 'on':''}">홀더랭킹</a></li>
+        	</ul>
+        </div>
+	</div>
 </th:block>
