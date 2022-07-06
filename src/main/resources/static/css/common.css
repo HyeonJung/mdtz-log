@@ -108,12 +108,12 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .pala::before {content:'';display:inline-block;background:url('../images/common/pala.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px;}
 
 /* .filterArea {width: 300px;height: 100vh;background: #ffffff;position: fixed;top: 0;left: 0;z-index: 2;} */
-.filterArea {opacity:0;visibility:hidden;position:fixed;top:0;left:0;width:80vw;height:100vh;padding-top:0;background:#fff;transform:translate3d(-60%, 0, 0);transition:.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);transition-property:transform, height, visibility, opacity;z-index:10; max-width:500px; padding:15px;}
-.filterArea::after {content:'';opacity:0;visibility:hidden;position:absolute;top: 0;left: 100%;width: 100vw;height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
+.filterArea {opacity:0;visibility:hidden;position:fixed;top:0;right:0;width:80vw;height:100vh;padding-top:0;background:#fff;transform:translate3d(130%, 0, 0);transition:.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);transition-property:transform, height, visibility, opacity;z-index:10; max-width:500px; padding:15px;}
+.filterArea::after {content:'';opacity:0;visibility:hidden;position:absolute;top: 0;right: 100%;width: 100vw;height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
 .filterArea .btnClose {overflow:hidden;display:block;position:relative;width:100%;height:53px;background:#fff}
 .filterArea .btnClose .slideRefresh {display:block;position:absolute;top:3px;left:0;width:48px;height:100%;padding:17px 0;text-align:center;box-sizing:border-box}
 .filterArea .btnClose .slideRefresh.iconS::before {width:17px;height:19px;background-position:-197px 0px}
-.filterArea .btnClose .slideClose {display:block;position:absolute;top:0;right:0;width:52px;height:100%;padding:19px 0;text-align:center;box-sizing:border-box}
+.filterArea .btnClose .slideClose {display:block;position:absolute;top:0;left:0;width:52px;height:100%;padding:19px 0;text-align:center;box-sizing:border-box}
 .filterArea .btnClose .slideClose.iconS::before {width:15px;height:15px;background-position:-176px -21px}
 
 .filterArea.on {opacity:1;visibility:visible;transform:translate3d(0, 0, 0);}
