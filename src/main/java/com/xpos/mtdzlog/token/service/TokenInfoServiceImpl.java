@@ -1,14 +1,16 @@
 package com.xpos.mtdzlog.token.service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import com.xpos.mtdzlog.client.KlaytnClient;
+import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
+import com.xpos.mtdzlog.meta.klaytn.TransferModel;
 import com.xpos.mtdzlog.token.TokenInfo;
 import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +34,15 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	
 	@Autowired
 	private TokenDAO tokenDAO;
+
+	@Autowired
+	private KlaytnClient klaytnClient;
+
+	@Value("${klaytn.api.x-chain-id}")
+	private String xChainId;
+
+	@Value("${klaytn.api.presets}")
+	private Integer presets;
 
 	@Override
 	public Page<TokenDTO> getTokenInfoList(TokenInfoSearchRequest req) {
@@ -87,5 +98,31 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	@Override
 	public List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req) {
 		return tokenDAO.getOwnerTokenList(req);
+	}
+
+	@Override
+	@Cacheable(value="getTransferInfo", key = "#type", cacheManager = "cacheManager")
+	public List<TokenTransferDTO> getTokenTransferInfo(String type) {
+		List<TokenTransferDTO> tokenTransferList = new ArrayList<>();
+		NftItemResponse<TransferModel> res = klaytnClient.transferInfo(xChainId, presets, 30);
+		if (res != null && res.getItems() != null && res.getItems().size() > 0) {
+			for (TransferModel transferModel: res.getItems()) {
+				TokenTransferDTO tokenTransfer = new TokenTransferDTO();
+				tokenTransfer.setBlockNumber(transferModel.getTransaction().getBlockNumber());
+				tokenTransfer.setFrom(transferModel.getFrom());
+				tokenTransfer.setTo(transferModel.getTo());
+				tokenTransfer.setTransferDate(transferModel.getTransaction().getTimestamp());
+				tokenTransfer.setTokenId(Integer.decode(transferModel.getTokenId()));
+				TokenInfo tokenInfo = tokenInfoRepository.findByTokenId(tokenTransfer.getTokenId());
+				if (tokenInfo != null) {
+					tokenTransfer.setGrade(tokenInfo.getGrade());
+					tokenTransfer.setImageUrl(tokenInfo.getImageUrl());
+				}
+
+				log.info("tokenTransfer : {}", tokenTransfer);
+				tokenTransferList.add(tokenTransfer);
+			}
+		}
+		return tokenTransferList;
 	}
 }

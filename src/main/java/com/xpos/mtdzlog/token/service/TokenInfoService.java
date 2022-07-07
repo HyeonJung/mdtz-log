@@ -3,6 +3,8 @@ package com.xpos.mtdzlog.token.service;
 import java.util.List;
 import java.util.Map;
 
+import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
+import com.xpos.mtdzlog.meta.klaytn.TransferModel;
 import com.xpos.mtdzlog.token.TokenInfo;
 import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.data.domain.Page;
@@ -26,4 +28,7 @@ public interface TokenInfoService {
 
 	// 지갑주소로 토큰 검색
 	List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req);
+
+	// 토큰 전송내역 조회
+	List<TokenTransferDTO> getTokenTransferInfo(String type);
 }

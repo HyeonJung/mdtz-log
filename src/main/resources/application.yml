@@ -22,6 +22,12 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+  cache:
+    type: redis
+  redis:
+    host: 140.238.23.189
+    port: 6379
+    password: mtdz7487
 
 mybatis:
   mapper-locations: classpath:sql-mapper/*.xml
@@ -39,6 +45,7 @@ klaytn:
     x-chain-id: 8217
     accessKeyId: KASKW914TUX48DUA5ZR4PT1A
     secretAccessKey: BE_sQ07qwNOT6ju06zL9KYnpUwwwzKc1rs9r3BGv
+    presets: 460
     
 tomcat:
   ajp:

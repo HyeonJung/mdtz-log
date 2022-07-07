@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class NftItemResponse {
-    private List<NftItem> items;
+public class NftItemResponse<V> {
+    private List<V> items;
     private String cursor;
 }

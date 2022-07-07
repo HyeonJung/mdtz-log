@@ -44,7 +44,7 @@ public class TokenCollectTask {
 
         log.info("=========================token owner collect start=========================");
         while (callCount == 0 || !StringUtils.isEmpty(cursor)) {
-            NftItemResponse res = klaytnClient.tokenInfo(xChainId, mtdzContractAddress, DEFAULT_SIZE, cursor);
+            NftItemResponse<NftItem> res = klaytnClient.tokenInfo(xChainId, mtdzContractAddress, DEFAULT_SIZE, cursor);
             cursor = updateNftOwner(res);
             callCount++;
         }

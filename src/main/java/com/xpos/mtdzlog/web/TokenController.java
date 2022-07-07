@@ -3,9 +3,15 @@ package com.xpos.mtdzlog.web;
 import java.util.List;
 import java.util.Map;
 
+import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
+import com.xpos.mtdzlog.meta.klaytn.TransferModel;
+import com.xpos.mtdzlog.token.dto.*;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.xpos.mtdzlog.token.dto.MtdzGrade;
-import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
-import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
-import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
 import com.xpos.mtdzlog.token.service.TokenInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -136,4 +138,9 @@ public class TokenController {
 
 		return "token/include/rankingTokenList";
 	}
+
+	@GetMapping("/transfer")
+    public ResponseEntity<List<TokenTransferDTO>> getTransferInfo(String type) {
+	    return new ResponseEntity<List<TokenTransferDTO>>(tokenInfoServiceImpl.getTokenTransferInfo(type), HttpStatus.OK);
+    }
 }
