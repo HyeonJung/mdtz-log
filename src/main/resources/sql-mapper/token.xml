@@ -177,7 +177,7 @@
     </select>
 
 	<select id="getTokenRankingList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenRankingDTO">
-		select owner, token_count, token_ids
+		select owner, token_count, token_ids, replace(owner, substr(owner, 10, 22), '***********') as masking_owner_address
 		from (
 				 select t.owner, count(*) as token_count, group_concat(t.token_id) as token_ids
 				 from token_info t
