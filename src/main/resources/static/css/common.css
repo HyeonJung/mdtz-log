@@ -195,3 +195,14 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .rankingTokenFilterWrap .item.filter.grade ul li label {display:block;width:100%;height:100%;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
 .tokenInfoWrap .rankingTokenFilterWrap .item.filter.grade ul li input:checked + label {color:var(--color-wt)}
 .tokenInfoWrap .rankingTokenFilterWrap .item.filter.grade ul li input:checked + label::before {content:'';display:block;position:absolute;top:-1px;left:-1px;width:calc(100% + 2px);height:calc(100% + 2px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}
+
+
+/* 토근 전송내역 조회 */
+.tokenTransferWrap ul {}
+.tokenTransferWrap ul .transferItem {display:grid;grid-template-columns: 2fr 8fr;border-radius: 10px;border: 1px solid #dfdfdf;padding: 10px 10px 5px; gap:10px; grid-gap:10px;margin-bottom: 20px;}
+.tokenTransferWrap ul .transferItem .tokenImgWrap {border-radius: 20px;}
+.tokenTransferWrap ul .transferItem .tokenImgWrap img {width:100%;border-radius: 20px;}
+.tokenTransferWrap ul .transferItem .tokenDescWrap {display:grid; grid-template-columns: repeat(4, 1fr);}
+.tokenTransferWrap ul .transferItem .tokenDescWrap .tit {grid-column-start:1; grid-column-end:5}
+.tokenTransferWrap ul .transferItem .tokenDescWrap .from
+, .tokenTransferWrap ul .transferItem .tokenDescWrap .to {display:block; overflow-x:hidden;text-overflow: ellipsis;white-space: nowrap; font-weight:600}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout}">
+      
+	<th:block layout:fragment="content">
+		<div class="tokenInfoWrap">
+			<div class="tokenTransferWrap">
+				<ul>
+					<li class="transferItem" th:each="transfer : ${ tokenTransferList }">
+						<div class="tokenImgWrap">
+							<img th:src="${transfer.imageUrl}" src=""/>
+						</div>
+						<div class="tokenDescWrap">
+							<h3 class="tit" th:text="'MTDZ #'+${transfer.tokenId}"></h3>
+							<span class="from" th:text="${transfer.from}"></span>
+							<span>></span>
+							<span class="to" th:text="${transfer.to}"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</th:block>
