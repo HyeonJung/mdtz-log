@@ -4,9 +4,9 @@ server:
 feign:
   client:
     config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
+      KlaytnClient:
+        connectTimeout: 10000
+        readTimeout: 10000
         loggerLevel: full
         
         
