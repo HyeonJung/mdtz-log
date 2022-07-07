@@ -1,7 +1,7 @@
 <ul>
 	<li th:each="color : ${colorList}">
 		<div class="check">
-			<input type="checkbox" th:id="${ color }" th:data-color="${ color }" name="color">
+			<input type="radio" th:id="${ color }" th:data-color="${ color }" name="color">
 			<label th:for="${ color }"><span th:style="'background:' + ${color} + ';'" ></span></label>
 		</div>
 	</li>

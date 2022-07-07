@@ -89,7 +89,7 @@ function getColorList() {
 		data: {  type : type, gradeList: gradeList, keyword: keyword},
 		success: function(html) {
 			$(".item.filter.color").html(html);
-			$(".item.filter.color").find("input[type=checkbox]").each(function() {
+			$(".item.filter.color").find("input[type=radio]").each(function() {
 				var color = $(this).data("color");
 				if (values.indexOf(color) >= 0) {
 					$(this).prop("checked", true);

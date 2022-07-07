@@ -37,7 +37,7 @@
         })
 
         // 리스트 불러오기
-        function getRankingList(searchPage, updateColor) {
+        function getRankingList(searchPage) {
             isLoading = true;
             var $tokenSearchForm = $("#tokenSearchForm");
             var rows = $tokenSearchForm.find("input[name=rows]").val();
@@ -56,7 +56,12 @@
                 dataType: "html",
                 data: { rows : rows, page : searchPage, type : type, gradeList: gradeList},
                 success: function(html) {
-                    $(".tokenOwnerWrap").append(html);
+                    if (searchPage == 1) {
+                        $(".tokenOwnerWrap").html(html);
+                    } else {
+                        $(".tokenOwnerWrap").append(html);
+                    }
+
                     totalPages = $("input[name=refreshTotalPages]").val();
                     updateTotalCount();
                     isLoading = false;
@@ -104,8 +109,7 @@
         function search() {
             $(".tokenItemWrap").html("");
             page = 1;
-            getTokenInfoList(page);
-            getColorList();
+            getRankingList(page);
         }
 
         function updateTotalCount() {
@@ -115,6 +119,19 @@
 
     </script>
     <div class="tokenInfoWrap">
+        <div class="rankingTokenFilterWrap">
+            <div class="item tit">GRADE</div>
+            <div class="item filter grade">
+                <ul>
+                    <li th:each="grade : ${ gradeList }">
+                        <div class="check">
+                            <input type="checkbox" th:id="${ grade }" th:data-grade="${ grade }" name="grade">
+                            <label th:for="${ grade }" th:text="${ grade.description }"></label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div>
             <span class="tokenTotalCnt">Total : <em id="totalCount"></em></span>
             <ul class="tokenOwnerHeaderWrap">

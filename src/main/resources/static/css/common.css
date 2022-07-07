@@ -112,6 +112,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenTotalCnt {margin-bottom:10px; display:block;}
 .tokenInfoWrap {padding:20px;position: relative;margin: auto; max-width: 900px;}
 .tokenInfoWrap .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 9fr 1fr; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .tokenFilterWrap .itemWrap {display:grid}
 .tokenInfoWrap .tokenFilterWrap .item{padding:10px; position:relative}
 .tokenInfoWrap .tokenFilterWrap .item .btnFilter {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
 .icon_filter {width:19px; height:19px; display:inline-block;background:url('../images/common/filter_icon.png') no-repeat 0 0;vertical-align:top; background-size:19px;}
@@ -181,3 +182,16 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem img {width:100%; border-radius:5px}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem.moreBtn a {width: 100%; display: inline-block; height: 100%;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem.moreBtn a {max-width: 64px; width: 50%; margin-top: 25%;}
+
+.tokenInfoWrap .rankingTokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 2fr 8fr; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .rankingTokenFilterWrap .item{padding:10px; position:relative}
+.tokenInfoWrap .rankingTokenFilterWrap .item .btnFilter {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
+.icon_filter {width:19px; height:19px; display:inline-block;background:url('../images/common/filter_icon.png') no-repeat 0 0;vertical-align:top; background-size:19px;}
+.tokenInfoWrap .rankingTokenFilterWrap .item.tit {text-align:center; border-radius: 50px; letter-spacing:-1px; font-size:15px; display:flex; justify-content: center; align-items: center; font-weight:600}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter {}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter ul {display:grid;grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px;}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter ul li {display:inline-grid;}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter input {width: calc(100% - 20px);display: inline-block;height: 20px;padding: 5px 10px;border: 1px solid #dfdfdf;border-radius: 50px;}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter.grade ul li label {display:block;width:100%;height:100%;z-index:2;border: 1px solid #dfdfdf;text-align:center;border-radius: 50px;}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter.grade ul li input:checked + label {color:var(--color-wt)}
+.tokenInfoWrap .rankingTokenFilterWrap .item.filter.grade ul li input:checked + label::before {content:'';display:block;position:absolute;top:-1px;left:-1px;width:calc(100% + 2px);height:calc(100% + 2px);border-radius:50px;background:#ea684e;transition:all .2s ease;z-index:-1}
