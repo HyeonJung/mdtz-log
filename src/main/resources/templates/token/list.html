@@ -11,7 +11,7 @@
 			var isLoading = false;
 	    	$(function() {
 	    		getColorList();
-	    		/* getAttributes(); */
+	    		// getAttributes();
 	    		updateTotalCount();
 	    		totalPages = $("#totalPages").val();
 	    		$(window).scroll(function() {
@@ -24,9 +24,13 @@
 	    			search();
 	    		});
 	    		
-	    		$(".item.filter.color, .attributeWrap").on("change", "input[type=radio]", function()  {
+	    		$(".item.filter.color").on("change", "input[type=radio]", function()  {
 	    			search();
 	    		});
+
+				$(".attributeWrap").on("change", "input[type=check]", function()  {
+					search();
+				});
 
 	    		$("input[name=keyword]").on("keyup", function(e) {
 	    			if (e.keyCode == 13) {

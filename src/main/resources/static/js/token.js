@@ -19,10 +19,12 @@ $(function() {
 	$(".subTopMenu").on("click", function(e) {
 		e.preventDefault();
 		$(".menuArea").addClass("on");
+		$("body").addClass("screenOut")
 	})
 	
 	$(".menuArea .btnClose .slideClose").on("click", function(e) {
 		e.preventDefault();
+		$("body").addClass("screenOut")
 		$(".menuArea").removeClass("on");
 	})
 });

@@ -111,7 +111,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 ********************************/
 .tokenTotalCnt {margin-bottom:10px; display:block;}
 .tokenInfoWrap {padding:20px;position: relative;margin: auto; max-width: 900px;}
-.tokenInfoWrap .tokenFilterWrap {border:1px solid #dfdfdf; border-radius:5px; margin-bottom:20px; display:grid;grid-template-columns: 9fr 1fr; gap:10px; grid-gap:10px;}
+.tokenInfoWrap .tokenFilterWrap {margin-bottom:20px; display:grid;grid-template-columns: 9fr 1fr; gap:10px; grid-gap:10px;}
 .tokenInfoWrap .tokenFilterWrap .itemWrap {display:grid}
 .tokenInfoWrap .tokenFilterWrap .item{padding:10px; position:relative}
 .tokenInfoWrap .tokenFilterWrap .item .btnFilter {position:absolute;top:0;right: 10px;display:flex;align-items:center;height:100%;padding:0 10px}
