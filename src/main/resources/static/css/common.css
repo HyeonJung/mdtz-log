@@ -177,7 +177,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList {display:none;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList.on {display:block; padding:10px;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap {margin-top:10px;}
-.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem {width:calc(100% / 5) !important}
-.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem img {width:100%;}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem {width:calc(100% / 5) !important; border-radius:5px}
+.tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem img {width:100%; border-radius:5px}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem.moreBtn a {width: 100%; display: inline-block; height: 100%;}
 .tokenInfoWrap .tokenOwnerWrap li .ownerTokenList .ownerTokenItemWrap .tokenItem.moreBtn a {max-width: 64px; width: 50%; margin-top: 25%;}
