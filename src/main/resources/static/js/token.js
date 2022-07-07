@@ -24,7 +24,7 @@ $(function() {
 	
 	$(".menuArea .btnClose .slideClose").on("click", function(e) {
 		e.preventDefault();
-		$("body").addClass("screenOut")
+		$("body").removeClass("screenOut")
 		$(".menuArea").removeClass("on");
 	})
 });
