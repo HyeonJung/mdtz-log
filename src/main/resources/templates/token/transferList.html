@@ -14,7 +14,15 @@
 						<div class="tokenDescWrap">
 							<h3 class="tit" th:text="'MTDZ #'+${transfer.tokenId}"></h3>
 							<span class="from" th:text="${transfer.from}"></span>
-							<span class="arrow">></span>
+							<div class="transferArrow">
+								<div class="indicator">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+							</div>
 							<span class="to" th:text="${transfer.to}"></span>
 						</div>
 					</li>
