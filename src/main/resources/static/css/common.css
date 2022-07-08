@@ -208,15 +208,6 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 , .tokenTransferWrap ul .transferItem .tokenDescWrap .to {display:block; overflow-x:hidden;text-overflow: ellipsis;white-space: nowrap; font-weight:600}
 .tokenTransferWrap ul .transferItem .tokenDescWrap .arrow {display: block; animation-name: slide; animation-duration: 0.8s; animation-iteration-count: infinite;}
 @keyframes slide {
-    0% {transform: translateX(0%);}
-    10% {transform: translateX(8%);}
-    20% {transform: translateX(16%);}
-    30% {transform: translateX(24%);}
-    40% {transform: translateX(32%);}
-    50% {transform: translateX(40%);}
-    60% {transform: translateX(48%);}
-    70% {transform: translateX(56%);}
-    80% {transform: translateX(64%);}
-    90% {transform: translateX(72%);}
-    100% {transform: translateX(80%);}
+    from {transform: translateX(0%);}
+    to {transform: translateX(80%);}
 }
