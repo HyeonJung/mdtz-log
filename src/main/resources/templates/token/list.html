@@ -24,7 +24,10 @@
 	    			search();
 	    		});
 	    		
-	    		$(".item.filter.color").on("change", "input[type=radio]", function()  {
+	    		$(".item.filter.color").on("change", "input[type=checkbox]", function(e)  {
+	    			var checked = $(this).prop("checked");
+	    			$(".item.filter.color").find("input[type=checkbox]").prop("checked", false);
+	    			$(this).prop("checked", checked);
 	    			search();
 	    		});
 
@@ -83,10 +86,11 @@
 					values.push(color);
 				});
 				
+				var attributes = new Array();
 				// 특성
 				$("input[name=attribute]:checked").each(function() {
 					var attribute = $(this).data('attribute');	
-					values.push(attribute);
+					attributes.push(attribute);
 				});
 				
 				$("input[name=totalDocs]").remove();
@@ -94,7 +98,7 @@
 					url : contextPath + "/token/subList",
 					type: "GET",
 					dataType: "html",
-					data: { rows : rows, page : searchPage, type : type, gradeList: gradeList, keyword: keyword, values:values},
+					data: { rows : rows, page : searchPage, type : type, gradeList: gradeList, keyword: keyword, values:values, attributes:attributes},
 					success: function(html) {
 						$(".tokenItemWrap").append(html);	
 						totalPages = $("input[name=refreshTotalPages]").val();

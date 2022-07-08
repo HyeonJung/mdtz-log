@@ -17,6 +17,7 @@ public class TokenInfoSearchRequest {
     private String keyword;
     private String value;
     private List<String> values;
+    private List<String> attributes;
     private List<String> gradeList;
     private String key;
     private String address;

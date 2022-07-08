@@ -31,6 +31,12 @@
 					#{v}
 				</foreach>
 			</if>
+			<if test="attributes != null and attributes.size > 0">
+				and ta.attribute_value in 
+				<foreach collection="attributes" item="v" open="(" close=")" separator=",">
+					#{v}
+				</foreach>
+			</if>
 			<if test="gradeList != null and gradeList.size > 0">
 				and t.grade in 
 				<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
@@ -71,6 +77,12 @@
 			<if test="values != null and values.size > 0">
 				and ta.attribute_value in 
 				<foreach collection="values" item="v" open="(" close=")" separator=",">
+					#{v}
+				</foreach>
+			</if>
+			<if test="attributes != null and attributes.size > 0">
+				and ta.attribute_value in 
+				<foreach collection="attributes" item="v" open="(" close=")" separator=",">
 					#{v}
 				</foreach>
 			</if>

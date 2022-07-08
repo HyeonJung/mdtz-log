@@ -77,10 +77,11 @@ function getColorList() {
 		values.push(color);
 	});
 	
+	var attributes = new Array();
 	// 특성
 	$("input[name=attribute]:checked").each(function() {
 		var attribute = $(this).data('attribute');	
-		values.push(attribute);
+		attributes.push(attribute);
 	});
 	
 	$(".item.filter.color").html("");
@@ -88,10 +89,10 @@ function getColorList() {
 		url : contextPath + "/token/colorList",
 		type: "GET",
 		dataType: "html",
-		data: {  type : type, gradeList: gradeList, keyword: keyword},
+		data: {  type : type, gradeList: gradeList, keyword: keyword, attributes: attributes},
 		success: function(html) {
 			$(".item.filter.color").html(html);
-			$(".item.filter.color").find("input[type=radio]").each(function() {
+			$(".item.filter.color").find("input[type=checkbox]").each(function() {
 				var color = $(this).data("color");
 				if (values.indexOf(color) >= 0) {
 					$(this).prop("checked", true);
