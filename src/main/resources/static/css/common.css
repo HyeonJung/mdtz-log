@@ -199,15 +199,16 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 
 /* 토근 전송내역 조회 */
 .tokenTransferWrap ul {}
-.tokenTransferWrap ul .transferItem {display:grid;grid-template-columns: 2fr 8fr;border-radius: 10px;border: 1px solid #dfdfdf;padding: 10px 10px 5px; gap:10px; grid-gap:10px;margin-bottom: 20px;}
+.tokenTransferWrap ul .transferItem {display:grid;grid-template-columns: 2fr 8fr;border-radius: 10px;border: 1px solid #dfdfdf;padding: 10px 10px 5px; gap:10px; grid-gap:10px;margin-bottom: 20px; box-shadow:0px 8px 9px rgb(113 113 113 / 15%)}
 .tokenTransferWrap ul .transferItem .tokenImgWrap {border-radius: 20px;}
-.tokenTransferWrap ul .transferItem .tokenImgWrap img {width:100%;border-radius: 20px;}
-.tokenTransferWrap ul .transferItem .tokenDescWrap {display:grid; grid-template-columns: repeat(4, 1fr);}
-.tokenTransferWrap ul .transferItem .tokenDescWrap .tit {grid-column-start:1; grid-column-end:5}
+.tokenTransferWrap ul .transferItem .tokenImgWrap img {max-width: 100px;border-radius: 20px;width: 100%;}
+.tokenTransferWrap ul .transferItem .tokenDescWrap {display:grid; grid-template-columns: 4fr 2fr 4fr}
+.tokenTransferWrap ul .transferItem .tokenDescWrap .tit {grid-column-start:1; grid-column-end:3}
+.tokenTransferWrap ul .transferItem .tokenDescWrap .transferDt {text-align:right; color:#767676}
 .tokenTransferWrap ul .transferItem .tokenDescWrap .from
 , .tokenTransferWrap ul .transferItem .tokenDescWrap .to {display:block; overflow-x:hidden;text-overflow: ellipsis;white-space: nowrap; font-weight:600}
 .tokenTransferWrap ul .transferItem .tokenDescWrap .transferArrow {width: 100%; height: 100%; padding-left:20%}
-.tokenTransferWrap ul .transferItem .tokenDescWrap .transferArrow .indicator{ position:relative; width:15px; height:15px; transform:rotate(-45deg); }
+.tokenTransferWrap ul .transferItem .tokenDescWrap .transferArrow .indicator{ position:relative; width:13px; height:13px; transform:rotate(-45deg); }
 .tokenTransferWrap ul .transferItem .tokenDescWrap .transferArrow .indicator span { position:absolute; left:0; top:0; width:100%; height:100%; box-sizing:border-box; border:none; border-bottom:3px solid #000; border-right:3px solid #000; animation:animate 1s linear infinite;}
 .tokenTransferWrap ul .transferItem .tokenDescWrap .transferArrow .indicator span:nth-child(1){ top:-12px; left:-12px; animation-delay:0s;}
 .tokenTransferWrap ul .transferItem .tokenDescWrap .transferArrow .indicator span:nth-child(2){ top:-6px; left:-6px; animation-delay:0.2s;}

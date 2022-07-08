@@ -11,7 +11,7 @@ public class TransferTransactionModel {
     private Long blockNumber;
     private String transactionHash;
     private Integer typeInt;
-    private Date timestamp;
+    private Long timestamp;
     private String value;
     private String feePayer;
     private Integer feeRatio;

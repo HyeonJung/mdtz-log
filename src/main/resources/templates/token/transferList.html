@@ -4,7 +4,7 @@
       layout:decorator="~{layout/layout}">
       
 	<th:block layout:fragment="content">
-		<div class="tokenInfoWrap">
+		<div class="tokenInfoWrap" style="max-width:600px;">
 			<div class="tokenTransferWrap">
 				<ul>
 					<li class="transferItem" th:each="transfer : ${ tokenTransferList }">
@@ -13,6 +13,7 @@
 						</div>
 						<div class="tokenDescWrap">
 							<h3 class="tit" th:text="'MTDZ #'+${transfer.tokenId}"></h3>
+							<span class="transferDt" th:text="${ #dates.format(transfer.transferDate, 'yyyy-MM-dd HH:mm') }"></span>
 							<span class="from" th:text="${transfer.from}"></span>
 							<div class="transferArrow">
 								<div class="indicator">

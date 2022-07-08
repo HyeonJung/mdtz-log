@@ -111,7 +111,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 				tokenTransfer.setBlockNumber(transferModel.getTransaction().getBlockNumber());
 				tokenTransfer.setFrom(transferModel.getFrom());
 				tokenTransfer.setTo(transferModel.getTo());
-				tokenTransfer.setTransferDate(transferModel.getTransaction().getTimestamp());
+				tokenTransfer.setTransferDate(new Date(transferModel.getTransaction().getTimestamp() * 1000));
 				tokenTransfer.setTokenId(Integer.decode(transferModel.getTokenId()));
 				TokenInfo tokenInfo = tokenInfoRepository.findByTokenId(tokenTransfer.getTokenId());
 				if (tokenInfo != null) {
