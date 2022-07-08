@@ -34,6 +34,8 @@
                 console.log(address);
                 getRankingTokenList(address, seq, this);
             });
+            
+            openFirstAddress();
         })
 
         // 리스트 불러오기
@@ -58,6 +60,7 @@
                 success: function(html) {
                     if (searchPage == 1) {
                         $(".tokenOwnerWrap").html(html);
+                        openFirstAddress()
                     } else {
                         $(".tokenOwnerWrap").append(html);
                     }
@@ -115,6 +118,11 @@
         function updateTotalCount() {
             var totalDocs = $("input[name=totalDocs]").val();
             $("#totalCount").text(comma(totalDocs));
+        }
+        
+        // 첫 번째 지갑 클릭
+        function openFirstAddress() {
+        	$(".tokenOwnerWrap").find(".item").find(".ownerAddress").get(0).click();
         }
 
     </script>

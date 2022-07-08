@@ -96,6 +96,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	}
 
 	@Override
+	@Cacheable(value="getTransferInfo", key = "#req.address + '_' + #req.gradeList", cacheManager = "cacheManager")
 	public List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req) {
 		return tokenDAO.getOwnerTokenList(req);
 	}
