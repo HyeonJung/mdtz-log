@@ -1,13 +1,13 @@
 package com.xpos.mtdzlog.token.service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.xpos.mtdzlog.client.KlaytnClient;
-import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
-import com.xpos.mtdzlog.meta.klaytn.TransferModel;
-import com.xpos.mtdzlog.token.TokenInfo;
-import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,9 +16,23 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.xpos.mtdzlog.client.KlaytnClient;
+import com.xpos.mtdzlog.client.MtdzClient;
+import com.xpos.mtdzlog.meta.MetaAttribute;
+import com.xpos.mtdzlog.meta.MetaData;
+import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
+import com.xpos.mtdzlog.meta.klaytn.TransferModel;
+import com.xpos.mtdzlog.token.TokenAttribute;
+import com.xpos.mtdzlog.token.TokenInfo;
 import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
+import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
+import com.xpos.mtdzlog.token.dto.TokenDTO;
+import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
+import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
+import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +51,9 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
 	@Autowired
 	private KlaytnClient klaytnClient;
+	
+	@Autowired
+	private MtdzClient mtdzClient;
 
 	@Value("${klaytn.api.x-chain-id}")
 	private String xChainId;
@@ -125,5 +142,29 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 			}
 		}
 		return tokenTransferList;
+	}
+
+	@Override
+	public List<MetaData> getMetaData() {
+		List<MetaData> metaDataList = new ArrayList<>();
+		List<TokenInfo> tokenList = tokenInfoRepository.findAll();
+		for (TokenInfo token : tokenList) {
+			MetaData metaData = mtdzClient.getJsonData(token.getTokenId());
+			log.info("metaData = {}", metaData);
+			List<TokenAttribute> tokenAttributeList = new ArrayList<>();
+			for (MetaAttribute attribute : metaData.getAttributes()) {
+				TokenAttribute attr = new TokenAttribute();
+				attr.setTokenInfoId(token.getId());
+				attr.setAttributeKey(attribute.getTrait_type());
+				attr.setAttributeValue(attribute.getValue());
+				tokenAttributeList.add(attr);
+			}
+			log.info("tokenAttributeList : {}", tokenAttributeList);
+			tokenAttributeRepository.saveAll(tokenAttributeList);
+			metaDataList.add(metaData);			
+		}
+		
+		
+		return metaDataList;
 	}
 }

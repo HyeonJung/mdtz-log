@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -149,4 +151,14 @@ public class TokenController {
 		model.addAttribute("tokenTransferList", tokenTransferList);
 	    return "token/transferList";
     }
+	
+	/**
+	 * meta data 조회
+	 * @return
+	 */
+	@GetMapping("/metaData")
+	public ResponseEntity<?> getMetaData() {
+		tokenInfoServiceImpl.getMetaData();
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 }

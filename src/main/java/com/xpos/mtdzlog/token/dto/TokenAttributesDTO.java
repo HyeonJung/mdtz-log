@@ -14,5 +14,6 @@ public class TokenAttributesDTO implements Serializable {
 	
 	private String attributeKey;
 	private String attributeValue;
+	private String alias;
 
 }

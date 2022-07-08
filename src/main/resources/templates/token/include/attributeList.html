@@ -1,12 +1,12 @@
 
-<div class="itemWrap" th:each="attributes : ${attributesMap}">
+<div class="itemWrap open" th:each="attributes : ${attributesMap}">
 	<div class="item tit" th:text="${ attributes.key }"></div>
 	<div class="item filter grade">
 		<ul class="attributes">
 			<li th:each="a : ${attributes.value}">
 				<div class="check">
 					<input type="checkbox" th:id="${ attributes.key + '-' + a.attributeValue }" th:data-attribute="${ a.attributeValue }" name="attribute">
-					<label th:for="${ attributes.key + '-' + a.attributeValue }" th:text="${ a.attributeValue }"></label>
+					<label th:for="${ attributes.key + '-' + a.attributeValue }" th:text="${ a.alias }"></label>
 				</div>
 			</li>
 		</ul>

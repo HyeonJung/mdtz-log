@@ -134,46 +134,13 @@
     </select>
     
     <select id="getTokenAttributeList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenAttributesDTO">
-    	select attribute_key, attribute_value
+    	select attribute_key, attribute_value, alias
     	from (
-	    	select count(*) as cnt, ta.attribute_key, ta.attribute_value
-			from token_info t,
-			     token_attribute ta
-			where t.id = ta.token_info_id
-	    	 and ta.attribute_key <![CDATA[ <> ]]> 'color'
-	    	 <if test="keyword != null and keyword != ''">
-				 and (t.token_id = #{keyword} or t.owner = #{keyword})
-			</if>
-			<if test="type != null">
-				and t.type = #{type}
-			</if>
-			<if test="grade != null">
-				and t.grade = #{grade}
-			</if>
-			<if test="value != null">
-				and ta.value = #{value}
-			</if>
-			<if test="key != null">
-				and ta.key = #{key}
-			</if>
-			<if test="values != null and values.size > 0">
-				and ta.value in 
-				<foreach collection="values" item="v" open="(" close=")" separator=",">
-					#{v}
-				</foreach>
-			</if>
-			<if test="gradeList != null and gradeList.size > 0">
-				and t.grade in 
-				<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
-					#{grade}
-				</foreach>
-			</if>
-			group by ta.attribute_key,ta.attribute_value
-			<if test="(gradeList == null or gradeList.size == 0) and (keyword == null or keyword == '')">
-			having count(*) > 10
-			</if>
+	    	select count(*) as cnt, attribute_key, attribute_value, alias
+			from token_filter
+			group by attribute_value
 		) res
-		order by cnt desc, attribute_value asc
+		order by alias asc
     </select>
 
 	<select id="getTokenRankingList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenRankingDTO">

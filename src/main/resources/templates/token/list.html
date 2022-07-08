@@ -11,7 +11,7 @@
 			var isLoading = false;
 	    	$(function() {
 	    		getColorList();
-	    		// getAttributes();
+	    		getAttributes();
 	    		updateTotalCount();
 	    		totalPages = $("#totalPages").val();
 	    		$(window).scroll(function() {
@@ -28,7 +28,7 @@
 	    			search();
 	    		});
 
-				$(".attributeWrap").on("change", "input[type=check]", function()  {
+				$(".attributeWrap").on("change", "input[type=checkbox]", function()  {
 					search();
 				});
 
@@ -54,6 +54,11 @@
 	    			$(".filterArea").toggleClass("on");
 	    			$("body").toggleClass("screenOut")
 	    		})
+	    		
+	    		$(".tokenFilterWrap").on("click", ".tit", function(e)  {
+	    			$(this).parents(".itemWrap").toggleClass("open");
+	    		});
+	    		
 	    	})
 	    	
 	    	// 리스트 불러오기
@@ -152,7 +157,7 @@
 	        </div>
 			<div class="tokenFilterWrap">
 				<div class="itemWrap open">
-	    			<div class="item tit">GRADE</div>
+	    			<div class="item tit">등급</div>
 	    			<div class="item filter grade">
 	    				<ul>
 	    					<li th:each="grade : ${ gradeList }">
@@ -166,7 +171,7 @@
     			</div>
     			
     			<div class="itemWrap open">
-	    			<div class="item tit">COLOR</div>
+	    			<div class="item tit">색깔</div>
 	    			<div class="item filter color">
 	    			</div>
     			</div>
