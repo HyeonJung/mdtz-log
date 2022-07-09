@@ -240,6 +240,13 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .mainWrap {padding:20px;max-width: 900px;margin: auto;}
 .mainWrap .floorPriceWrap {display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px; text-align:center;}
 .mainWrap .floorPriceWrap .priceInfoWrap {border:1px solid #dfdfdf; border-radius:5px;}
-.mainWrap .floorPriceWrap .priceInfoWrap .tit {font-weight:bold; padding:10px;}
+.mainWrap .floorPriceWrap .priceInfoWrap .tit {font-weight:bold; padding:10px; line-height:22px;}
+.mainWrap .floorPriceWrap .priceInfoWrap .tit a {text-decoration:none; color:#000000}
+.mainWrap .floorPriceWrap .priceInfoWrap.palaPrice .tit::before {content:'';display:inline-block;background:url('../images/common/pala.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px; margin-right:5px; border-radius:50px; border:1px solid;}
+.mainWrap .floorPriceWrap .priceInfoWrap.openSeaPrice .tit::before {content:'';display:inline-block;background:url('../images/common/opensea.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px; margin-right:5px; border-radius:50px; border:1px solid #0283e9;}
+.mainWrap .floorPriceWrap .priceInfoWrap.klayPrice .tit::before {content:'';display:inline-block;background:url('../images/common/klay.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px; margin-right:5px; border-radius:50px; border:1px solid}
 .mainWrap .floorPriceWrap .priceInfoWrap .price {text-align:right; padding:10px;}
 .mainWrap .floorPriceWrap .priceInfoWrap .price .krwPrice {font-size: 12px;color: #928f8f;}
+
+.mainWrap .mainItmeWrap {margin-top:15px;}
+.mainWrap .mainItmeWrap h2 {margin-bottom:10px;}

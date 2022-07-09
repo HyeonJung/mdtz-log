@@ -7,21 +7,28 @@
 	
 		<script type="text/javascript">
 	    	$(function() {
-	    		
+	    		$(function() {
+	    	        var swiper = new Swiper('.swiper', {
+	    	            slidesPerView: 'auto',
+	    	            spaceBetween: 10,
+	    	            loop : false,
+	    	            pagination : false
+	    	        });
+	    	    });
 	    	})
     	</script>
     	
     	<div class="mainWrap">
     		<div class="floorPriceWrap">
     			<div class="openSeaPrice priceInfoWrap">
-    				<div class="tit">OpenSea</div>
+    				<div class="tit"><a href="https://opensea.io/collection/mtdz-1">OpenSea</a></div>
     				<div class="price">
     					<span class="tokenPrice" th:text="${#numbers.formatInteger(fp.openSeaFp,1,'COMMA')} + 'Klay'"></span>
     					<span class="krwPrice" th:text="'(' + ${#numbers.formatInteger(fp.openSeaFp * fp.klayPrice,1,'COMMA')} + '원)'"></span>
     				</div>
     			</div>
     			<div class="palaPrice priceInfoWrap">
-    				<div class="tit">Pala</div>
+    				<div class="tit"><a href="https://pala.world/square/project/46DBdC7965CF3cd2257C054fEAb941a05Ff46488">Pala</a></div>
     				<div class="price">
     					<span class="tokenPrice" th:text="${#numbers.formatInteger(fp.palaFp,1,'COMMA')} + 'Klay'"></span>
     					<span class="krwPrice" th:text="'(' + ${#numbers.formatInteger(fp.palaFp * fp.klayPrice,1,'COMMA')} + '원)'"></span>
@@ -30,6 +37,62 @@
     			<div class="klayPrice priceInfoWrap">
     				<div class="tit">Klay</div>
     				<div class="price" th:text="${#numbers.formatInteger(fp.klayPrice,1,'COMMA') + '원'}"></div>
+				</div>
+    		</div>
+    		
+    		<div class="mainItmeWrap">
+    			<h2>홀더랭킹</h2>
+    			<div class="tokenInfoWrap" style="padding:0">
+			        <div>
+			            <ul class="tokenOwnerWrap">
+			                <li class="item" th:each="ranking : ${contents}">
+							    <div class="ownerInfo">
+							        <div th:text="${ ranking.seq }" class="rankSeq"></div>
+							        <div th:text="${ ranking.maskingOwnerAddress }" class="ownerAddress" th:data-address="${ ranking.owner }" th:data-seq="${ ranking.seq }"></div>
+							        <div th:text="${ ranking.tokenCount }" class="tokenCount"></div>
+							    </div>
+							    <div th:id="'ranking_'+${ ranking.seq }" class="ownerTokenList on swiper">
+							        <div class="ownerTokenItemWrap swiper-wrapper">
+							        	<div class="tokenItem swiper-slide" th:each="token : ${ranking.ownerTokenList}">
+										    <img th:src="${token.imageUrl}" src=""/>
+										</div>
+										
+										<div class="tokenItem swiper-slide moreBtn">
+											<a th:href="@{|/ranking?keyword=${address}|}"><img th:src="@{/images/common/icons-right-arrow.png}" src=""/></a>   
+										</div>
+							        </div>
+							    </div>
+							</li>
+			            </ul>
+			        </div>
+			    </div>
+    		</div>
+    		
+    		<div class="mainItmeWrap">
+    			<h2>최근 거래기록</h2>
+    			<div class="tokenTransferWrap">
+					<ul>
+						<li class="transferItem" th:each="transfer : ${ tokenTransferList }">
+							<div class="tokenImgWrap">
+								<img th:src="${transfer.imageUrl}" src=""/>
+							</div>
+							<div class="tokenDescWrap">
+								<h3 class="tit" th:text="'MTDZ #'+${transfer.tokenId}"></h3>
+								<span class="transferDt" th:text="${ #dates.format(transfer.transferDate, 'yyyy-MM-dd HH:mm') }"></span>
+								<span class="from" th:text="${transfer.from}"></span>
+								<div class="transferArrow">
+									<div class="indicator">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+								</div>
+								<span class="to" th:text="${transfer.to}"></span>
+							</div>
+						</li>
+					</ul>
 				</div>
     		</div>
     	</div>

@@ -208,4 +208,23 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		
 		return fp;
 	}
+	
+	@Override
+	@Cacheable(value="mainRankingList", key = "'mainRanking_' + #type", cacheManager = "cacheManager")
+	public List<TokenRankingDTO> getMainRankingList() {
+		TokenInfoSearchRequest req = new TokenInfoSearchRequest();
+		req.setType("MTDZ");
+		req.setRows(3);
+		// 토큰 랭킹 리스트 조회.
+		List<TokenRankingDTO> tokenRankingList = tokenDAO.getTokenRankingList(req);
+		Integer seq = req.getOffset();
+		TokenInfoSearchRequest subReq = new TokenInfoSearchRequest();
+		for (TokenRankingDTO tokenRanking: tokenRankingList) {
+			subReq.setAddress(tokenRanking.getOwner());
+			tokenRanking.setSeq(++seq);
+			tokenRanking.setOwnerTokenList(getTokenByOwnerAddress(subReq));
+		}
+		return tokenRankingList;
+	}
+	
 }

@@ -1,8 +1,9 @@
 package com.xpos.mtdzlog.token.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import java.util.List;
+
+import lombok.Data;
 
 @Data
 public class TokenRankingDTO implements Serializable {
@@ -16,4 +17,5 @@ public class TokenRankingDTO implements Serializable {
     private Integer tokenCount;
     private String tokenIds;
     private String maskingOwnerAddress;
+    private List<TokenDTO> ownerTokenList;
 }

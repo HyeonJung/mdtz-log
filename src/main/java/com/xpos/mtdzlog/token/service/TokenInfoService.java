@@ -42,4 +42,7 @@ public interface TokenInfoService {
 	
 	// 바닥가 조회
 	FloorPriceModel getFloorPrice(String type);
+	
+	// 메인용 랭킹리스트
+	List<TokenRankingDTO> getMainRankingList();
 }
