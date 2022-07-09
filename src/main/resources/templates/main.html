@@ -7,14 +7,12 @@
 	
 		<script type="text/javascript">
 	    	$(function() {
-	    		$(function() {
-	    	        var swiper = new Swiper('.swiper', {
-	    	            slidesPerView: 'auto',
-	    	            spaceBetween: 10,
-	    	            loop : false,
-	    	            pagination : false
-	    	        });
-	    	    });
+    	        var swiper = new Swiper('.swiper', {
+    	            slidesPerView: 'auto',
+    	            spaceBetween: 10,
+    	            loop : false,
+    	            pagination : false
+    	        });
 	    	})
     	</script>
     	
@@ -41,7 +39,7 @@
     		</div>
     		
     		<div class="mainItmeWrap">
-    			<h2>홀더랭킹</h2>
+    			<h2>홀더랭킹<a class="moreBtn" href="/token/ranking">전체보기</a></h2>
     			<div class="tokenInfoWrap" style="padding:0">
 			        <div>
 			            <ul class="tokenOwnerWrap">
@@ -58,7 +56,7 @@
 										</div>
 										
 										<div class="tokenItem swiper-slide moreBtn">
-											<a th:href="@{|/ranking?keyword=${address}|}"><img th:src="@{/images/common/icons-right-arrow.png}" src=""/></a>   
+											<a th:href="@{|/token/list?keyword=${ranking.owner}|}"><img th:src="@{/images/common/icons-right-arrow.png}" src=""/></a>   
 										</div>
 							        </div>
 							    </div>
@@ -69,7 +67,7 @@
     		</div>
     		
     		<div class="mainItmeWrap">
-    			<h2>최근 거래기록</h2>
+    			<h2>최근 거래기록<a class="moreBtn" href="/token/transfer">전체보기</a></h2>
     			<div class="tokenTransferWrap">
 					<ul>
 						<li class="transferItem" th:each="transfer : ${ tokenTransferList }">

@@ -36,8 +36,13 @@ public class TokenController {
 	@Autowired
 	private TokenInfoService tokenInfoServiceImpl;
 	
-	// 리스트 조회
 	@GetMapping("")
+	public String main() {
+		return "redirect:/main";
+	}
+	
+	// 리스트 조회
+	@GetMapping("/list")
 	public String list(Model model, @ModelAttribute TokenInfoSearchRequest req) {
 		
 		// 토큰 등급 리스트

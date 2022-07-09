@@ -248,5 +248,6 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .mainWrap .floorPriceWrap .priceInfoWrap .price {text-align:right; padding:10px;}
 .mainWrap .floorPriceWrap .priceInfoWrap .price .krwPrice {font-size: 12px;color: #928f8f;}
 
-.mainWrap .mainItmeWrap {margin-top:15px;}
-.mainWrap .mainItmeWrap h2 {margin-bottom:10px;}
+.mainWrap .mainItmeWrap {}
+.mainWrap .mainItmeWrap h2 {margin:25px 0; font-size:20px; letter-spacing:-1px; position:relative}
+.mainWrap .mainItmeWrap h2 .moreBtn {position: absolute;right: 20px;font-size: 15px;color: #888888;text-decoration: none;bottom: 0;}
