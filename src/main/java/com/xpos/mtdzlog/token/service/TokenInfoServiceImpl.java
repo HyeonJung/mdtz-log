@@ -16,17 +16,22 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.xpos.mtdzlog.client.BitThumbClient;
 import com.xpos.mtdzlog.client.KlaytnClient;
 import com.xpos.mtdzlog.client.MtdzClient;
 import com.xpos.mtdzlog.meta.MetaAttribute;
 import com.xpos.mtdzlog.meta.MetaData;
+import com.xpos.mtdzlog.meta.bitThumb.BitThumbResponse;
 import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
 import com.xpos.mtdzlog.meta.klaytn.TransferModel;
 import com.xpos.mtdzlog.token.TokenAttribute;
+import com.xpos.mtdzlog.token.TokenFloorPrice;
 import com.xpos.mtdzlog.token.TokenInfo;
 import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
+import com.xpos.mtdzlog.token.dao.repository.TokenFloorPriceRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
+import com.xpos.mtdzlog.token.dto.FloorPriceModel;
 import com.xpos.mtdzlog.token.dto.MtdzGrade;
 import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
@@ -54,7 +59,13 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	
 	@Autowired
 	private MtdzClient mtdzClient;
-
+	
+	@Autowired
+	private BitThumbClient bitThumbClient;
+	
+	@Autowired
+	private TokenFloorPriceRepository tokenFloorPriceRepository;
+	
 	@Value("${klaytn.api.x-chain-id}")
 	private String xChainId;
 
@@ -113,13 +124,13 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	}
 
 	@Override
-	@Cacheable(value="getTransferInfo", key = "#req.address + '_' + #req.gradeList", cacheManager = "cacheManager")
+	@Cacheable(value="getTransferInfo", key = "'transfer_' + #req.address + '_' + #req.gradeList", cacheManager = "cacheManager")
 	public List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req) {
 		return tokenDAO.getOwnerTokenList(req);
 	}
 
 	@Override
-	@Cacheable(value="getTransferInfo", key = "#type", cacheManager = "cacheManager")
+	@Cacheable(value="getTransferInfo", key = "'info_' + #type", cacheManager = "cacheManager")
 	public List<TokenTransferDTO> getTokenTransferInfo(String type) {
 		List<TokenTransferDTO> tokenTransferList = new ArrayList<>();
 		NftItemResponse<TransferModel> res = klaytnClient.transferInfo(xChainId, presets, 30);
@@ -166,5 +177,35 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		
 		
 		return metaDataList;
+	}
+	
+	@Override
+	@Cacheable(value="getFloorPrice", key = "'floorPrice_' + #type", cacheManager = "cacheManager")
+	public FloorPriceModel getFloorPrice(String type) {
+		FloorPriceModel fp = new FloorPriceModel();
+		try {
+			TokenFloorPrice openSeaFp = tokenFloorPriceRepository.findByTypeAndPlatform(type, "OPENSEA");
+			fp.setOpenSeaFp(openSeaFp.getFloorPrice());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			TokenFloorPrice palaFp =tokenFloorPriceRepository.findByTypeAndPlatform(type, "PALA");
+			fp.setPalaFp(palaFp.getFloorPrice());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			BitThumbResponse res = bitThumbClient.getKlayPrice();
+			fp.setKlayPrice(Double.valueOf(res.getData().getClosing_price()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return fp;
 	}
 }

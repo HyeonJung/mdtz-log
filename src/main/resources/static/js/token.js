@@ -27,6 +27,12 @@ $(function() {
 		$("body").removeClass("screenOut")
 		$(".menuArea").removeClass("on");
 	})
+	
+	$(".btnTop").on("click", function(e) {
+		e.preventDefault();
+		$('html, body').animate({scrollTop: '0'}, 1000);
+	});
+	
 });
 
 // 로딩

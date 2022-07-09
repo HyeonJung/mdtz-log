@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout}">
+      
+	<th:block layout:fragment="content">
+	
+		<script type="text/javascript">
+	    	$(function() {
+	    		
+	    	})
+    	</script>
+    	
+    	<div class="mainWrap">
+    		<div class="floorPriceWrap">
+    			<div class="openSeaPrice priceInfoWrap">
+    				<div class="tit">OpenSea</div>
+    				<div class="price">
+    					<span class="tokenPrice" th:text="${#numbers.formatInteger(fp.openSeaFp,1,'COMMA')} + 'Klay'"></span>
+    					<span class="krwPrice" th:text="'(' + ${#numbers.formatInteger(fp.openSeaFp * fp.klayPrice,1,'COMMA')} + '원)'"></span>
+    				</div>
+    			</div>
+    			<div class="palaPrice priceInfoWrap">
+    				<div class="tit">Pala</div>
+    				<div class="price">
+    					<span class="tokenPrice" th:text="${#numbers.formatInteger(fp.palaFp,1,'COMMA')} + 'Klay'"></span>
+    					<span class="krwPrice" th:text="'(' + ${#numbers.formatInteger(fp.palaFp * fp.klayPrice,1,'COMMA')} + '원)'"></span>
+    				</div>
+				</div>
+    			<div class="klayPrice priceInfoWrap">
+    				<div class="tit">Klay</div>
+    				<div class="price" th:text="${#numbers.formatInteger(fp.klayPrice,1,'COMMA') + '원'}"></div>
+				</div>
+    		</div>
+    	</div>
+		
+	</th:block>
+</html>

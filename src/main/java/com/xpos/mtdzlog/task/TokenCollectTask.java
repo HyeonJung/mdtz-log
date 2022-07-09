@@ -1,24 +1,31 @@
 package com.xpos.mtdzlog.task;
 
-import com.xpos.mtdzlog.client.KlaytnClient;
-import com.xpos.mtdzlog.meta.klaytn.NftItem;
-import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
-import com.xpos.mtdzlog.token.TokenInfo;
-import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
-import com.xpos.mtdzlog.token.service.TokenInfoServiceImpl;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.apache.groovy.parser.antlr4.util.StringUtils;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.xpos.mtdzlog.client.BigDragonClient;
+import com.xpos.mtdzlog.client.KlaytnClient;
+import com.xpos.mtdzlog.client.PalaClient;
+import com.xpos.mtdzlog.meta.klaytn.NftItem;
+import com.xpos.mtdzlog.meta.klaytn.NftItemResponse;
+import com.xpos.mtdzlog.meta.pala.PalaResponse;
+import com.xpos.mtdzlog.token.TokenFloorPrice;
+import com.xpos.mtdzlog.token.TokenInfo;
+import com.xpos.mtdzlog.token.dao.repository.TokenFloorPriceRepository;
+import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
+@Profile("production")
 public class TokenCollectTask {
 
     @Value("${klaytn.api.x-chain-id}")
@@ -34,6 +41,15 @@ public class TokenCollectTask {
 
     @Autowired
     private KlaytnClient klaytnClient;
+    
+    @Autowired
+    private PalaClient palaClient;
+    
+    @Autowired
+    private BigDragonClient bigDragonClient;
+    
+    @Autowired
+    private TokenFloorPriceRepository tokenFloorPriceRepository;
 
     // 매일 새벽 3시에 돌자
     @Scheduled(cron = "0 0 3 * * *")
@@ -50,6 +66,36 @@ public class TokenCollectTask {
         }
         log.info("=========================token owner collect end===========================");
 
+    }
+    
+    // 오픈씨 바닥가 수집
+    @Scheduled(fixedDelay = 60000)
+    public void getOpenseaFloorPrice() {
+    	String res = bigDragonClient.getFloorFp();
+    	if (res != null) {
+    		Double fp = Double.valueOf(res);
+    		log.info("opensea fp = {}", fp);
+    		TokenFloorPrice tokenFloorPrice = new TokenFloorPrice();
+    		tokenFloorPrice.setType("MTDZ");
+    		tokenFloorPrice.setPlatform("OPENSEA");
+    		tokenFloorPrice.setFloorPrice(fp);
+    		tokenFloorPriceRepository.save(tokenFloorPrice);
+    	}
+    }
+    
+    // 팔라 바닥가 수집
+    @Scheduled(fixedDelay = 60000)
+    public void getPalaFloorPrice() {
+    	PalaResponse res = palaClient.getProjectInfo(mtdzContractAddress);
+    	if (res != null) {
+    		Double fp = Double.valueOf(res.getFloorPriceInKlay().replace("000000000000000000", ""));
+    		log.info("pala fp = {}", fp);
+    		TokenFloorPrice tokenFloorPrice = new TokenFloorPrice();
+    		tokenFloorPrice.setType("MTDZ");
+    		tokenFloorPrice.setPlatform("PALA");
+    		tokenFloorPrice.setFloorPrice(fp);
+    		tokenFloorPriceRepository.save(tokenFloorPrice);
+    	}
     }
 
     @Transactional

@@ -35,7 +35,7 @@ mybatis:
     map-underscore-to-camel-case: true
         
 mtdz:
-  contractAddress: '0x46dbdc7965cf3cd2257c054feab941a05ff46488'
+  contractAddress: '0x46DBdC7965CF3cd2257C054fEAb941a05Ff46488'
   json:
     url: https://data.metatoydragonz.io/meta
 
@@ -52,6 +52,20 @@ tomcat:
    protocol: AJP/1.3
    enabled: true
    port: 18080
+    
+pala:
+  api:
+    host: https://api.pala.world
+
+bigdragon:
+  api:
+    host: https://coin.bigdragon.shop/api
+    
+bitThumb:
+  api:
+    host: https://api.bithumb.com
+    
+    
    
 ---
 

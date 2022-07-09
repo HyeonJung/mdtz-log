@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 
 import com.xpos.mtdzlog.meta.MetaData;
+import com.xpos.mtdzlog.token.dto.FloorPriceModel;
 import com.xpos.mtdzlog.token.dto.MtdzGrade;
 import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
@@ -38,4 +39,7 @@ public interface TokenInfoService {
 	
 	// json 데이터 조회
 	List<MetaData> getMetaData();
+	
+	// 바닥가 조회
+	FloorPriceModel getFloorPrice(String type);
 }
