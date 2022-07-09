@@ -24,14 +24,18 @@
 	    			search();
 	    		});
 	    		
+	    		// 색깔필터 선택 시
 	    		$(".item.filter.color").on("change", "input[type=checkbox]", function(e)  {
 	    			var checked = $(this).prop("checked");
+	    			$(".attributeWrapr").find("input[type=checkbox]").prop("checked", false);
 	    			$(".item.filter.color").find("input[type=checkbox]").prop("checked", false);
 	    			$(this).prop("checked", checked);
 	    			search();
 	    		});
 
+	    		// 특성필터 선택 시
 				$(".attributeWrap").on("change", "input[type=checkbox]", function()  {
+					$(".item.filter.color").find("input[type=checkbox]").prop("checked", false);
 					search();
 				});
 
