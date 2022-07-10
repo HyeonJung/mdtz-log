@@ -227,4 +227,17 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		return tokenRankingList;
 	}
 	
+	@Override
+	public String getRandAttributeValue() {
+		return tokenDAO.getRandAttributeValue();
+	}
+	
+	@Override
+	@Cacheable(value="randAttributeTokenList", key = "'randAttributeTokenList_' + #req.value", cacheManager = "cacheManager")
+	public List<TokenDTO> getRandAttributeTokenList(TokenInfoSearchRequest req) {
+		// 토큰 리스트 조회
+		List<TokenDTO> tokenList = tokenDAO.getTokenList(req);
+		return tokenList;
+	}
+	
 }

@@ -39,6 +39,35 @@
     		</div>
     		
     		<div class="mainItmeWrap">
+    			<h2>도감<a class="moreBtn" href="/token/list">전체보기</a></h2>
+    			<div class="tokenInfoWrap" style="padding:0">
+			        <div>
+			            <ul class="tokenItemWrap">
+			            	<li class="item" th:each="token : ${collectList}">
+								<div>
+									<img th:src="${token.imageUrl}" src=""/>
+								</div>
+								<div class="tokenInfo">
+									<span th:text="${token.type}"></span> #<span th:text="${token.tokenId}">MTDZ</span>
+								</div>
+								<div th:class="'tokenGrade ' + ${token.grade}">
+									<span th:if="${token.grade == 'canister'}">깡통</span>
+									<span th:if="${token.grade == 'gradation'}">그라</span>
+									<span th:if="${token.grade == 'glass'}">유리</span>
+									<span th:if="${token.grade == 'light'}">조명</span>
+									<span th:if="${token.grade == 'legendary'}">레전더리</span>
+								</div>
+								<div class="tokenExchange">
+									<a class="opensea" th:href="@{|https://opensea.io/assets/klaytn/0x46dbdc7965cf3cd2257c054feab941a05ff46488/${token.tokenId}|}" target="blank"><span class="blind">OpenSea</span></a>
+									<a class="pala" th:href="@{|https://pala.world/square/project/46DBdC7965CF3cd2257C054fEAb941a05Ff46488/${token.tokenId}|}" target="blank"><span class="blind">Pala</span></a>
+								</div>
+							</li>
+			            </ul>
+			        </div>
+			    </div>
+    		</div>
+    		
+    		<div class="mainItmeWrap">
     			<h2>홀더랭킹<a class="moreBtn" href="/token/ranking">전체보기</a></h2>
     			<div class="tokenInfoWrap" style="padding:0">
 			        <div>

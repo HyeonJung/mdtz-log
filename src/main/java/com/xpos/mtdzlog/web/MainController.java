@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.xpos.mtdzlog.token.dto.FloorPriceModel;
+import com.xpos.mtdzlog.token.dto.TokenDTO;
+import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
 import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 import com.xpos.mtdzlog.token.service.TokenInfoService;
@@ -32,8 +34,14 @@ private static final String TYPE = "MTDZ";
 	@GetMapping(value = "/main")
 	public String main(Model model) {
 		FloorPriceModel fp = tokenInfoServiceImpl.getFloorPrice(TYPE);
-		log.info("fp = {}", fp);
 		model.addAttribute("fp", fp);
+		
+		// 메인 도감
+		TokenInfoSearchRequest req = new TokenInfoSearchRequest();
+		req.setValue(tokenInfoServiceImpl.getRandAttributeValue());
+		req.setRows(12);
+		List<TokenDTO> mainCollectList = tokenInfoServiceImpl.getRandAttributeTokenList(req);
+		model.addAttribute("collectList", mainCollectList);
 		
 		// 전송이력
 		List<TokenTransferDTO> tokenTransferList = tokenInfoServiceImpl.getTokenTransferInfo(TYPE);

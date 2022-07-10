@@ -37,4 +37,7 @@ public interface TokenDAO {
 
 	// 지갑 토큰 리스트 조회
 	List<TokenDTO> getOwnerTokenList(TokenInfoSearchRequest req);
+	
+	// 랜덤 attribute값 조회.
+	String getRandAttributeValue();
 }

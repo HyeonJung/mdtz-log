@@ -69,7 +69,7 @@ public class TokenCollectTask {
     }
     
     // 오픈씨 바닥가 수집
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 300000)
     public void getOpenseaFloorPrice() {
     	String res = bigDragonClient.getFloorFp();
     	if (res != null) {
@@ -84,7 +84,7 @@ public class TokenCollectTask {
     }
     
     // 팔라 바닥가 수집
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 300000)
     public void getPalaFloorPrice() {
     	PalaResponse res = palaClient.getProjectInfo(mtdzContractAddress);
     	if (res != null) {

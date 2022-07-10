@@ -45,4 +45,10 @@ public interface TokenInfoService {
 	
 	// 메인용 랭킹리스트
 	List<TokenRankingDTO> getMainRankingList();
+	
+	// 랜덤 속성값 불러오기
+	String getRandAttributeValue();
+	
+	// 랜덤 속성값 토큰리스트 불러오기
+	List<TokenDTO> getRandAttributeTokenList(TokenInfoSearchRequest req);
 }

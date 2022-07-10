@@ -20,10 +20,10 @@
 				and t.grade = #{grade}
 			</if>
 			<if test="value != null">
-				and ta.value = #{value}
+				and ta.attribute_value = #{value}
 			</if>
 			<if test="key != null">
-				and ta.key = #{key}
+				and ta.attribute_key = #{key}
 			</if>
 			<if test="values != null and values.size > 0">
 				and ta.attribute_value in 
@@ -69,10 +69,10 @@
 				and t.grade = #{grade}
 			</if>
 			<if test="value != null">
-				and ta.value = #{value}
+				and ta.attribute_value = #{value}
 			</if>
 			<if test="key != null">
-				and ta.key = #{key}
+				and ta.attribute_key = #{key}
 			</if>
 			<if test="values != null and values.size > 0">
 				and ta.attribute_value in 
@@ -223,5 +223,9 @@
 		) res
 		order by grade_seq desc
 		limit 10
+	</select>
+	
+	<select id="getRandAttributeValue" resultType="string">
+		select tf.attribute_value from token_filter tf order by rand() limit 1
 	</select>
 </mapper>
