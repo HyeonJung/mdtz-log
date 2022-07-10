@@ -39,7 +39,7 @@ private static final String TYPE = "MTDZ";
 		// 메인 도감
 		TokenInfoSearchRequest req = new TokenInfoSearchRequest();
 		req.setValue(tokenInfoServiceImpl.getRandAttributeValue());
-		req.setRows(12);
+		req.setRows(8);
 		List<TokenDTO> mainCollectList = tokenInfoServiceImpl.getRandAttributeTokenList(req);
 		model.addAttribute("collectList", mainCollectList);
 		
