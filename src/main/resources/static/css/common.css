@@ -31,6 +31,7 @@ body.screenOut .btnTop {display:none !important}
 ********************************/
 .headerWrap {text-align: center;padding: 15px;border-bottom: 1px solid #dfdfdf; position:relative}
 .headerWrap h1{font-size: 18px; letter-spacing: -1px; font-weight:bold;}
+.headerWrap h1::before {content:'';display:inline-block;background:url('../images/xpos_dragon.png') no-repeat;vertical-align:top;width: 20px;height: 20px;background-size: 20px;margin-right: 5px; }
 .headerWrap .subTopMenu { width:18px; left:13px; }
 .headerWrap .subTopMenu::before { content:""; display:block; width:18px; height:23px; background:url('../images/common/topBtn_menu.png') no-repeat 0 55%; background-size:100% auto; }
 .headerWrap .subTopPrev,
