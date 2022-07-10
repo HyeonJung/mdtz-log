@@ -140,7 +140,8 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenItemWrap li .tokenGrade.gradation span {background:#b5a27a}
 .tokenInfoWrap .tokenItemWrap li .tokenGrade.glass span {background:#7294b9}
 .tokenInfoWrap .tokenItemWrap li .tokenGrade.light span {background:#60a992}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.legendary span {background:#3805a7}
+.tokenInfoWrap .tokenItemWrap li .tokenGrade.legendary span {background:linear-gradient(#3805a7, #f6cbff)}
+.tokenInfoWrap .tokenItemWrap li .tokenGrade.special span {background:linear-gradient(#9e0000, #dcce7b)}
 .tokenInfoWrap .tokenItemWrap li .tokenExchange {margin-top:7px;}
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .opensea {width:17px; height:17px;display: inline-block; border:1px solid #dfdfdf; border-radius:50px; margin-right:3px;}  
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .opensea::before {content:'';display:inline-block;background:url('../images/common/opensea.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px;}

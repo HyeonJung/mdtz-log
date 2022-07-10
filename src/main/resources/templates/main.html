@@ -57,6 +57,7 @@
 									<span th:if="${token.grade == 'glass'}">유리</span>
 									<span th:if="${token.grade == 'light'}">조명</span>
 									<span th:if="${token.grade == 'legendary'}">레전더리</span>
+									<span th:if="${token.grade == 'special'}">스페셜</span>
 								</div>
 								<div class="tokenExchange">
 									<a class="opensea" th:href="@{|https://opensea.io/assets/klaytn/0x46dbdc7965cf3cd2257c054feab941a05ff46488/${token.tokenId}|}" target="blank"><span class="blind">OpenSea</span></a>

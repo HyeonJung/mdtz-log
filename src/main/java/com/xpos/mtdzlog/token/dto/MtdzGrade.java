@@ -15,7 +15,10 @@ public enum MtdzGrade {
 	light("조명"),
 	
 	/** 레전더리 */
-	legendary("레전더리");
+	legendary("레전더리"),
+	
+	/** 스페셜 */
+	special("스페셜");
 
 	private String description;
 
