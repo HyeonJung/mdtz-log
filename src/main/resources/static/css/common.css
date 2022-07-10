@@ -50,6 +50,11 @@ body.screenOut .btnTop {display:none !important}
 .headerArea.white .headerInner .headerBtn.back .icon_img {background-position:-92px 0}
 .headerArea.white .headerInner .headerBtn.sCart .icon_img {background-position:-212px -75px}
 
+@media (min-width: 1300px) {
+	.menuArea {visibility:visible !important; opacity:1 !important; transform:translate3d(0, 0, 0) !important; width:200px !important; border-right:1px solid}
+	.menuArea.on::after {opaicity:0 !important; visibility:hidden !important;}
+	.menuArea .btnClose {display:none !important;}
+}
 .menuArea {opacity:0;visibility:hidden;position:fixed;top:0;left:0;width:calc(100vw - 30px);height:100vh;padding-top:0;background:#fff;transform:translate3d(-60%, 0, 0);transition:.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);transition-property:transform, height, visibility, opacity;z-index:10; max-width:500px; padding:15px;}
 .menuArea::after {content:'';opacity:0;visibility:hidden;position:absolute;top: 0;left: 100%;width: calc(100vw - 30px);height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
 .menuArea .btnClose {overflow:hidden;display:block;position:relative;width:100%;height:53px;background:#fff}
@@ -237,6 +242,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
     }
 }
 
+/* 메인 */
 .mainWrap {padding:20px;max-width: 900px;margin: auto;}
 .mainWrap .floorPriceWrap {display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px; text-align:center;}
 .mainWrap .floorPriceWrap .priceInfoWrap {border:1px solid #dfdfdf; border-radius:5px;}
@@ -251,3 +257,6 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .mainWrap .mainItmeWrap {}
 .mainWrap .mainItmeWrap h2 {margin:45px 0 25px; font-size:20px; letter-spacing:-1px; position:relative}
 .mainWrap .mainItmeWrap h2 .moreBtn {position: absolute;right: 20px;font-size: 15px;color: #888888;text-decoration: none;bottom: 0;}
+
+/* 로그인 */
+.loginWrap {padding:20px;max-width: 900px;margin: auto;}

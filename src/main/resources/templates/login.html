@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout}">
+      
+	<th:block layout:fragment="content">
+		<script type="text/javascript">
+	    	$(function() {
+				if (typeof window.klaytn !== 'undefined') {
+		       	  	const provider = window['klaytn']
+			        	try {
+			        	  const accounts = klaytn.enable()
+			        	  // You now have an array of accounts!
+			        	  // Currently only one:
+			        	  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+			        	} catch (error) {
+			        	  // Handle error. Likely the user rejected the login
+			        	  console.error(error)
+			        	}
+		       	}
+	    	});
+		</script>
+		<div class="loginWrap">
+			<h1>로그인</h1>
+		</div>
+	</th:block>
+</html>
