@@ -3,16 +3,11 @@ package com.xpos.mtdzlog.token.service;
 import java.util.List;
 import java.util.Map;
 
+import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.data.domain.Page;
 
 import com.xpos.mtdzlog.meta.MetaData;
-import com.xpos.mtdzlog.token.dto.FloorPriceModel;
-import com.xpos.mtdzlog.token.dto.MtdzGrade;
-import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
-import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
-import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
-import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 
 public interface TokenInfoService {
 	
@@ -51,4 +46,7 @@ public interface TokenInfoService {
 	
 	// 랜덤 속성값 토큰리스트 불러오기
 	List<TokenDTO> getRandAttributeTokenList(TokenInfoSearchRequest req);
+
+	// 토큰 랭킹 비율 추가.
+	List<TokenRankingRatioModel> getTokenRankingRatio(TokenInfoSearchRequest req);
 }

@@ -5,7 +5,7 @@
 
 <th:block layout:fragment="content">
 
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
         var page = 1;
         var totalPages = 0;
         var isLoading = false;
@@ -36,6 +36,60 @@
             });
             
             openFirstAddress();
+
+            /* <![CDATA[ */
+            var rankingRatioList = /*[[${rankingRatioList}]]*/;  //리스트의 경우
+            /* ]]> */
+
+            var columns = new Array();
+            for (var i in rankingRatioList) {
+                var rankingRatio = rankingRatioList[i];
+                console.log(rankingRatio)
+                var column = new Array();
+                column.push(rankingRatio.tokenCount + '개 홀더');
+                column.push(rankingRatio.holderCount);
+                columns.push(column);
+            }
+
+            var chart = bb.generate({
+                data: {
+                    columns: columns,
+                    type: "pie", // for ESM specify as: pie()
+                },
+                legend: {
+                    show: false
+                },
+                bindto: "#customLegend"
+            });
+
+            function toggle(id) { chart.toggle(id); }
+
+            d3.select(".chart_area")
+                .insert("div", ".chart")
+                .attr("class", "legend")
+                .selectAll("span")
+                .data(["data1", "data2", "data3"])
+                .enter()
+                .append("span")
+                .attr('data-id', function(id) {
+                    return id;
+                })
+                .html(function(id) {
+                    return id;
+                })
+                .each(function(id) {
+                    d3.select(this)
+                        .style('background-color', chart.color(id));
+                })
+                .on("mouseover", function(event, id) {
+                    chart.focus(id);
+                })
+                .on("mouseout", function(event, id) {
+                    chart.revert();
+                })
+                .on("click", function(event, id) {
+                    chart.toggle(id);
+                });
         })
 
         // 리스트 불러오기
@@ -139,6 +193,9 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div>
+            <div id="customLegend"></div>
         </div>
         <div>
             <span class="tokenTotalCnt">Total : <em id="totalCount"></em></span>

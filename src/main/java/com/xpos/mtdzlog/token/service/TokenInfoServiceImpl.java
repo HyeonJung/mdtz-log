@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,13 +32,7 @@ import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenFloorPriceRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
-import com.xpos.mtdzlog.token.dto.FloorPriceModel;
-import com.xpos.mtdzlog.token.dto.MtdzGrade;
-import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
-import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
-import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
-import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -238,6 +233,11 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		// 토큰 리스트 조회
 		List<TokenDTO> tokenList = tokenDAO.getTokenList(req);
 		return tokenList;
+	}
+
+	@Override
+	public List<TokenRankingRatioModel> getTokenRankingRatio(TokenInfoSearchRequest req) {
+		return tokenDAO.tokenRankingRatio();
 	}
 	
 }

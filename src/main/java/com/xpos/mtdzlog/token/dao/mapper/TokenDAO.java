@@ -3,6 +3,7 @@ package com.xpos.mtdzlog.token.dao.mapper;
 import java.util.List;
 
 import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
+import com.xpos.mtdzlog.token.dto.TokenRankingRatioModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -40,4 +41,7 @@ public interface TokenDAO {
 	
 	// 랜덤 attribute값 조회.
 	String getRandAttributeValue();
+
+	// 홀더 랭킹 비율
+	List<TokenRankingRatioModel> tokenRankingRatio();
 }

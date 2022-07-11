@@ -228,4 +228,34 @@
 	<select id="getRandAttributeValue" resultType="string">
 		select tf.attribute_value from token_filter tf order by rand() limit 1
 	</select>
+
+	<select id="tokenRankingRatio" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenRankingRatioModel">
+		select aa.token_count,
+			   count(*)                             holder_count,
+			   (select count(*)
+				from (
+						 select owner, count(*)
+						 from token_info
+						 where owner is not null
+						<if test="gradeList != null and gradeList.size > 0">
+							and grade in
+							<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+								#{grade}
+							</foreach>
+						</if>
+						 group by owner) holder) as total_holder_count
+		from (
+				 select owner, count(*) token_count
+				 from token_info
+				 where owner is not null
+				<if test="gradeList != null and gradeList.size > 0">
+					and grade in
+					<foreach collection="gradeList" item="grade" open="(" close=")" separator=",">
+						#{grade}
+					</foreach>
+				</if>
+				 group by owner) aa
+		group by aa.token_count
+		order by aa.token_count asc
+	</select>
 </mapper>
