@@ -37,36 +37,6 @@
             
             openFirstAddress();
 
-            /* <![CDATA[ */
-            var rankingRatioList = /*[[${rankingRatioList}]]*/;  //리스트의 경우
-            /* ]]> */
-
-            var columns = new Array();
-            for (var i in rankingRatioList) {
-                var rankingRatio = rankingRatioList[i];
-                var column = new Array();
-                column.push(rankingRatio.ratioName);
-                column.push(rankingRatio.holderCount);
-                columns.push(column);
-            }
-
-            var chart = bb.generate({
-                data: {
-                    columns: columns,
-                    type: "gauge", // for ESM specify as: gauge()
-                },
-                gauge: {
-                    type: "single",
-                    max: 100,
-                    min: 0,
-                    fullCircle: true,
-                    arcLength: 100
-                },
-                size: {
-                    height: 300
-                },
-                bindto: "#rankingRatio"
-            });
         })
 
         // 리스트 불러오기
@@ -170,9 +140,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div>
-            <div id="rankingRatio"></div>
         </div>
         <div>
             <span class="tokenTotalCnt">Total : <em id="totalCount"></em></span>

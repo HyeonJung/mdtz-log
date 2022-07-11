@@ -101,10 +101,6 @@ public class TokenController {
 			model.addAttribute("gradeList", gradeList);
 		}
 
-		// 홀더 비율
-		List<TokenRankingRatioModel> rankingRatioList = tokenInfoServiceImpl.getTokenRankingRatio(req);
-		model.addAttribute("rankingRatioList", rankingRatioList);
-
 		subRanking(model, req);
 		return "token/ranking";
 	}
@@ -129,6 +125,7 @@ public class TokenController {
 		model.addAttribute("pageEnd", pageEnd);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("total", total);
+		
 		return "token/include/subRanking";
 	}
 

@@ -5,7 +5,7 @@
       
 	<th:block layout:fragment="content">
 	
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="javascript">
 	    	$(function() {
     	        var swiper = new Swiper('.swiper', {
     	            slidesPerView: 'auto',
@@ -13,6 +13,37 @@
     	            loop : false,
     	            pagination : false
     	        });
+    	        
+    	        /* <![CDATA[ */
+                var rankingRatioList = /*[[${rankingRatioList}]]*/;  //리스트의 경우
+                /* ]]> */
+
+                var columns = new Array();
+                for (var i in rankingRatioList) {
+                    var rankingRatio = rankingRatioList[i];
+                    var column = new Array();
+                    column.push(rankingRatio.ratioName);
+                    column.push(rankingRatio.holderCount);
+                    columns.push(column);
+                }
+
+                var chart = bb.generate({
+                    data: {
+                        columns: columns,
+                        type: "gauge", // for ESM specify as: gauge()
+                    },
+                    gauge: {
+                        type: "single",
+                        max: 100,
+                        min: 0,
+                        fullCircle: true,
+                        arcLength: 100
+                    },
+                    size: {
+                        height: 300
+                    },
+                    bindto: "#rankingRatio"
+                });
     	        
 	    	})
     	</script>
@@ -122,6 +153,13 @@
 							</div>
 						</li>
 					</ul>
+				</div>
+    		</div>
+    		
+    		<div class="mainItmeWrap">
+    			<h2>홀더분포</h2>
+    			<div class="tokenTransferWrap">
+            		<div id="rankingRatio"></div>
 				</div>
     		</div>
     	</div>

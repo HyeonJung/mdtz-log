@@ -12,6 +12,7 @@ import com.xpos.mtdzlog.token.dto.FloorPriceModel;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
 import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
 import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
+import com.xpos.mtdzlog.token.dto.TokenRankingRatioModel;
 import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 import com.xpos.mtdzlog.token.service.TokenInfoService;
 
@@ -50,6 +51,10 @@ private static final String TYPE = "MTDZ";
 		// 랭킹
 		List<TokenRankingDTO> rankingList = tokenInfoServiceImpl.getMainRankingList();
 		model.addAttribute("contents", rankingList);
+		
+		// 홀더 비율
+		List<TokenRankingRatioModel> rankingRatioList = tokenInfoServiceImpl.getTokenRankingRatio(req);
+		model.addAttribute("rankingRatioList", rankingRatioList);
 		return "main";
 	}
 }
