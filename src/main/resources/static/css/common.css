@@ -263,3 +263,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 
 /* 로그인 */
 .loginWrap {padding:20px;max-width: 900px;margin: auto;}
+.loginWrap h1 {text-align:center; margin-bottom:20px; font-size:20px;}
+.loginWrap .loginForm {display:grid;grid-template-columns: 1fr; gap:10px; grid-gap:10px; max-width:400px; margin:auto;}
+.loginWrap .loginForm input {padding:15px; border:1px solid #dfdfdf; border-radius:5px}
+.loginWrap .loginForm .loginBtn {text-decoration: none;background: #252525;color: #fff;text-align: center;border-radius: 5px;padding: 15px;font-size: 18px;letter-spacing: -1px;}
