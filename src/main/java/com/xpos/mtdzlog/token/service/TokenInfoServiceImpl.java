@@ -237,7 +237,29 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
 	@Override
 	public List<TokenRankingRatioModel> getTokenRankingRatio(TokenInfoSearchRequest req) {
-		return tokenDAO.tokenRankingRatio();
+		List<TokenRankingRatioModel> tokenRankingRatioList = new ArrayList<>();
+		List<TokenRankingRatioModel> temp = tokenDAO.tokenRankingRatio();
+
+		TokenRankingRatioModel etc = new TokenRankingRatioModel();
+		etc.setRatioName("기타");
+		etc.setHolderCount(0);
+		etc.setTokenCount(0);
+
+		int count = 1;
+		for (TokenRankingRatioModel ratio: temp) {
+			if (count < 10) {
+				ratio.setRatioName(ratio.getTokenCount() + "개 홀더");
+				tokenRankingRatioList.add(ratio);
+			} else {
+				etc.setHolderCount(etc.getHolderCount() + ratio.getHolderCount());
+				etc.setTokenCount(etc.getTokenCount() + ratio.getTokenCount());
+				etc.setTotalHolderCount(ratio.getTotalHolderCount());
+			}
+			count++;
+		}
+		tokenRankingRatioList.add(etc);
+
+		return tokenRankingRatioList;
 	}
 	
 }

@@ -256,6 +256,6 @@
 				</if>
 				 group by owner) aa
 		group by aa.token_count
-		order by aa.token_count asc
+		order by count(*) desc
 	</select>
 </mapper>

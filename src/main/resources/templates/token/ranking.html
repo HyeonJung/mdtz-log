@@ -44,9 +44,8 @@
             var columns = new Array();
             for (var i in rankingRatioList) {
                 var rankingRatio = rankingRatioList[i];
-                console.log(rankingRatio)
                 var column = new Array();
-                column.push(rankingRatio.tokenCount + '개 홀더');
+                column.push(rankingRatio.ratioName);
                 column.push(rankingRatio.holderCount);
                 columns.push(column);
             }
@@ -54,42 +53,20 @@
             var chart = bb.generate({
                 data: {
                     columns: columns,
-                    type: "pie", // for ESM specify as: pie()
+                    type: "gauge", // for ESM specify as: gauge()
                 },
-                legend: {
-                    show: false
+                gauge: {
+                    type: "single",
+                    max: 100,
+                    min: 0,
+                    fullCircle: true,
+                    arcLength: 100
                 },
-                bindto: "#customLegend"
+                size: {
+                    height: 300
+                },
+                bindto: "#rankingRatio"
             });
-
-            function toggle(id) { chart.toggle(id); }
-
-            d3.select(".chart_area")
-                .insert("div", ".chart")
-                .attr("class", "legend")
-                .selectAll("span")
-                .data(["data1", "data2", "data3"])
-                .enter()
-                .append("span")
-                .attr('data-id', function(id) {
-                    return id;
-                })
-                .html(function(id) {
-                    return id;
-                })
-                .each(function(id) {
-                    d3.select(this)
-                        .style('background-color', chart.color(id));
-                })
-                .on("mouseover", function(event, id) {
-                    chart.focus(id);
-                })
-                .on("mouseout", function(event, id) {
-                    chart.revert();
-                })
-                .on("click", function(event, id) {
-                    chart.toggle(id);
-                });
         })
 
         // 리스트 불러오기
@@ -195,7 +172,7 @@
             </div>
         </div>
         <div>
-            <div id="customLegend"></div>
+            <div id="rankingRatio"></div>
         </div>
         <div>
             <span class="tokenTotalCnt">Total : <em id="totalCount"></em></span>
