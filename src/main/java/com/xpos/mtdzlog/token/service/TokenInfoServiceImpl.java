@@ -186,7 +186,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		}
 		
 		try {
-			TokenFloorPrice palaFp =tokenFloorPriceRepository.findByTypeAndPlatform(type, "PALA");
+			TokenFloorPrice palaFp = tokenFloorPriceRepository.findByTypeAndPlatform(type, "PALA");
 			fp.setPalaFp(palaFp.getFloorPrice());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,7 +196,14 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 		try {
 			BitThumbResponse res = bitThumbClient.getKlayPrice();
 			fp.setKlayPrice(Double.valueOf(res.getData().getClosing_price()));
+			TokenFloorPrice klayPrice = new TokenFloorPrice();
+			klayPrice.setFloorPrice(Double.parseDouble(res.getData().getClosing_price()));
+			klayPrice.setPlatform("BITHUMB");
+			klayPrice.setType("KLAY");
+			tokenFloorPriceRepository.save(klayPrice);
 		} catch (Exception e) {
+			TokenFloorPrice klayPrice = tokenFloorPriceRepository.findByTypeAndPlatform("KLAY", "BITHUMB");
+			fp.setKlayPrice(klayPrice.getFloorPrice());
 			e.printStackTrace();
 		}
 		

@@ -20,6 +20,20 @@
 	    	        }
 	    	    });
 	    		
+	    		$('html').click(function(e) {   
+	    			if($(e.target).parents(".filterArea").length < 1 && $(".filterArea").hasClass("on")) {
+	    				e.preventDefault();
+		    			$(".filterArea").removeClass("on");
+		    			$("body").removeClass("screenOut")
+	    			} else {
+	    				if ($(e.target).hasClass(".btnFilter")) {
+	    					e.preventDefault();
+	    	    			$(".filterArea").toggleClass("on");
+	    	    			$("body").toggleClass("screenOut")
+	    				}
+	    			}
+	    		});    
+	    		
 	    		$("input[name=grade]").on("change", function() {
 	    			search();
 	    		});
@@ -51,11 +65,6 @@
 	    			$("body").removeClass("screenOut")
 	    		})
 	    		
-	    		$(".btnFilter").on("click", function(e) {
-	    			e.preventDefault();
-	    			$(".filterArea").toggleClass("on");
-	    			$("body").toggleClass("screenOut")
-	    		})
 	    		
 	    		$(".tokenFilterWrap").on("click", ".tit", function(e)  {
 	    			$(this).parents(".itemWrap").toggleClass("open");
