@@ -20,7 +20,7 @@
 	    	        }
 	    	    });
 	    		
-	    		$('html').click(function(e) {   
+	    		/* $('html').click(function(e) {   
 	    			if($(e.target).parents(".filterArea").length < 1 && $(".filterArea").hasClass("on")) {
 	    				e.preventDefault();
 		    			$(".filterArea").removeClass("on");
@@ -32,11 +32,17 @@
 	    	    			$("body").toggleClass("screenOut")
 	    				}
 	    			}
-	    		});    
+	    		});     */
 	    		
 	    		$("input[name=grade]").on("change", function() {
 	    			search();
 	    		});
+	    		
+	    		$(".btnFilter").on("click", function(e) {
+	    			e.preventDefault();
+	    			$(".filterArea").toggleClass("on");
+	    			$("body").toggleClass("screenOut")
+	    		})
 	    		
 	    		// 색깔필터 선택 시
 	    		$(".item.filter.color").on("change", "input[type=checkbox]", function(e)  {
