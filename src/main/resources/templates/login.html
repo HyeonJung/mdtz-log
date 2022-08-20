@@ -8,15 +8,26 @@
 	    	$(function() {
 				if (typeof window.klaytn !== 'undefined') {
 		       	  	const provider = window['klaytn']
-			        	try {
-			        	  const accounts = klaytn.enable()
-			        	  // You now have an array of accounts!
-			        	  // Currently only one:
-			        	  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
-			        	} catch (error) {
-			        	  // Handle error. Likely the user rejected the login
-			        	  console.error(error)
+		        	try {
+		        	  const accounts = klaytn.enable()
+		        	  var selectedAddress = (klaytn.selectedAddress);
+		        	  if (selectedAddress) {
+		        		  walletLogin(selectedAddress);
+		        	  }
+		        	  // You now have an array of accounts!
+		        	  // Currently only one:
+		        	  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+		        	} catch (error) {
+		        	  // Handle error. Likely the user rejected the login
+		        	  console.error(error)
+		        	}
+			        	
+		        	klaytn.on('accountsChanged', function(accounts) {
+		        		var selectedAddress = accounts[0];
+		        		if (selectedAddress) {
+		        			walletLogin(selectedAddress);
 			        	}
+		        	})
 		       	}
 	    	});
 		</script>
@@ -26,7 +37,10 @@
 				<input type="text" name="username" id="username" placeholder="아이디를 입력해주세요"/>
 				<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/>
 				<a class="loginBtn" href="#">로그인</a>
+				<a class="loginBtn" href="#" style="background:#9c6182">회원가입</a>
 			</form>
 		</div>
+		
+		<form id="signUpForm" method="post"></form>
 	</th:block>
 </html>

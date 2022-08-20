@@ -18,6 +18,7 @@
         <div class="menuList">
         	<ul>
         		<li><a href="/main" th:class="${#httpServletRequest.requestURI == '/main' ? 'on':''}">Home</a></li>
+        		<li><a href="/login" th:class="${#httpServletRequest.requestURI == '/login' ? 'on':''}">로그인</a></li>
         		<li><a href="/token/list" th:class="${#httpServletRequest.requestURI == '/token/list' ? 'on':''}">도감</a></li>
         		<li><a href="/token/ranking" th:class="${#httpServletRequest.requestURI == '/token/ranking' ? 'on':''}">홀더랭킹</a></li>
 				<li><a href="/token/transfer" th:class="${#httpServletRequest.requestURI == '/token/transfer' ? 'on':''}">전송이력</a></li>

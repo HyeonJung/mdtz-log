@@ -10,6 +10,7 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+input:read-only {background:#fff1f1 !important}
 .icon_img {display:inline-block;background:url('../images/common/icon_sprites.png') no-repeat 0 0/250px auto;vertical-align:top}/* 사용안함 */
 
 /*숨김 텍스트*/
@@ -89,6 +90,19 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 @keyframes loading-xposDragon3{0%, 50% {transform:translate(62px);opacity:0} 55%, 70% {opacity:1} 75% {transform:translate(-31px);opacity:0} 100% {transform:translate(62px);opacity:0}}
 @keyframes loading-xposDragon4{0%, 75% {transform:translate(62px);opacity:0} 80%, 95% {opacity:1} 99% {transform:translate(-31px);opacity:0} 100% {transform:translate(62px);opacity:0}}
 
+/*******************************
+*	팝업::토스트
+********************************/
+.popToast {opacity:0;position:fixed;bottom:83px;left:0;right:0;width:86%;margin:0 auto;font-size:12px;animation:toast 2.5s ease-in-out both;z-index:11}
+.popToast .toastText {display:flex;align-items:center;position:relative;width:100%;padding:17px 30px;border-radius:50px;background:rgba(0,0,0,.8);color:var(--color-wt);font-size:14px;line-height:16px;box-sizing:border-box; text-decoration:none}
+.popToast .toastText .left {flex-grow:1}
+.popToast .toastText .right {color:var(--color-yw)}
+.popToast .toastText.top::after {content:'';display:inline-block;width:10px;height:12px;margin-left:4px;background:url('../images/common/icon_sprites.png') no-repeat -176px -63px/250px auto;vertical-align:top}
+.popToast .toastText.right::after {content:'';display:inline-block;width:12px;height:10px;margin-left:4px;background:url('../images/common/icon_sprites.png') no-repeat -187px -65px/250px auto;vertical-align:top}
+.popToast .toastText.check {padding-left:15px}
+.popToast .toastText.check::before {content:'';display:inline-block;width:20px;height:20px;margin-right:10px;border-radius:50%;background:#D02D28}
+.popToast .toastText.check::after {content:'';display:inline-block;position:absolute;top:23px;left:18px;width:13px;height:9px;background:url('../images/common/icon_sprites.png') no-repeat -197px -78px/250px auto}
+@keyframes toast{0% {opacity:0;bottom:50px;/* z-index:-1 */} 5%,92% {opacity:1;bottom:83px;z-index:11} 100% {opacity:0;bottom:50px;/* z-index:-1 */} }
 /*******************************
 *	check/radio
 ********************************/
@@ -267,3 +281,6 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .loginWrap .loginForm {display:grid;grid-template-columns: 1fr; gap:10px; grid-gap:10px; max-width:400px; margin:auto;}
 .loginWrap .loginForm input {padding:15px; border:1px solid #dfdfdf; border-radius:5px}
 .loginWrap .loginForm .loginBtn {text-decoration: none;background: #252525;color: #fff;text-align: center;border-radius: 5px;padding: 15px;font-size: 18px;letter-spacing: -1px;}
+.loginWrap .loginForm .msg {display:none;}
+.loginWrap .loginForm .msg.warning {color:#c20505; display:block;}
+.loginWrap .loginForm .msg.success {color:#5299ff; display:block;}
