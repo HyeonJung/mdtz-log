@@ -147,3 +147,24 @@ function walletLogin(walletAddress) {
 	$signUpForm.html("<input type='hidden' name='walletAddress' value='" + walletAddress + "'/>");
 	$signUpForm.submit();
 }
+
+function walletConnect(walletAddress) {
+	$.ajax({
+		url : contextPath + '/users/connectKaikas',
+		type : "POST",
+		data : {
+			walletAddress: walletAddress
+		},
+		success : function(data) {
+			toastPop('지갑이 연결되었습니다.')
+			setTimeout(() => { window.location.reload(true) }, 500);
+		}, error : function(e) {
+			console.log(e.responseText)
+			if (e.responseText != null && e.responseText != '') {
+				toastPop(e.responseText);
+			} else {
+				toastPop('지갑 연결 중 오류가 발생했습니다.');
+			}
+		}
+	})
+}

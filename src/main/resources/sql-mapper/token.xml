@@ -210,7 +210,8 @@
 	<select id="getOwnerTokenList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenDTO">
 		select * from (
 		select t.*
-	     , case when t.grade = 'legendary' then 5
+	     , case when t.grade = 'special' then 6
+	    when t.grade = 'legendary' then 5
 	    when t.grade = 'light' then 4
 	    when t.grade = 'glass' then 3
 	    when t.grade = 'gradation' then 2
@@ -228,7 +229,15 @@
 		</if>
 		) res
 		order by grade_seq desc
-		limit 10
+		<choose>
+			<when test="ownerRows != null">
+				limit #{ownerRows}
+			</when>
+			<otherwise>
+				limit 10
+			</otherwise>
+		</choose>
+		
 	</select>
 	
 	<select id="getRandAttributeValue" resultType="string">
@@ -263,5 +272,20 @@
 				 group by owner) aa
 		group by aa.token_count
 		order by count(*) desc
+	</select>
+	
+	<select id="getDefaultImgUrl" resultType="string">
+	select image_url from (
+		select case when grade = 'special' then 6
+			    when grade = 'legendary' then 5
+			    when grade = 'light' then 4
+			    when grade = 'glass' then 3
+			    when grade = 'gradation' then 2
+			    when grade = 'canister' then 1 end as grade_seq,
+		       token_id,
+		       image_url from token_info
+		where owner = #{walletAddress}) res
+	order by grade_seq desc, token_id desc
+	limit 1
 	</select>
 </mapper>

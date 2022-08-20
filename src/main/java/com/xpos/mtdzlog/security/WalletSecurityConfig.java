@@ -23,6 +23,9 @@ public class WalletSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
     private CustomLoginSuccessHandler customLoginSuccessHandler;
+	
+	@Autowired
+    private CustomLoginFailureHandler customLoginFailureHandler;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -40,6 +43,7 @@ public class WalletSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/wallet/login")
                 .defaultSuccessUrl("/main")
                 .successHandler(customLoginSuccessHandler)
+                .failureHandler(customLoginFailureHandler)
                 .and()
                 .logout()
                 .logoutUrl("/logout")

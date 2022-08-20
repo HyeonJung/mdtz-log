@@ -1,7 +1,6 @@
 package com.xpos.mtdzlog.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,8 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.xpos.mtdzlog.security.WalletSecurityConfig.WalletPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomLoginSuccessHandler customLoginSuccessHandler;
+    
+    @Autowired
+    private CustomLoginFailureHandler customLoginFailureHandler;
 	
 	@Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -33,12 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/**").csrf().disable()
                 .authorizeRequests()
+                	.antMatchers("/users/info").authenticated()
+                	.antMatchers("/users/connectKaikas").authenticated()
                     .anyRequest().permitAll()
                 .and()
                     .formLogin()
                         .loginPage("/login")
                         .defaultSuccessUrl("/main")
                         .successHandler(customLoginSuccessHandler)
+                        .failureHandler(customLoginFailureHandler)
                 .and()
                     .logout()
                         .logoutUrl("/logout")

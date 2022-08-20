@@ -71,8 +71,10 @@ body.screenOut .btnTop {display:none !important}
 
 .menuArea .menuList ul li {list-style: none;padding: 15px;}
 .menuArea .menuList .userInfo {padding: 15px;}
-.menuArea .menuList .userInfo h3 {font-size: 20px;}
-.menuArea .menuList .userInfo .logout {padding:5px 0; color:#999999; display:inline-block;}
+.menuArea .menuList .userInfo h3 {font-size: 20px; float:left;line-height: 50px;margin-left: 10px;}
+.menuArea .menuList .userInfo .logout {padding:15px 0; color:#999999; display:inline-block;}
+.menuArea .menuList .userInfo .profileImgUrl {width:50px; float:left; border-radius:50px;}
+.menuArea .menuList .userInfo a {color:#000}
 .menuArea .menuList ul li a {display:block; font-size: 17px; font-weight: bold;color: #999999;letter-spacing: -1px; text-decoration:none;}
 .menuArea .menuList ul li a.on {color:#000}
 
@@ -287,3 +289,17 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .loginWrap .loginForm .msg {display:none;}
 .loginWrap .loginForm .msg.warning {color:#c20505; display:block;}
 .loginWrap .loginForm .msg.success {color:#5299ff; display:block;}
+.loginWrap .errorMsg {color:red}
+
+/* 내정보 */
+.infoWrap {padding:20px;max-width: 900px;margin: auto;}
+.infoWrap .userInfoWrap {display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; grid-gap:10px; text-align:center;}
+.infoWrap .userInfoWrap .profileImgUrl {width:100%; max-width:150px;}
+.infoWrap .userInfoWrap .basicUserInfoWrap {grid-column:2/4; text-align:left; padding:5%; line-height:25px;}
+.infoWrap .userInfoWrap .basicUserInfoWrap h3 {font-size:25px;}
+.infoWrap .userInfoWrap .basicUserInfoWrap div {margin:5px 0;}
+.infoWrap .userInfoWrap .basicUserInfoWrap span {overflow-x:hidden;text-overflow: ellipsis;white-space: nowrap;width: 100%;display: inline-block;}
+.infoWrap .tokenInfoWrap h1 {font-size:20px; border-bottom:1px solid #999999; margin-bottom:10px; padding-bottom:10px;}
+.connectKaikasBtn { color: #ffffff; background: #8a8a8a; text-decoration: none; border-radius: 5px; padding: 5px 10px; display: none;}
+.kaikasUnconnectable {color:red; display:none;}
+.infoWrap .emptyWrap {font-size:20px; color:#666; text-align:center; padding-top:50px;}
