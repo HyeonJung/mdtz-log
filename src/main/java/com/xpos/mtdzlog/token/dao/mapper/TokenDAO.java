@@ -44,4 +44,7 @@ public interface TokenDAO {
 
 	// 홀더 랭킹 비율
 	List<TokenRankingRatioModel> tokenRankingRatio();
+	
+	// 기본 이미지 주소 불러오기.
+	String getDefaultImgUrl(String walletAddress);
 }

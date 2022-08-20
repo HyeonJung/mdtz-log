@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout}">
+      
+	<th:block layout:fragment="content">
+		<script type="text/javascript">
+			var click = false;
+	    	$(function() {
+	    		$("#id").on("keyup", function(e) {
+	    			var $id = $("#id");
+	    			$id.val($id.val().replace(/[^0-9a-z]/gi,""));
+				})
+				
+				$("#name").on("keyup", function(e) {
+	    			var $name = $("#name");
+	    			$name.val($name.val().replace(/[^ㄱ-ㅎ가-힇0-9a-z]/gi,""));
+				})
+				
+				$("#id").on("focusout", function(e) {
+					// 중복 check
+					checkId();
+				})
+				
+				$("#name").on("focusout", function(e) {
+					// 중복 check
+					checkName();
+				})
+				
+				$("#password, #passwordConfirm").on("focusout", function(e) {
+					// 중복 check
+					checkPassword();
+				})
+	    	});
+	    	
+	    	function checkId() {
+	    		var id = $("#id").val();
+	    		if (id && id != '' && id.length > 0) {
+	    			$.ajax({
+		    			url : contextPath + "/users/checkId",
+		    			type: "POST",
+		    			dataType: "json",
+		    			data: { 
+		    				id : id
+		    			},
+		    			success: function(data) {
+		    				var count = data;
+		    				if (count > 0) {
+		    					$("#id").next(".msg").addClass("warning").text("* 이미 사용중인 아이디입니다.");
+		    				} else {
+		    					$("#id").next(".msg").addClass("success").text("* 가입 가능한 아이디입니다.");
+		    				}
+		    			}, 
+		    			error: function() {
+		    			}
+		    		});
+	    		} else {
+	    			$("#id").next(".msg").removeClass("warning");
+	    			$("#id").next(".msg").removeClass("success");
+	    		}
+	    	}
+	    	
+	    	function checkName() {
+	    		var name = $("#name").val();
+	    		if (name && name != '' && name.length > 0) {
+	    			$.ajax({
+		    			url : contextPath + "/users/checkName",
+		    			type: "POST",
+		    			dataType: "json",
+		    			data: { 
+		    				name : name
+		    			},
+		    			success: function(data) {
+		    				var count = data;
+		    				if (count > 0) {
+		    					$("#name").next(".msg").addClass("warning").text("* 이미 사용중인 닉네임입니다.");
+		    				} else {
+		    					$("#name").next(".msg").addClass("success").text("* 가입 가능한 닉네임입니다.");
+		    				}
+		    			}, 
+		    			error: function() {
+		    			}
+		    		});
+	    		} else {
+	    			$("#name").next(".msg").removeClass("warning");
+	    			$("#name").next(".msg").removeClass("success");
+	    		}
+	    	}
+	    	
+	    	function checkPassword() {
+	    		
+	    		var pattern1 = /[0-9]/;
+                var pattern2 = /[a-zA-Z]/;
+                var pattern3 = /[~!@\#$%<>^&*]/;
+                
+	    		var $password = $("#password");
+	    		var password = $password.val();
+	    		
+	    		var $passwordConfirm = $("#passwordConfirm");
+	    		var passwordConfirm = $passwordConfirm.val();
+	    		
+	    		$password.next(".msg").removeClass("warning");
+	    		$password.next(".msg").removeClass("success");
+	    		
+	            if (password == "" || (password.length < 6 || password.length > 15)) {
+	            	$password.next(".msg").addClass("warning").text("* 6~15자리로 비밀번호를 입력해 주세요");
+	            	return;
+				}
+	            
+	            $passwordConfirm.next(".msg").removeClass("warning");
+	    		$passwordConfirm.next(".msg").removeClass("success");
+	            if (password != "" && passwordConfirm != "" && password != passwordConfirm) {
+	            	$passwordConfirm.next(".msg").addClass("warning").text("* 비밀번호가 일치하지 않습니다");
+	            	return;
+				}
+
+	    	}
+	    	
+	    	// 회원가입
+	    	function signUp() {
+	    		var $signUpForm = $("#signUpForm");
+	    		if ($signUpForm.find(".msg.warning").length > 0) {
+	    			toastPop($signUpForm.find(".msg.warning").first().text(),'','','check');
+	    		}
+	    		var id = $("#id").val();
+	    		var password = $("#password").val();
+	    		var passwordConfirm = $("#passwordConfirm").val();
+	    		var name = $("#name").val();
+	    		
+	    		if (!id || id == '') {
+	    			toastPop('아이디를 입력해주세요.');
+	    			$("#id").focus();
+	    			return;
+	    		}
+	    		
+	    		if (!password || password == '') {
+	    			toastPop('비밀번호를 입력해주세요.');
+	    			$("#password").focus();
+	    			return;
+	    		}
+	    		
+				if (!passwordConfirm || passwordConfirm == '') {
+					toastPop('비밀번호 확인을 입력해주세요.');
+	    			$("#passwordConfirm").focus();
+	    			return;
+	    		}
+				
+				if (!name || name == '') {
+					toastPop('닉네임을 입력해주세요.');
+	    			$("#name").focus();
+	    			return;
+	    		}
+				
+				if (!click) {
+					click = true;
+					$.ajax({
+		    			url : contextPath + '/signUp',
+		    			type : "POST",
+		    			data : {
+		    				id : $.trim(id),
+		    				password : password,
+		    				passwordConfirm : passwordConfirm,
+		    				name : name
+		    			},
+		    			dataType : 'json',
+		    			success : function(data) {
+		    				toastPop('회원가입이 완료되었습니다.')
+		    				setTimeout(() => { location.href = contextPath + "/login"; }, 500);
+		    			}, error : function(e) {
+		    				console.log(e.responseText)
+		    				if (e.responseText != null && e.responseText != '') {
+		    					toastPop(e.responseText);
+		    				} else {
+		    					toastPop('회원가입 시도 중 오류가 발생했습니다.');
+		    				}
+		    				click = false;
+		    				return;
+		    			}
+		    		})
+				}
+	    			
+	    		
+	    		
+	    	}
+		</script>
+		<div class="loginWrap">
+			<!-- <h1>로그인</h1> -->
+			<form id="signUpForm" class="loginForm" method="post" action="/signUp">
+				<input th:if="${ walletAddress != null }" type="text" name="walletAddress" id="walletAddress" th:value="'지갑주소 : ' + ${ walletAddress }" readonly="readonly"/>
+				<input type="text" name="id" id="id" placeholder="아이디를 입력해주세요"/>
+				<span class="msg"></span>
+				<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/>
+				<span class="msg"></span>
+				<input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="비밀번호를 입력해주세요"/>
+				<span class="msg"></span>
+				<input type="text" name="name" id="name" placeholder="닉네임을 입력해주세요"/>
+				<span class="msg"></span>
+				<a class="loginBtn" href="javascript:signUp()">회원가입</a>
+			</form>
+		</div>
+	</th:block>
+</html>

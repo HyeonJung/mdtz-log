@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/layout}">
+      
+	<th:block layout:fragment="content">
+		<script type="text/javascript">
+	    	$(function() {
+	    		if (typeof window.klaytn !== 'undefined') {
+	    			$(".connectKaikasBtn").show();
+	    		} else {
+	    			$(".kaikasUnconnectable").show();
+	    		}
+	    		
+	    		klaytn.on('accountsChanged', function(accounts) {
+	        		var selectedAddress = accounts[0];
+	        		if (selectedAddress) {
+	        			
+	        			if ($(".connectKaikasBtn").length > 0) {
+	        				console.log('?')
+	        				var maskingAddress = selectedAddress.substring(0, 6) + "******" + selectedAddress.substring(36, 42);
+		        			$(".connectKaikasBtn").text(maskingAddress + " 지갑 연결");	
+		        			walletConnect(selectedAddress);
+	        			}
+		        	}
+	        	})
+	    	});
+	    	
+	    	function connectKaikas() {
+	    		if (typeof window.klaytn !== 'undefined') {
+		       	  	const provider = window['klaytn']
+		       	  	
+		        	try {
+		        	  const accounts = klaytn.enable()
+		        	  var selectedAddress = (klaytn.selectedAddress);
+		        	  if (selectedAddress) {
+		        		  walletConnect(selectedAddress);
+		        	  }
+		        	  // You now have an array of accounts!
+		        	  // Currently only one:
+		        	  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+		        	} catch (error) {
+		        	  // Handle error. Likely the user rejected the login
+		        	  console.error(error)
+		        	}
+			        	
+		        	
+		       	}
+	    	}
+		</script>
+		<div class="infoWrap">
+			<div class="userInfoWrap">
+				<div>
+					<img class="profileImgUrl" th:src="${ user.profileImgUrl }"/>
+				</div>
+				<div class="basicUserInfoWrap">
+					<h3 th:text="${ user.name }"></h3>
+					<div><span th:text="${ user.regDate }"></span></div>
+					<div th:if="${ user.walletAddress != null }"><span th:text="${ user.walletAddress }"></span></div>
+					<div th:if="${ user.walletAddress == null }">
+						<a class="connectKaikasBtn" href="javascript:connectKaikas()">카이카스 지갑 연결</a>
+						<em class="kaikasUnconnectable">* 지갑을 연결할 수 없습니다.</em>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="tokenInfoWrap" style="padding:30px 0 0 0;">
+					<h1>MY MTDZ</h1>
+			        <div th:if="${ user.walletAddress != null && collectList != null && collectList.size > 0 }">
+			            <ul class="tokenItemWrap">
+			            	<li class="item" th:each="token : ${collectList}">
+								<div>
+									<img th:src="${token.imageUrl}" src=""/>
+								</div>
+								<div class="tokenInfo">
+									<span th:text="${token.type}"></span> #<span th:text="${token.tokenId}">MTDZ</span>
+								</div>
+								<div th:class="'tokenGrade ' + ${token.grade}">
+									<span th:if="${token.grade == 'canister'}">깡통</span>
+									<span th:if="${token.grade == 'gradation'}">그라</span>
+									<span th:if="${token.grade == 'glass'}">유리</span>
+									<span th:if="${token.grade == 'light'}">조명</span>
+									<span th:if="${token.grade == 'legendary'}">레전더리</span>
+									<span th:if="${token.grade == 'special'}">스페셜</span>
+								</div>
+								<div class="tokenExchange">
+									<a class="opensea" th:href="@{|https://opensea.io/assets/klaytn/0x46dbdc7965cf3cd2257c054feab941a05ff46488/${token.tokenId}|}" target="blank"><span class="blind">OpenSea</span></a>
+									<a class="pala" th:href="@{|https://pala.world/square/project/46DBdC7965CF3cd2257C054fEAb941a05Ff46488/${token.tokenId}|}" target="blank"><span class="blind">Pala</span></a>
+								</div>
+							</li>
+			            </ul>
+			        </div>
+			        <div class="emptyWrap" th:if="${ user.walletAddress == null }">
+			        	카이카스 지갑을 연결해주세요.
+			        </div>
+			        <div class="emptyWrap" th:if="${ user.walletAddress != null && (collectList == null || collectList.size == 0) }">
+			        	보유하고 있는 메토드가 없습니다.
+			        </div>
+			    </div>
+		</div>
+	</th:block>
+</html>

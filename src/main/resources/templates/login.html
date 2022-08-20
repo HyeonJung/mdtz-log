@@ -8,25 +8,71 @@
 	    	$(function() {
 				if (typeof window.klaytn !== 'undefined') {
 		       	  	const provider = window['klaytn']
-			        	try {
-			        	  const accounts = klaytn.enable()
-			        	  // You now have an array of accounts!
-			        	  // Currently only one:
-			        	  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
-			        	} catch (error) {
-			        	  // Handle error. Likely the user rejected the login
-			        	  console.error(error)
+		        	try {
+		        	  const accounts = klaytn.enable()
+		        	  var selectedAddress = (klaytn.selectedAddress);
+		        	  if (selectedAddress) {
+		        		  walletLogin(selectedAddress);
+		        	  }
+		        	  // You now have an array of accounts!
+		        	  // Currently only one:
+		        	  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+		        	} catch (error) {
+		        	  // Handle error. Likely the user rejected the login
+		        	  console.error(error)
+		        	}
+			        	
+		        	klaytn.on('accountsChanged', function(accounts) {
+		        		var selectedAddress = accounts[0];
+		        		if (selectedAddress) {
+		        			walletLogin(selectedAddress);
 			        	}
+		        	})
 		       	}
+				
+				$('#username, #password').on("keydown", function(e) {
+					if (e.keyCode == 13) {
+						if ($.trim($('#username').val()) != "" && $.trim($("#password").val()) == "") {
+							$password.focus();
+						} else if ($.trim($('#username').val()) != "" && $.trim($("#password").val()) != "") {
+							doLogin();
+						} else {
+							alert("아이디를 입력해주세요.");
+							$('#username').focus();
+						}
+					}
+				});
 	    	});
+	    	
+	    	function doLogin() {
+	    		var userId = $('#username').val();
+	    		var password = $('#password').val()
+
+	    		if (userId == '') {
+	    			toastPop('아이디를 입력해주세요.');
+	    			return;
+	    		}
+
+	    		if (password == '') {
+	    			toastPop('비밀번호를 입력해주세요.');
+	    			return;
+	    		}
+
+	    		var $loginForm = $("#loginForm");
+	    		$loginForm.submit();
+	    	}
 		</script>
 		<div class="loginWrap">
 			<!-- <h1>로그인</h1> -->
-			<form class="loginForm">
+			<form  id="loginForm" name="loginForm" method="POST" action="/login" class="loginForm">
 				<input type="text" name="username" id="username" placeholder="아이디를 입력해주세요"/>
 				<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/>
-				<a class="loginBtn" href="#">로그인</a>
+				<span class="errorMsg" th:if="${ param.exception != null }" th:text="${ param.exception }"></span>
+				<a class="loginBtn" href="/login">로그인</a>
+				<a class="loginBtn" href="/signUp" style="background:#9c6182">회원가입</a>
 			</form>
 		</div>
+		
+		<form id="signUpForm" method="post"></form>
 	</th:block>
 </html>

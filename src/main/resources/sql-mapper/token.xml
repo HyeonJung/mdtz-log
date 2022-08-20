@@ -9,9 +9,11 @@
 			FROM token_info t
 			         left join token_attribute ta
 			                   on t.id = ta.token_info_id
+			         left join users u
+	                  			on t.owner = u.wallet_address
 			where 1=1
 			<if test="keyword != null and keyword != ''">
-				and (t.token_id = #{keyword} or t.owner = #{keyword})
+				and (t.token_id = #{keyword} or t.owner = #{keyword} or u.name like concat('%', #{keyword}, '%'))
 			</if>
 			<if test="type != null and type != ''">
 				and t.type = #{type}
@@ -57,10 +59,12 @@
 	         SELECT t.id, t.token_id, t.image_url, t.type, t.grade, t.description
 	         FROM token_info t
 	                  left join token_attribute ta
-	                            on t.id = ta.token_info_id
+	                  on t.id = ta.token_info_id
+	                  left join users u
+	                  on t.owner = u.wallet_address
 	         where 1=1
 	         <if test="keyword != null and keyword != ''">
-				 and (t.token_id = #{keyword} or t.owner = #{keyword})
+				 and (t.token_id = #{keyword} or t.owner = #{keyword} or u.name like concat('%', #{keyword}, '%'))
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -106,12 +110,13 @@
     	select attribute_value
     	from (
 	    	select count(*) as cnt, ta.attribute_value
-			from token_info t,
+			from token_info t left join users u
+				 on t.owner = u.wallet_address,
 			     token_attribute ta
 			where ta.attribute_key = 'color'
 			  and t.id = ta.token_info_id
 			<if test="keyword != null and keyword != ''">
-				and (t.token_id = #{keyword} or t.owner = #{keyword})
+				and (t.token_id = #{keyword} or t.owner = #{keyword} or u.name like concat('%', #{keyword}, '%'))
 			</if>
 			<if test="type != null">
 				and t.type = #{type}
@@ -156,10 +161,11 @@
     </select>
 
 	<select id="getTokenRankingList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenRankingDTO">
-		select owner, token_count, token_ids, replace(owner, substr(owner, 10, 22), '***********') as masking_owner_address
+		select owner, token_count, token_ids, replace(owner, substr(owner, 10, 22), '***********') as masking_owner_address, name
 		from (
-				 select t.owner, count(*) as token_count, group_concat(t.token_id) as token_ids
-				 from token_info t
+				 select t.owner, count(*) as token_count, group_concat(t.token_id) as token_ids, u.name
+				 from token_info t left join users u
+				 on t.owner = u.wallet_address
 				 where t.owner is not null
 				<if test="type != null">
 					and t.type = #{type}
@@ -204,7 +210,8 @@
 	<select id="getOwnerTokenList" parameterType="com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest" resultType="com.xpos.mtdzlog.token.dto.TokenDTO">
 		select * from (
 		select t.*
-	     , case when t.grade = 'legendary' then 5
+	     , case when t.grade = 'special' then 6
+	    when t.grade = 'legendary' then 5
 	    when t.grade = 'light' then 4
 	    when t.grade = 'glass' then 3
 	    when t.grade = 'gradation' then 2
@@ -222,7 +229,15 @@
 		</if>
 		) res
 		order by grade_seq desc
-		limit 10
+		<choose>
+			<when test="ownerRows != null">
+				limit #{ownerRows}
+			</when>
+			<otherwise>
+				limit 10
+			</otherwise>
+		</choose>
+		
 	</select>
 	
 	<select id="getRandAttributeValue" resultType="string">
@@ -257,5 +272,20 @@
 				 group by owner) aa
 		group by aa.token_count
 		order by count(*) desc
+	</select>
+	
+	<select id="getDefaultImgUrl" resultType="string">
+	select image_url from (
+		select case when grade = 'special' then 6
+			    when grade = 'legendary' then 5
+			    when grade = 'light' then 4
+			    when grade = 'glass' then 3
+			    when grade = 'gradation' then 2
+			    when grade = 'canister' then 1 end as grade_seq,
+		       token_id,
+		       image_url from token_info
+		where owner = #{walletAddress}) res
+	order by grade_seq desc, token_id desc
+	limit 1
 	</select>
 </mapper>

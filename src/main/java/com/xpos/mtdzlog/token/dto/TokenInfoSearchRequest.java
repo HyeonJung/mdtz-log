@@ -21,6 +21,7 @@ public class TokenInfoSearchRequest {
     private List<String> gradeList;
     private String key;
     private String address;
+    private Integer ownerRows;
     
     public Integer getLimit() {
     	return rows;

@@ -119,7 +119,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	}
 
 	@Override
-	@Cacheable(value="getTransferInfo", key = "'transfer_' + #req.address + '_' + #req.gradeList", cacheManager = "cacheManager")
+	@Cacheable(value="getTransferInfo", key = "'tokenByOwner_' + #req.address + '_' + #req.gradeList + '_' + #req.ownerRows", cacheManager = "cacheManager")
 	public List<TokenDTO> getTokenByOwnerAddress(TokenInfoSearchRequest req) {
 		return tokenDAO.getOwnerTokenList(req);
 	}
@@ -212,7 +212,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	}
 	
 	@Override
-	@Cacheable(value="mainRankingList", key = "'mainRanking_' + #type", cacheManager = "cacheManager")
+	@Cacheable(value="mainRankingList", key = "'mainRanking_v2_' + #type", cacheManager = "cacheManager")
 	public List<TokenRankingDTO> getMainRankingList() {
 		TokenInfoSearchRequest req = new TokenInfoSearchRequest();
 		req.setType("MTDZ");

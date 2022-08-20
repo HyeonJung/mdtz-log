@@ -33,6 +33,19 @@ $(function() {
 		$('html, body').animate({scrollTop: '0'}, 1000);
 	});
 	
+	toastPop = function(tsMsg,tsNm,tsUrl,tsOpt,tsTg) {
+        var msg = tsMsg ? tsMsg : "메시지를 입력해주세요", 
+            nm = tsNm ? tsNm : "", 
+            url = tsUrl ? tsUrl : "javascript:;", 
+            opt = tsOpt ? tsOpt : "", //화살표 right or top or check
+            tg = tsTg ? tsTg : "_self", 
+            html = '<div class="popToast"><a href="'+url+'" rel="opener" target="'+tg+'" class="toastText '+opt+'"><span class="left">'+msg+'</span><span class="right">'+nm+'</span></a></div>';
+        $('body').append(html);
+        setTimeout(function(){
+            $('body').find('.popToast').remove();
+        }, 2600);
+    }
+	
 });
 
 // 로딩
@@ -124,4 +137,34 @@ function getAttributes() {
 		error: function() {
 		}
 	});
+}
+
+// 지갑 로그인
+function walletLogin(walletAddress) {
+	console.log(walletAddress);
+	var $signUpForm = $("#signUpForm");		
+	$signUpForm.attr("action", "/walletLogin");
+	$signUpForm.html("<input type='hidden' name='walletAddress' value='" + walletAddress + "'/>");
+	$signUpForm.submit();
+}
+
+function walletConnect(walletAddress) {
+	$.ajax({
+		url : contextPath + '/users/connectKaikas',
+		type : "POST",
+		data : {
+			walletAddress: walletAddress
+		},
+		success : function(data) {
+			toastPop('지갑이 연결되었습니다.')
+			setTimeout(() => { window.location.reload(true) }, 500);
+		}, error : function(e) {
+			console.log(e.responseText)
+			if (e.responseText != null && e.responseText != '') {
+				toastPop(e.responseText);
+			} else {
+				toastPop('지갑 연결 중 오류가 발생했습니다.');
+			}
+		}
+	})
 }

@@ -17,5 +17,6 @@ public class TokenRankingDTO implements Serializable {
     private Integer tokenCount;
     private String tokenIds;
     private String maskingOwnerAddress;
+    private String name;
     private List<TokenDTO> ownerTokenList;
 }
