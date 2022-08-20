@@ -68,7 +68,7 @@
 				<input type="text" name="username" id="username" placeholder="아이디를 입력해주세요"/>
 				<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/>
 				<span class="errorMsg" th:if="${ param.exception != null }" th:text="${ param.exception }"></span>
-				<a class="loginBtn" href="/login">로그인</a>
+				<a class="loginBtn" href="javascript:doLogin()">로그인</a>
 				<a class="loginBtn" href="/signUp" style="background:#9c6182">회원가입</a>
 			</form>
 		</div>
