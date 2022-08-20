@@ -42,5 +42,8 @@ public class Users {
 	
 	@Column(name = "PROFILE_IMG_URL")
 	private String profileImgUrl;
+	
+	@Column(name = "STATUS")
+	private String status;
 
 }

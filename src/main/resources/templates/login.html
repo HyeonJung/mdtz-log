@@ -29,15 +29,46 @@
 			        	}
 		        	})
 		       	}
+				
+				$('#username, #password').on("keydown", function(e) {
+					if (e.keyCode == 13) {
+						if ($.trim($('#username').val()) != "" && $.trim($("#password").val()) == "") {
+							$password.focus();
+						} else if ($.trim($('#username').val()) != "" && $.trim($("#password").val()) != "") {
+							doLogin();
+						} else {
+							alert("아이디를 입력해주세요.");
+							$('#username').focus();
+						}
+					}
+				});
 	    	});
+	    	
+	    	function doLogin() {
+	    		var userId = $('#username').val();
+	    		var password = $('#password').val()
+
+	    		if (userId == '') {
+	    			toastPop('아이디를 입력해주세요.');
+	    			return;
+	    		}
+
+	    		if (password == '') {
+	    			toastPop('비밀번호를 입력해주세요.');
+	    			return;
+	    		}
+
+	    		var $loginForm = $("#loginForm");
+	    		$loginForm.submit();
+	    	}
 		</script>
 		<div class="loginWrap">
 			<!-- <h1>로그인</h1> -->
-			<form class="loginForm">
+			<form  id="loginForm" name="loginForm" method="POST" action="/login" class="loginForm">
 				<input type="text" name="username" id="username" placeholder="아이디를 입력해주세요"/>
 				<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/>
-				<a class="loginBtn" href="#">로그인</a>
-				<a class="loginBtn" href="#" style="background:#9c6182">회원가입</a>
+				<a class="loginBtn" href="/login">로그인</a>
+				<a class="loginBtn" href="/signUp" style="background:#9c6182">회원가입</a>
 			</form>
 		</div>
 		

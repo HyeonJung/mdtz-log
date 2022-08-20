@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<script type="text/javascript">
+function doLogin() {
+	document.loginForm.submit();
+}
+</script>
+</head>
+<body onload="doLogin()">
+<form name="loginForm" method="POST" action="/wallet/login">
+<input type="hidden" id="username" name="username" th:value="${ session.walletAddress }" />
+<input type="hidden" id="password" name="password" value="kaikas" />
+</form>
+</body>
+</html>

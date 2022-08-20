@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<Users, Integer>{
 	long countByName(String name);
 	long countByWalletAddress(String walletAddress);
 	Users findByWalletAddress(String walletAddress);
+	Users findByWalletAddressAndStatus(String walletAddress ,String status);
+	Users findByIdAndStatus(String id, String status);
 }

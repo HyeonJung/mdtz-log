@@ -70,7 +70,10 @@ body.screenOut .btnTop {display:none !important}
 .menuArea.on::after {opacity:1;visibility:visible;}
 
 .menuArea .menuList ul li {list-style: none;padding: 15px;}
-.menuArea .menuList ul li a {display:block; font-size: 20px; font-weight: bold;color: #999999;letter-spacing: -1px; text-decoration:none;}
+.menuArea .menuList .userInfo {padding: 15px;}
+.menuArea .menuList .userInfo h3 {font-size: 20px;}
+.menuArea .menuList .userInfo .logout {padding:5px 0; color:#999999; display:inline-block;}
+.menuArea .menuList ul li a {display:block; font-size: 17px; font-weight: bold;color: #999999;letter-spacing: -1px; text-decoration:none;}
 .menuArea .menuList ul li a.on {color:#000}
 
 body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;box-shadow:0px 2px 3px rgba(0,0,0,.1);z-index:3}

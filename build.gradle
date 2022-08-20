@@ -31,6 +31,7 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation group: 'io.github.openfeign', name: 'feign-gson', version: '11.0'

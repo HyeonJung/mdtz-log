@@ -48,6 +48,8 @@ public class UserServiceImpl implements UserService {
 		users.setName(signUpDTO.getName());
 		users.setShowName(signUpDTO.isShowName());
 		users.setWalletAddress(signUpDTO.getWalletAddress());
+		users.setStatus("ON");
+
 		return userRepository.save(users);
 	}
 }
