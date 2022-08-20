@@ -59,7 +59,7 @@
 					<div th:if="${ user.walletAddress != null }"><span th:text="${ user.walletAddress }"></span></div>
 					<div th:if="${ user.walletAddress == null }">
 						<a class="connectKaikasBtn" href="javascript:connectKaikas()">카이카스 지갑 연결</a>
-						<em class="kaikasUnconnectable">* 지갑을 연결할 수 없습니다.</em>
+						<em class="kaikasUnconnectable">* 지갑을 연결할 수 없습니다<br/>(카이카스 연결이 가능한 브라우저로 접속해주세요.)</em>
 					</div>
 				</div>
 			</div>
