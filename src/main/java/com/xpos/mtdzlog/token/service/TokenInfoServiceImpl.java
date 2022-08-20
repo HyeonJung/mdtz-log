@@ -212,7 +212,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 	}
 	
 	@Override
-	@Cacheable(value="mainRankingList", key = "'mainRanking_' + #type", cacheManager = "cacheManager")
+	@Cacheable(value="mainRankingList", key = "'mainRanking_v2_' + #type", cacheManager = "cacheManager")
 	public List<TokenRankingDTO> getMainRankingList() {
 		TokenInfoSearchRequest req = new TokenInfoSearchRequest();
 		req.setType("MTDZ");

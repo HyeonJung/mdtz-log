@@ -114,7 +114,11 @@
 					dataType: "html",
 					data: { rows : rows, page : searchPage, type : type, gradeList: gradeList, keyword: keyword, values:values, attributes:attributes},
 					success: function(html) {
-						$(".tokenItemWrap").append(html);	
+						if (searchPage == 1) {
+			    			$(".tokenItemWrap").html(html);
+			    		} else {
+			    			$(".tokenItemWrap").append(html);	
+			    		}
 						totalPages = $("input[name=refreshTotalPages]").val();
 						updateTotalCount();
 						isLoading = false;
@@ -127,7 +131,6 @@
 	    	
 	    	// 검색
 	    	function search() {
-	    		$(".tokenItemWrap").html("");
 	    		page = 1;
 	    		getTokenInfoList(page);
 	    		getColorList();

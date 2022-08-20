@@ -2,7 +2,7 @@
 <li class="item" th:each="ranking : ${contents}">
     <div class="ownerInfo">
         <div th:text="${ ranking.seq }" class="rankSeq"></div>
-        <div th:text="${ ranking.maskingOwnerAddress }" class="ownerAddress" th:data-address="${ ranking.owner }" th:data-seq="${ ranking.seq }"></div>
+        <div th:text="${ ranking.name != null ? ranking.name : ranking.maskingOwnerAddress }" class="ownerAddress" th:data-address="${ ranking.owner }" th:data-seq="${ ranking.seq }"></div>
         <div th:text="${ ranking.tokenCount }" class="tokenCount"></div>
     </div>
     <div th:id="'ranking_'+${ ranking.seq }" class="ownerTokenList swiper">
