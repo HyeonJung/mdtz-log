@@ -85,9 +85,11 @@ public class LoginController {
 		}
 		
 		// 3. 지갑 중복 체크
-		long walletAddressCount = userServiceImpl.countByWalletAddress(signUpDTO.getWalletAddress());
-		if (walletAddressCount > 0) {
-			return new ResponseEntity<>("중복된 지갑주소 입니다.", HttpStatus.BAD_REQUEST);
+		if (!StringUtils.isEmpty(signUpDTO.getWalletAddress())) {
+			long walletAddressCount = userServiceImpl.countByWalletAddress(signUpDTO.getWalletAddress());
+			if (walletAddressCount > 0) {
+				return new ResponseEntity<>("중복된 지갑주소 입니다.", HttpStatus.BAD_REQUEST);
+			}
 		}
 		
 		// 4. 비밀번호 일치 체크
