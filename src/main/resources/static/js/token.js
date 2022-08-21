@@ -46,7 +46,7 @@ $(function() {
         }, 2600);
     }
 	
-	$(".tokenItem").on("click", function(e) {
+	$(".tokenItemWrap").on("click", ".tokenItem", function(e)  {
 		e.preventDefault();
 		var tokenId = $(this).data("token-id");
 		$(".tokenDetailPopArea").addClass("on");

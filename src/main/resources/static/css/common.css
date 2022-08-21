@@ -310,7 +310,7 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenDetailPopArea .tokenDetailWrap .tokenDetail {padding:40px 15px 15px 15px; display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; grid-gap:10px;}
 .tokenDetailPopArea .tokenDetailWrap .tokenDetail img {width:100%; border-radius:10px;}
 .tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 {position:relative}
-.tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 em {font-size:25px; text-align:center; color:#666; padding:10px 5px; display:inline-block;}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 em {font-size:17px; text-align:center; color:#666; padding:10px 5px; display:inline-block;}
 .tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 .tokenGrade {position:absolute; top:1px;}
 .tokenDetailPopArea .tokenDetailWrap .tokenDetail .ownerAddress{color:#666}
 .tokenDetailPopArea::after {content:'';opacity:0;visibility:hidden;position:absolute;bottom: 100%;right: 0;width: 100vw;height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
