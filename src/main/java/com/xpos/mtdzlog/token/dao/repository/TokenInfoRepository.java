@@ -10,5 +10,6 @@ public interface TokenInfoRepository extends JpaRepository<TokenInfo, Integer> {
 
 	List<TokenInfo> findByIdIn(List<Integer> ids);
 	TokenInfo findByTokenId(Integer tokenId);
+	TokenInfo findByTypeAndTokenId(String type, Integer tokenId);
 	List<TokenInfo> findByOwner(String owner);
 }

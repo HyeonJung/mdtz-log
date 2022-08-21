@@ -3,7 +3,6 @@ package com.xpos.mtdzlog.web;
 import java.util.List;
 import java.util.Map;
 
-import com.xpos.mtdzlog.token.dto.*;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xpos.mtdzlog.token.TokenInfo;
+import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
+import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
+import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
+import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 import com.xpos.mtdzlog.token.service.TokenInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +40,19 @@ public class TokenController {
 	@GetMapping("")
 	public String main() {
 		return "redirect:/main";
+	}
+	
+	@GetMapping(value = "/{tokenId}")
+	public String tokenDetail(@PathVariable Integer tokenId, Model model) {
+		tokenDetailInc(tokenId, model);
+		return "token/detail";
+	}
+	
+	@GetMapping(value = "/{tokenId}.inc")
+	public String tokenDetailInc(@PathVariable Integer tokenId, Model model) {
+		TokenInfo tokenInfo = tokenInfoServiceImpl.getTokenInfo("MTDZ", tokenId);
+		model.addAttribute("token", tokenInfo);
+		return "token/include/detail";
 	}
 	
 	// 리스트 조회

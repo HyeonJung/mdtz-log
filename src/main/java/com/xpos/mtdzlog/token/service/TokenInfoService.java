@@ -3,13 +3,27 @@ package com.xpos.mtdzlog.token.service;
 import java.util.List;
 import java.util.Map;
 
-import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.data.domain.Page;
 
 import com.xpos.mtdzlog.meta.MetaData;
+import com.xpos.mtdzlog.token.TokenInfo;
+import com.xpos.mtdzlog.token.dto.FloorPriceModel;
+import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
+import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
+import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
+import com.xpos.mtdzlog.token.dto.TokenRankingRatioModel;
+import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 
 public interface TokenInfoService {
+	
+	/**
+	 * 토큰 정보 불러오기
+	 * @param tokenId
+	 * @return
+	 */
+	TokenInfo getTokenInfo(String type, Integer tokenId);
 	
 	// 토큰 리스트 조회
 	Page<TokenDTO> getTokenInfoList(TokenInfoSearchRequest req);

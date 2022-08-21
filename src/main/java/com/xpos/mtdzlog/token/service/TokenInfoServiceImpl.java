@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.xpos.mtdzlog.token.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,7 +31,14 @@ import com.xpos.mtdzlog.token.dao.mapper.TokenDAO;
 import com.xpos.mtdzlog.token.dao.repository.TokenAttributeRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenFloorPriceRepository;
 import com.xpos.mtdzlog.token.dao.repository.TokenInfoRepository;
+import com.xpos.mtdzlog.token.dto.FloorPriceModel;
+import com.xpos.mtdzlog.token.dto.MtdzGrade;
+import com.xpos.mtdzlog.token.dto.TokenAttributesDTO;
 import com.xpos.mtdzlog.token.dto.TokenDTO;
+import com.xpos.mtdzlog.token.dto.TokenInfoSearchRequest;
+import com.xpos.mtdzlog.token.dto.TokenRankingDTO;
+import com.xpos.mtdzlog.token.dto.TokenRankingRatioModel;
+import com.xpos.mtdzlog.token.dto.TokenTransferDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -66,10 +72,16 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
 	@Value("${klaytn.api.presets}")
 	private Integer presets;
+	
+	@Override
+	public TokenInfo getTokenInfo(String type, Integer tokenId) {
+		TokenInfo tokenInfo = tokenInfoRepository.findByTypeAndTokenId(type, tokenId);
+		return tokenInfo;
+	}
 
 	@Override
 	public Page<TokenDTO> getTokenInfoList(TokenInfoSearchRequest req) {
-		// 토큰 리스트 조회
+		// 토큰 리스트 조회x
 		List<TokenDTO> tokenList = tokenDAO.getTokenList(req);
 		// 토큰 수량 조회
 		long totalCount = tokenDAO.getTokenListCount(req);

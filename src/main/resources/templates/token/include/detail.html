@@ -1,0 +1,24 @@
+<div class="btnClose">
+    <a href="" class="slideClose iconS"><span class="blind">메뉴 닫기</span></a>
+</div>
+<div class="tokenDetail">
+	<div>
+		<img th:src="${token.imageUrl}" src=""/>
+	</div>
+	<div>
+		<h5>
+			<em th:text="'MTDZ #' + ${token.tokenId}"></em>
+			<div th:class="'tokenGrade ' + ${token.grade}" style="margin-left:10px;">
+				<span th:if="${token.grade == 'canister'}">깡통</span>
+				<span th:if="${token.grade == 'gradation'}">그라</span>
+				<span th:if="${token.grade == 'glass'}">유리</span>
+				<span th:if="${token.grade == 'light'}">조명</span>
+				<span th:if="${token.grade == 'legendary'}">레전더리</span>
+				<span th:if="${token.grade == 'special'}">스페셜</span>
+			</div>
+		</h5>
+		<div class="ownerAddress">
+			<a th:text="${ token.maskingOwnerAddress }"></a>
+		</div>
+	</div>
+</div>

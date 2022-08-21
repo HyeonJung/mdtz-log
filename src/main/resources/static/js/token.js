@@ -19,7 +19,7 @@ $(function() {
 	$(".subTopMenu").on("click", function(e) {
 		e.preventDefault();
 		$(".menuArea").addClass("on");
-		$("body").addClass("screenOut")
+		$("body").addClass("screenOut");
 	})
 	
 	$(".menuArea .btnClose .slideClose").on("click", function(e) {
@@ -46,6 +46,28 @@ $(function() {
         }, 2600);
     }
 	
+	$(".tokenItem").on("click", function(e) {
+		e.preventDefault();
+		var tokenId = $(this).data("token-id");
+		$(".tokenDetailPopArea").addClass("on");
+		$("body").addClass("screenOut")
+		$.ajax({
+			url : contextPath + "/token/" + tokenId + ".inc",
+			type: "GET",
+			dataType: "html",
+			success: function(html) {
+				$(".tokenDetailPopArea .tokenDetailWrap").html(html);
+			}, 
+			error: function() {
+			}
+		});
+	});
+	
+	$(".tokenDetailPopArea .tokenDetailWrap").on("click", ".btnClose .slideClose", function(e)  {
+		e.preventDefault();
+		$("body").removeClass("screenOut")
+		$(".tokenDetailPopArea").removeClass("on");
+	})
 });
 
 // 로딩

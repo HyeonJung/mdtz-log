@@ -154,14 +154,14 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .tokenInfoWrap .tokenItemWrap li {display:inline-grid; border-radius:10px;}
 .tokenInfoWrap .tokenItemWrap li img {border-radius:10px; width:100%}
 .tokenInfoWrap .tokenItemWrap li .tokenInfo {font-weight:bold; letter-spacing:-1px;color: #666666;font-size: 14px;}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade {margin-top:5px; letter-spacing:-1px;}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade span {font-size:12px; color:#ffffff;padding: 3px 5px;border-radius: 5px; /* width: calc(100% - 10px);  */ display:inline-block;}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.canister span {background:#464646}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.gradation span {background:#b5a27a}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.glass span {background:#7294b9}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.light span {background:#60a992}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.legendary span {background:linear-gradient(#3805a7, #f6cbff)}
-.tokenInfoWrap .tokenItemWrap li .tokenGrade.special span {background:linear-gradient(#9e0000, #dcce7b)}
+.tokenGrade {margin-top:5px; letter-spacing:-1px; display:inline-block;}
+.tokenGrade span {font-size:12px; color:#ffffff;padding: 3px 5px;border-radius: 5px; /* width: calc(100% - 10px);  */ display:inline-block;}
+.tokenGrade.canister span {background:#464646}
+.tokenGrade.gradation span {background:#b5a27a}
+.tokenGrade.glass span {background:#7294b9}
+.tokenGrade.light span {background:#60a992}
+.tokenGrade.legendary span {background:linear-gradient(#3805a7, #f6cbff)}
+.tokenGrade.special span {background:linear-gradient(#9e0000, #dcce7b)}
 .tokenInfoWrap .tokenItemWrap li .tokenExchange {margin-top:7px;}
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .opensea {width:17px; height:17px;display: inline-block; border:1px solid #dfdfdf; border-radius:50px; margin-right:3px;}  
 .tokenInfoWrap .tokenItemWrap li .tokenExchange .opensea::before {content:'';display:inline-block;background:url('../images/common/opensea.png') no-repeat;vertical-align:top;width: 17px;height: 17px;background-size: 17px;}
@@ -303,3 +303,23 @@ body.scroll .headerArea:not(.white) .headerInner {position:fixed;top:0;left:0;bo
 .connectKaikasBtn { color: #ffffff; background: #8a8a8a; text-decoration: none; border-radius: 5px; padding: 5px 10px; display: none;}
 .kaikasUnconnectable {color:red; display:none;}
 .infoWrap .emptyWrap {font-size:20px; color:#666; text-align:center; padding-top:50px;}
+
+/* 토큰 팝업 상세정보 */
+.tokenDetailPopArea {opacity:0;visibility:hidden;position:fixed;bottom:0;right:0;width:100vw;height:80vh;padding-top:0;background:rgba(0,0,0,.6);transform:translate3d(0, 60%, 0);transition:.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);transition-property:transform, height, visibility, opacity;z-index:10;}
+.tokenDetailPopArea .tokenDetailWrap {background:#fff; border-radius:15px 15px 0 0; width:100%; height:100%;  max-width:500px; max-height:700px; margin:auto;}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail {padding:40px 15px 15px 15px; display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; grid-gap:10px;}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail img {width:100%; border-radius:10px;}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 {position:relative}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 em {font-size:25px; text-align:center; color:#666; padding:10px 5px; display:inline-block;}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail h5 .tokenGrade {position:absolute; top:1px;}
+.tokenDetailPopArea .tokenDetailWrap .tokenDetail .ownerAddress{color:#666}
+.tokenDetailPopArea::after {content:'';opacity:0;visibility:hidden;position:absolute;bottom: 100%;right: 0;width: 100vw;height:100vh;background:rgba(0,0,0,.6);transform:translateZ(0);transition:.3s ease-in-out;transition-property:opacity, visibility, z-index;z-index: -1;}
+
+.tokenDetailPopArea .tokenDetailWrap .btnClose {overflow:hidden;display:block;position:relative;width:100%;height:53px;background:#fff}
+.tokenDetailPopArea .tokenDetailWrap .btnClose .slideRefresh {display:block;position:absolute;top:3px;right:0;width:48px;height:100%;padding:17px 0;text-align:center;box-sizing:border-box}
+.tokenDetailPopArea .tokenDetailWrap .btnClose .slideRefresh.iconS::before {width:17px;height:19px;background-position:-197px 0px}
+.tokenDetailPopArea .tokenDetailWrap .btnClose .slideClose {display:block;position:absolute;top:0;right:0;width:52px;height:100%;padding:19px 0;text-align:center;box-sizing:border-box}
+.tokenDetailPopArea .tokenDetailWrap .btnClose .slideClose.iconS::before {width:15px;height:15px;background-position:-176px -21px}
+
+.tokenDetailPopArea.on {opacity:1;visibility:visible;transform:translate3d(0, 0, 0);}
+.tokenDetailPopArea.on::after {opacity:1;visibility:visible;}

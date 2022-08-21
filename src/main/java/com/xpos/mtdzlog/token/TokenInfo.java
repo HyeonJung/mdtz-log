@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.apache.groovy.parser.antlr4.util.StringUtils;
+
 import lombok.Data;
 
 @Data
@@ -49,4 +51,12 @@ public class TokenInfo implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOKEN_INFO_ID", referencedColumnName = "TOKEN_ID")
 	private List<TokenAttribute> tokenAttributes;
+	
+	public String getMaskingOwnerAddress() {
+		if (StringUtils.isEmpty(this.owner)) {
+			return "";
+		} else {
+			return this.owner.substring(0, 5) + "***********" + this.owner.substring(37, 42);
+		}
+	}
 }
