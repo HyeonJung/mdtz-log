@@ -45,8 +45,13 @@ private static final String TYPE = "MTDZ";
 		model.addAttribute("collectList", mainCollectList);
 		
 		// 전송이력
-		List<TokenTransferDTO> tokenTransferList = tokenInfoServiceImpl.getTokenTransferInfo(TYPE);
-		model.addAttribute("tokenTransferList", tokenTransferList.stream().limit(3).collect(Collectors.toList()));
+		try {
+			List<TokenTransferDTO> tokenTransferList = tokenInfoServiceImpl.getTokenTransferInfo(TYPE);
+			model.addAttribute("tokenTransferList", tokenTransferList.stream().limit(3).collect(Collectors.toList()));
+		} catch (Exception e) {
+			log.error("전송이력 조회 중 오류 발생 {}", e);
+		}
+		
 		
 		// 랭킹
 		List<TokenRankingDTO> rankingList = tokenInfoServiceImpl.getMainRankingList();
